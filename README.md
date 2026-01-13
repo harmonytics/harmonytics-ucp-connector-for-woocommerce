@@ -290,6 +290,18 @@ composer plugin-check
 - Webhook signatures use HMAC-SHA256
 - Sessions expire after 24 hours
 
+## Supported Languages
+
+- English
+- Brazilian Portuguese
+- Estonian
+- French
+- German
+- Hindi
+- Italian
+- Russian
+- Turkish
+
 ## Documentation
 
 - [UCP Specification](https://ucp.dev/specification/overview/)
