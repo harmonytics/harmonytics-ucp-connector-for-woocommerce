@@ -204,17 +204,28 @@ class UCP_WC_Auth {
 			return false;
 		}
 
-		$table_name = $wpdb->prefix . self::TABLE_NAME;
+		// Check cache first.
+		$cache_key = 'ucp_api_key_' . md5( $key_id );
+		$key_data  = wp_cache_get( $cache_key, 'ucp_api_keys' );
 
-		// Get the key from database.
-		$key_data = $wpdb->get_row(
-			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is a constant.
-				"SELECT * FROM {$table_name} WHERE key_id = %s AND status = 'active'",
-				$key_id
-			),
-			ARRAY_A
-		);
+		if ( false === $key_data ) {
+			$table_name = $wpdb->prefix . self::TABLE_NAME;
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for UCP API keys, no WP API available.
+			$key_data = $wpdb->get_row(
+				$wpdb->prepare(
+					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name uses constant prefix.
+					"SELECT * FROM {$table_name} WHERE key_id = %s AND status = 'active'",
+					$key_id
+				),
+				ARRAY_A
+			);
+
+			// Cache for 5 minutes even if not found to prevent repeated lookups.
+			wp_cache_set( $cache_key, $key_data ? $key_data : 'not_found', 'ucp_api_keys', 300 );
+		} elseif ( 'not_found' === $key_data ) {
+			$key_data = null;
+		}
 
 		if ( ! $key_data ) {
 			return false;
@@ -326,6 +337,7 @@ class UCP_WC_Auth {
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
 
 		// Insert the key.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for UCP API keys, no WP API available.
 		$result = $wpdb->insert(
 			$table_name,
 			array(
@@ -380,29 +392,48 @@ class UCP_WC_Auth {
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
 		$offset     = ( absint( $args['page'] ) - 1 ) * absint( $args['per_page'] );
 
-		$where_clause = '';
+		// Build query based on status filter.
 		if ( 'all' !== $args['status'] ) {
-			$where_clause = $wpdb->prepare( 'WHERE status = %s', $args['status'] );
+			$status = sanitize_key( $args['status'] );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table, table name uses constant prefix.
+			$keys = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
+					FROM {$table_name}
+					WHERE status = %s
+					ORDER BY created_at DESC
+					LIMIT %d OFFSET %d",
+					$status,
+					absint( $args['per_page'] ),
+					$offset
+				),
+				ARRAY_A
+			);
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table, table name uses constant prefix.
+			$total = $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT COUNT(*) FROM {$table_name} WHERE status = %s",
+					$status
+				)
+			);
+		} else {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table, table name uses constant prefix.
+			$keys = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
+					FROM {$table_name}
+					ORDER BY created_at DESC
+					LIMIT %d OFFSET %d",
+					absint( $args['per_page'] ),
+					$offset
+				),
+				ARRAY_A
+			);
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table, table name uses constant prefix.
+			$total = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name}" );
 		}
-
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is constant, where clause is prepared.
-		$keys = $wpdb->get_results(
-			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				"SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
-				FROM {$table_name}
-				{$where_clause}
-				ORDER BY created_at DESC
-				LIMIT %d OFFSET %d",
-				absint( $args['per_page'] ),
-				$offset
-			),
-			ARRAY_A
-		);
-
-		// Get total count.
-		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$total = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name} {$where_clause}" );
 
 		$formatted_keys = array();
 		foreach ( $keys as $key ) {
@@ -436,18 +467,29 @@ class UCP_WC_Auth {
 	public function get_api_key( $key_id ) {
 		global $wpdb;
 
-		$table_name = $wpdb->prefix . self::TABLE_NAME;
+		// Check cache first.
+		$cache_key = 'ucp_api_key_info_' . md5( $key_id );
+		$key       = wp_cache_get( $cache_key, 'ucp_api_keys' );
 
-		$key = $wpdb->get_row(
-			$wpdb->prepare(
-				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				"SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
-				FROM {$table_name}
-				WHERE key_id = %s",
-				$key_id
-			),
-			ARRAY_A
-		);
+		if ( false === $key ) {
+			$table_name = $wpdb->prefix . self::TABLE_NAME;
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table for UCP API keys, table name uses constant prefix.
+			$key = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
+					FROM {$table_name}
+					WHERE key_id = %s",
+					$key_id
+				),
+				ARRAY_A
+			);
+
+			// Cache for 5 minutes.
+			wp_cache_set( $cache_key, $key ? $key : 'not_found', 'ucp_api_keys', 300 );
+		} elseif ( 'not_found' === $key ) {
+			$key = null;
+		}
 
 		if ( ! $key ) {
 			return null;
@@ -486,6 +528,7 @@ class UCP_WC_Auth {
 		}
 
 		// Update status to revoked.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table, write operation invalidates cache below.
 		$result = $wpdb->update(
 			$table_name,
 			array( 'status' => 'revoked' ),
@@ -500,6 +543,9 @@ class UCP_WC_Auth {
 				__( 'Failed to revoke API key.', 'ucp-for-woocommerce' )
 			);
 		}
+
+		// Invalidate cache.
+		$this->invalidate_key_cache( $key_id );
 
 		return true;
 	}
@@ -524,6 +570,7 @@ class UCP_WC_Auth {
 			);
 		}
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table, write operation invalidates cache below.
 		$result = $wpdb->delete(
 			$table_name,
 			array( 'key_id' => $key_id ),
@@ -536,6 +583,9 @@ class UCP_WC_Auth {
 				__( 'Failed to delete API key.', 'ucp-for-woocommerce' )
 			);
 		}
+
+		// Invalidate cache.
+		$this->invalidate_key_cache( $key_id );
 
 		return true;
 	}
@@ -571,6 +621,7 @@ class UCP_WC_Auth {
 
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table, timestamp update doesn't require cache invalidation.
 		$wpdb->update(
 			$table_name,
 			array( 'last_used_at' => current_time( 'mysql' ) ),
@@ -578,6 +629,16 @@ class UCP_WC_Auth {
 			array( '%s' ),
 			array( '%d' )
 		);
+	}
+
+	/**
+	 * Invalidate cache for a specific API key.
+	 *
+	 * @param string $key_id The key_id to invalidate cache for.
+	 */
+	private function invalidate_key_cache( $key_id ) {
+		wp_cache_delete( 'ucp_api_key_' . md5( $key_id ), 'ucp_api_keys' );
+		wp_cache_delete( 'ucp_api_key_info_' . md5( $key_id ), 'ucp_api_keys' );
 	}
 
 	/**

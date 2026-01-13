@@ -319,6 +319,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		);
 
 		if ( ! empty( $tax_query ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for filtering products by category and visibility.
 			$wp_args['tax_query'] = $tax_query;
 		}
 
@@ -356,6 +357,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		}
 
 		if ( ! empty( $meta_query ) ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Required for filtering products by price and stock status.
 			$wp_args['meta_query'] = $meta_query;
 		}
 

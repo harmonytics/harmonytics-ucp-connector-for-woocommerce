@@ -556,6 +556,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		// Rating filter (handled via meta query).
 		$rating = $request->get_param( 'rating' );
 		if ( ! empty( $rating ) && $rating >= 1 && $rating <= 5 ) {
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Required for filtering reviews by rating value.
 			$args['meta_query'] = array(
 				array(
 					'key'     => 'rating',

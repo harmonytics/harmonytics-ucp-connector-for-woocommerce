@@ -116,8 +116,9 @@ class UCP_WC_Cart {
 	public function get_cart( $cart_id ) {
 		global $wpdb;
 
+		// Table name from trusted internal source (prefix + constant).
 		$table_name = self::get_carts_table();
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP carts, table name from trusted internal source.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table for UCP carts, table name from trusted internal source.
 		$cart = $wpdb->get_row(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from trusted internal source.
@@ -548,8 +549,9 @@ class UCP_WC_Cart {
 	private function get_cart_raw( $cart_id ) {
 		global $wpdb;
 
+		// Table name from trusted internal source (prefix + constant).
 		$table_name = self::get_carts_table();
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP carts, table name from trusted internal source.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table for UCP carts, table name from trusted internal source.
 		$cart = $wpdb->get_row(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from trusted internal source.
@@ -820,8 +822,9 @@ class UCP_WC_Cart {
 	public static function cleanup_expired_carts() {
 		global $wpdb;
 
+		// Table name from trusted internal source (prefix + constant).
 		$table_name = self::get_carts_table();
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP carts, cleanup operation.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table for UCP carts, cleanup operation.
 		$deleted = $wpdb->query(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from trusted internal source.

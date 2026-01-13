@@ -378,7 +378,8 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 			// Include products from child categories
 			$args['category'] = array( $term->slug );
 		} else {
-			// Only direct products (use tax_query for exact match)
+			// Only direct products (use tax_query for exact match).
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for filtering products by exact category without children.
 			$args['tax_query'] = array(
 				array(
 					'taxonomy'         => 'product_cat',

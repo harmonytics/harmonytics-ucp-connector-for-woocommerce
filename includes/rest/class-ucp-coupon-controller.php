@@ -361,6 +361,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 			'post_status'    => 'publish',
 			'posts_per_page' => $per_page,
 			'paged'          => $page,
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Required for filtering public coupons with valid expiry dates.
 			'meta_query'     => array(
 				'relation' => 'AND',
 				array(
