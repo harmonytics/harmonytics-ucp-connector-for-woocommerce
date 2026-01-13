@@ -1,0 +1,526 @@
+# Estonian translation for UCP for WooCommerce
+# Copyright (C) 2026 Harmonytics OÜ
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: UCP for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: support@harmonytics.com\n"
+"POT-Creation-Date: 2026-01-13 19:07+0000\n"
+"PO-Revision-Date: 2026-01-13 19:15+0000\n"
+"Last-Translator: Harmonytics <dev@harmonytics.com>\n"
+"Language-Team: Estonian <et@li.org>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Claude\n"
+"X-Domain: ucp-for-woocommerce\n"
+
+#: includes/mapping/class-ucp-address-mapper.php:192
+msgid "First name"
+msgstr "Eesnimi"
+
+#: includes/mapping/class-ucp-address-mapper.php:193
+msgid "Last name"
+msgstr "Perekonnanimi"
+
+#: includes/mapping/class-ucp-address-mapper.php:194
+msgid "Address"
+msgstr "Aadress"
+
+#: includes/mapping/class-ucp-address-mapper.php:195
+msgid "City"
+msgstr "Linn"
+
+#: includes/mapping/class-ucp-address-mapper.php:196
+msgid "Postcode"
+msgstr "Postiindeks"
+
+#: includes/mapping/class-ucp-address-mapper.php:197
+msgid "Country"
+msgstr "Riik"
+
+#. translators: %s: field name
+#: includes/mapping/class-ucp-address-mapper.php:205
+#, php-format
+msgid "%s is required."
+msgstr "%s on kohustuslik."
+
+#: includes/mapping/class-ucp-address-mapper.php:215
+msgid "Invalid country code."
+msgstr "Vigane riigikood."
+
+#: includes/mapping/class-ucp-address-mapper.php:221
+msgid "Invalid email address."
+msgstr "Vigane e-posti aadress."
+
+#: includes/capabilities/class-ucp-order.php:125
+#: includes/capabilities/class-ucp-order.php:176
+msgid "Order not found."
+msgstr "Tellimust ei leitud."
+
+#: includes/capabilities/class-ucp-order.php:156
+msgid "No order found for this session."
+msgstr "Selle seansi jaoks tellimust ei leitud."
+
+#: includes/capabilities/class-ucp-checkout.php:67
+msgid "Items array is required and cannot be empty."
+msgstr "Toodete nimekiri on kohustuslik ja ei tohi olla tühi."
+
+#: includes/capabilities/class-ucp-checkout.php:191
+#: includes/capabilities/class-ucp-checkout.php:260
+#: includes/capabilities/class-ucp-checkout.php:354
+msgid "Checkout session not found."
+msgstr "Makseseanssi ei leitud."
+
+#: includes/capabilities/class-ucp-checkout.php:200
+msgid "Checkout session has expired."
+msgstr "Makseseanss on aegunud."
+
+#: includes/capabilities/class-ucp-checkout.php:210
+#: includes/capabilities/class-ucp-checkout.php:277
+#: includes/capabilities/class-ucp-checkout.php:371
+msgid "Associated order not found."
+msgstr "Seotud tellimust ei leitud."
+
+#: includes/capabilities/class-ucp-checkout.php:268
+msgid "Cannot update a confirmed session."
+msgstr "Kinnitatud seanssi ei saa uuendada."
+
+#: includes/capabilities/class-ucp-checkout.php:362
+msgid "Session has already been confirmed."
+msgstr "Seanss on juba kinnitatud."
+
+#: includes/capabilities/class-ucp-checkout.php:407
+msgid "Please complete payment at the checkout URL."
+msgstr "Palun lõpetage makse makselehe URL-il."
+
+#. translators: %s: Product identifier (SKU, product ID, or variant ID)
+#: includes/capabilities/class-ucp-checkout.php:480
+#, php-format
+msgid "Product not found: %s"
+msgstr "Toodet ei leitud: %s"
+
+#. translators: %s: Product name
+#: includes/capabilities/class-ucp-checkout.php:491
+#, php-format
+msgid "Product is not purchasable: %s"
+msgstr "Toodet ei saa osta: %s"
+
+#. translators: %s: Product name
+#: includes/capabilities/class-ucp-checkout.php:502
+#, php-format
+msgid "Insufficient stock for: %s"
+msgstr "Ebapiisav laoseis: %s"
+
+#: includes/webhooks/class-ucp-webhook-sender.php:58
+msgid "Invalid webhook URL configured."
+msgstr "Seadistatud on vigane webhook URL."
+
+#. translators: %d: HTTP status code
+#: includes/webhooks/class-ucp-webhook-sender.php:226
+#: includes/webhooks/class-ucp-webhook-sender.php:235
+#, php-format
+msgid "Webhook returned %d status code"
+msgstr "Webhook tagastas olekukoodi %d"
+
+#: includes/rest/class-ucp-checkout-controller.php:72
+msgid "Unique session identifier."
+msgstr "Unikaalne seansi identifikaator."
+
+#: includes/rest/class-ucp-checkout-controller.php:119
+msgid "Array of items to add to the checkout."
+msgstr "Maksesse lisatavate toodete nimekiri."
+
+#: includes/rest/class-ucp-checkout-controller.php:125
+msgid "Product SKU."
+msgstr "Toote SKU."
+
+#: includes/rest/class-ucp-checkout-controller.php:129
+msgid "Product ID."
+msgstr "Toote ID."
+
+#: includes/rest/class-ucp-checkout-controller.php:133
+msgid "Variant/variation ID."
+msgstr "Variandi ID."
+
+#: includes/rest/class-ucp-checkout-controller.php:137
+msgid "Quantity."
+msgstr "Kogus."
+
+#: includes/rest/class-ucp-checkout-controller.php:147
+msgid "Shipping address."
+msgstr "Tarneaadress."
+
+#: includes/rest/class-ucp-checkout-controller.php:164
+msgid "Billing address."
+msgstr "Arveldusaadress."
+
+#: includes/rest/class-ucp-checkout-controller.php:169
+msgid "Coupon code to apply."
+msgstr "Rakendatav kupongikood."
+
+#: includes/rest/class-ucp-checkout-controller.php:174
+msgid "Customer note for the order."
+msgstr "Kliendi märkus tellimuse kohta."
+
+#: includes/rest/class-ucp-checkout-controller.php:189
+msgid "Session ID."
+msgstr "Seansi ID."
+
+#: includes/rest/class-ucp-checkout-controller.php:195
+msgid "Selected shipping method ID."
+msgstr "Valitud tarneviisi ID."
+
+#: includes/rest/class-ucp-checkout-controller.php:200
+msgid "Payment method ID."
+msgstr "Makseviisi ID."
+
+#: includes/rest/class-ucp-order-controller.php:72
+msgid "Order ID."
+msgstr "Tellimuse ID."
+
+#: includes/rest/class-ucp-order-controller.php:133
+msgid "Page number."
+msgstr "Lehekülje number."
+
+#: includes/rest/class-ucp-order-controller.php:141
+msgid "Items per page."
+msgstr "Kirjeid lehel."
+
+#: includes/rest/class-ucp-order-controller.php:157
+msgid "Filter by order status."
+msgstr "Filtreeri tellimuse oleku järgi."
+
+#: includes/rest/class-ucp-order-controller.php:163
+msgid "Orders created after this date."
+msgstr "Pärast seda kuupäeva loodud tellimused."
+
+#: includes/rest/class-ucp-order-controller.php:169
+msgid "Orders created before this date."
+msgstr "Enne seda kuupäeva loodud tellimused."
+
+#: includes/rest/class-ucp-order-controller.php:175
+msgid "Filter by customer email."
+msgstr "Filtreeri kliendi e-posti järgi."
+
+#: includes/rest/class-ucp-rest-controller.php:46
+#: includes/rest/class-ucp-rest-controller.php:63
+msgid "UCP is currently disabled for this store."
+msgstr "UCP on selle poe jaoks hetkel keelatud."
+
+#: admin/partials/settings-page.php:23
+msgid "UCP Status"
+msgstr "UCP olek"
+
+#: admin/partials/settings-page.php:28
+msgid "Plugin Version"
+msgstr "Plugina versioon"
+
+#: admin/partials/settings-page.php:32
+msgid "Discovery URL"
+msgstr "Avastamise URL"
+
+#: admin/partials/settings-page.php:36
+msgid "View"
+msgstr "Vaata"
+
+#: admin/partials/settings-page.php:41
+msgid "Signing Key"
+msgstr "Allkirjastamisvõti"
+
+#: admin/partials/settings-page.php:45
+msgid "Active"
+msgstr "Aktiivne"
+
+#: admin/partials/settings-page.php:48
+msgid "Key ID:"
+msgstr "Võtme ID:"
+
+#: admin/partials/settings-page.php:53
+msgid "Rotate Key"
+msgstr "Uuenda võtit"
+
+#: admin/partials/settings-page.php:57
+msgid "Not configured"
+msgstr "Seadistamata"
+
+#: admin/partials/settings-page.php:62
+msgid "Failed Webhooks"
+msgstr "Ebaõnnestunud webhook'id"
+
+#. translators: %d: number of failed webhooks
+#: admin/partials/settings-page.php:69
+#, php-format
+msgid "%d failed webhook"
+msgid_plural "%d failed webhooks"
+msgstr[0] "%d ebaõnnestunud webhook"
+msgstr[1] "%d ebaõnnestunud webhook'i"
+
+#: admin/partials/settings-page.php:74
+msgid "Retry All"
+msgstr "Proovi kõiki uuesti"
+
+#: admin/partials/settings-page.php:78
+msgid "No failed webhooks"
+msgstr "Ebaõnnestunud webhook'e pole"
+
+#: admin/partials/settings-page.php:97
+msgid "Test Webhook"
+msgstr "Testi webhook'i"
+
+#: admin/partials/settings-page.php:98
+msgid "Send a test webhook to verify your integration."
+msgstr "Saatke test-webhook oma integratsiooni kontrollimiseks."
+
+#: admin/partials/settings-page.php:100
+msgid "Send Test Webhook"
+msgstr "Saada test-webhook"
+
+#: admin/partials/settings-page.php:107
+msgid "Documentation"
+msgstr "Dokumentatsioon"
+
+#: admin/partials/settings-page.php:109
+msgid "Learn more about the Universal Commerce Protocol:"
+msgstr "Lugege lisaks Universal Commerce Protocol'i kohta:"
+
+#: admin/partials/settings-page.php:114
+msgid "UCP Specification"
+msgstr "UCP spetsifikatsioon"
+
+#: admin/partials/settings-page.php:119
+msgid "Checkout REST Binding"
+msgstr "Checkout REST sidumine"
+
+#: admin/partials/settings-page.php:124
+msgid "Order Capability"
+msgstr "Tellimuse võimekus"
+
+#: admin/class-ucp-admin.php:52
+msgid "UCP Settings"
+msgstr "UCP seaded"
+
+#: admin/class-ucp-admin.php:53
+msgid "UCP"
+msgstr "UCP"
+
+#: admin/class-ucp-admin.php:67
+msgid "General Settings"
+msgstr "Üldseaded"
+
+#: admin/class-ucp-admin.php:84
+msgid "Enable UCP"
+msgstr "Luba UCP"
+
+#: admin/class-ucp-admin.php:90
+msgid "Enable Universal Commerce Protocol integration"
+msgstr "Luba Universal Commerce Protocol'i integratsioon"
+
+#: admin/class-ucp-admin.php:91
+msgid "When enabled, your store will be discoverable by AI agents."
+msgstr "Kui lubatud, on teie pood tehisintellekti agentidele leitav."
+
+#: admin/class-ucp-admin.php:107
+msgid "Guest Checkout"
+msgstr "Külalismakse"
+
+#: admin/class-ucp-admin.php:113
+msgid "Allow guest checkout via UCP"
+msgstr "Luba külalismakse UCP kaudu"
+
+#: admin/class-ucp-admin.php:114
+msgid "Required for agent purchases without identity linking."
+msgstr "Vajalik agentide ostudeks ilma identiteedi sidumiseta."
+
+#: admin/class-ucp-admin.php:121
+msgid "Webhook Settings"
+msgstr "Webhook'i seaded"
+
+#: admin/class-ucp-admin.php:138
+msgid "Webhook URL"
+msgstr "Webhook'i URL"
+
+#: admin/class-ucp-admin.php:147
+msgid "Debug Settings"
+msgstr "Silumisseaded"
+
+#: admin/class-ucp-admin.php:164
+msgid "Debug Logging"
+msgstr "Silumislogi"
+
+#: admin/class-ucp-admin.php:170
+msgid "Enable debug logging"
+msgstr "Luba silumislogi"
+
+#: admin/class-ucp-admin.php:171
+msgid "Log UCP requests and responses to the error log."
+msgstr "Logi UCP päringud ja vastused vealogisse."
+
+#: admin/class-ucp-admin.php:201
+msgid "Please enter a valid webhook URL."
+msgstr "Palun sisestage kehtiv webhook'i URL."
+
+#: admin/class-ucp-admin.php:240
+msgid ""
+"Are you sure you want to rotate the signing key? This will invalidate any "
+"existing webhook integrations."
+msgstr ""
+"Kas olete kindel, et soovite allkirjastamisvõtit uuendada? See muudab kõik "
+"olemasolevad webhook'i integratsioonid kehtetuks."
+
+#: admin/class-ucp-admin.php:241
+msgid "Rotating..."
+msgstr "Uuendamine..."
+
+#: admin/class-ucp-admin.php:242
+msgid "Testing..."
+msgstr "Testimine..."
+
+#: admin/class-ucp-admin.php:243
+msgid "Retrying..."
+msgstr "Uuesti proovimine..."
+
+#: admin/class-ucp-admin.php:244
+msgid "Success!"
+msgstr "Õnnestus!"
+
+#: admin/class-ucp-admin.php:245
+msgid "Error:"
+msgstr "Viga:"
+
+#: admin/class-ucp-admin.php:256
+msgid "You do not have permission to access this page."
+msgstr "Teil pole õigust sellele lehele juurde pääseda."
+
+#: admin/class-ucp-admin.php:266
+msgid "Configure general UCP settings for your store."
+msgstr "Seadistage oma poe üldised UCP seaded."
+
+#: admin/class-ucp-admin.php:275
+msgid ""
+"Webhooks allow your store to send real-time order event notifications to "
+"external platforms."
+msgstr ""
+"Webhook'id võimaldavad teie poel saata reaalajas tellimuse sündmuste "
+"teateid välistele platvormidele."
+
+#: admin/class-ucp-admin.php:276
+msgid "This is optional."
+msgstr "See on valikuline."
+
+#: admin/class-ucp-admin.php:276
+msgid "Leave blank if you only need the checkout and order REST APIs."
+msgstr "Jätke tühjaks, kui vajate ainult checkout ja tellimuse REST API-sid."
+
+#: admin/class-ucp-admin.php:285
+msgid "Debug and troubleshooting options."
+msgstr "Silumis- ja tõrkeotsingu valikud."
+
+#: admin/class-ucp-admin.php:342
+msgid "The external URL where order events will be sent via HTTP POST."
+msgstr "Väline URL, kuhu tellimuse sündmused HTTP POST-iga saadetakse."
+
+#: admin/class-ucp-admin.php:346
+msgid "Who provides this URL?"
+msgstr "Kes selle URL-i annab?"
+
+#: admin/class-ucp-admin.php:348
+msgid "AI Agent Platform:"
+msgstr "Tehisintellekti agendi platvorm:"
+
+#: admin/class-ucp-admin.php:348
+msgid ""
+"The platform integrating with your store provides a callback URL to receive "
+"order updates."
+msgstr ""
+"Teie poega integreeruv platvorm annab tagasikutse URL-i tellimuse "
+"uuenduste vastuvõtmiseks."
+
+#: admin/class-ucp-admin.php:349
+msgid "Your Backend:"
+msgstr "Teie tagasüsteem:"
+
+#: admin/class-ucp-admin.php:349
+msgid "Create an endpoint on your own server to process order events."
+msgstr "Looge oma serverisse lõpp-punkt tellimuse sündmuste töötlemiseks."
+
+#: admin/class-ucp-admin.php:350
+msgid "Integration Services:"
+msgstr "Integratsiooniteenused:"
+
+#: admin/class-ucp-admin.php:350
+msgid "Use services like Zapier, Make, or n8n to receive webhooks."
+msgstr "Kasutage webhook'ide vastuvõtmiseks teenuseid nagu Zapier, Make või n8n."
+
+#: admin/class-ucp-admin.php:351
+msgid "Testing:"
+msgstr "Testimine:"
+
+#: admin/class-ucp-admin.php:351
+msgid ""
+"Use webhook.site or requestbin.com to inspect webhook payloads during "
+"development."
+msgstr ""
+"Kasutage arenduse ajal webhook'i andmete kontrollimiseks webhook.site'i "
+"või requestbin.com'i."
+
+#: admin/class-ucp-admin.php:354
+msgid "Events sent to this URL:"
+msgstr "Sellele URL-ile saadetavad sündmused:"
+
+#: admin/class-ucp-admin.php:356
+msgid "When a new order is placed via UCP"
+msgstr "Kui UCP kaudu esitatakse uus tellimus"
+
+#: admin/class-ucp-admin.php:357
+msgid "When order status changes (e.g., pending to processing)"
+msgstr "Kui tellimuse olek muutub (nt ootel -> töötlemisel)"
+
+#: admin/class-ucp-admin.php:358
+msgid "When payment is completed"
+msgstr "Kui makse on lõpetatud"
+
+#: admin/class-ucp-admin.php:359
+msgid "When a refund is issued"
+msgstr "Kui tehakse tagasimakse"
+
+#: admin/class-ucp-admin.php:362
+msgid ""
+"All webhooks are signed with HMAC-SHA256 for security. The signing key is "
+"shown in the Status panel above."
+msgstr ""
+"Kõik webhook'id on turvalisuse tagamiseks allkirjastatud HMAC-SHA256-ga. "
+"Allkirjastamisvõti kuvatakse ülalolevas olekupaneelis."
+
+#: admin/class-ucp-admin.php:374 admin/class-ucp-admin.php:395
+#: admin/class-ucp-admin.php:429
+msgid "Permission denied."
+msgstr "Juurdepääs keelatud."
+
+#: admin/class-ucp-admin.php:382
+msgid "Signing key rotated successfully."
+msgstr "Allkirjastamisvõti edukalt uuendatud."
+
+#: admin/class-ucp-admin.php:401
+msgid "No webhook URL configured."
+msgstr "Webhook'i URL-i pole seadistatud."
+
+#: admin/class-ucp-admin.php:419
+msgid "Test webhook sent successfully."
+msgstr "Test-webhook edukalt saadetud."
+
+#. translators: 1: success count, 2: failed count
+#: admin/class-ucp-admin.php:442
+#, php-format
+msgid "Retry complete. %1$d succeeded, %2$d failed."
+msgstr "Uuesti proovimine lõpetatud. %1$d õnnestus, %2$d ebaõnnestus."
+
+#: admin/class-ucp-admin.php:479
+msgid "Unknown"
+msgstr "Teadmata"
+
+#: ucp-for-woocommerce.php:56
+msgid "WooCommerce UCP requires WooCommerce to be installed and active."
+msgstr "WooCommerce UCP nõuab, et WooCommerce oleks installitud ja aktiivne."

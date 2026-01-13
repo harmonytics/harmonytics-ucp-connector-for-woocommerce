@@ -1,0 +1,526 @@
+# Hindi translation for UCP for WooCommerce
+# Copyright (C) 2026 Harmonytics OÜ
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: UCP for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: support@harmonytics.com\n"
+"POT-Creation-Date: 2026-01-13 19:07+0000\n"
+"PO-Revision-Date: 2026-01-13 19:20+0000\n"
+"Last-Translator: Harmonytics <dev@harmonytics.com>\n"
+"Language-Team: Hindi <hi@li.org>\n"
+"Language: hi_IN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Claude\n"
+"X-Domain: ucp-for-woocommerce\n"
+
+#: includes/mapping/class-ucp-address-mapper.php:192
+msgid "First name"
+msgstr "पहला नाम"
+
+#: includes/mapping/class-ucp-address-mapper.php:193
+msgid "Last name"
+msgstr "उपनाम"
+
+#: includes/mapping/class-ucp-address-mapper.php:194
+msgid "Address"
+msgstr "पता"
+
+#: includes/mapping/class-ucp-address-mapper.php:195
+msgid "City"
+msgstr "शहर"
+
+#: includes/mapping/class-ucp-address-mapper.php:196
+msgid "Postcode"
+msgstr "पिन कोड"
+
+#: includes/mapping/class-ucp-address-mapper.php:197
+msgid "Country"
+msgstr "देश"
+
+#. translators: %s: field name
+#: includes/mapping/class-ucp-address-mapper.php:205
+#, php-format
+msgid "%s is required."
+msgstr "%s आवश्यक है।"
+
+#: includes/mapping/class-ucp-address-mapper.php:215
+msgid "Invalid country code."
+msgstr "अमान्य देश कोड।"
+
+#: includes/mapping/class-ucp-address-mapper.php:221
+msgid "Invalid email address."
+msgstr "अमान्य ईमेल पता।"
+
+#: includes/capabilities/class-ucp-order.php:125
+#: includes/capabilities/class-ucp-order.php:176
+msgid "Order not found."
+msgstr "ऑर्डर नहीं मिला।"
+
+#: includes/capabilities/class-ucp-order.php:156
+msgid "No order found for this session."
+msgstr "इस सत्र के लिए कोई ऑर्डर नहीं मिला।"
+
+#: includes/capabilities/class-ucp-checkout.php:67
+msgid "Items array is required and cannot be empty."
+msgstr "आइटम सूची आवश्यक है और खाली नहीं हो सकती।"
+
+#: includes/capabilities/class-ucp-checkout.php:191
+#: includes/capabilities/class-ucp-checkout.php:260
+#: includes/capabilities/class-ucp-checkout.php:354
+msgid "Checkout session not found."
+msgstr "चेकआउट सत्र नहीं मिला।"
+
+#: includes/capabilities/class-ucp-checkout.php:200
+msgid "Checkout session has expired."
+msgstr "चेकआउट सत्र समाप्त हो गया है।"
+
+#: includes/capabilities/class-ucp-checkout.php:210
+#: includes/capabilities/class-ucp-checkout.php:277
+#: includes/capabilities/class-ucp-checkout.php:371
+msgid "Associated order not found."
+msgstr "संबंधित ऑर्डर नहीं मिला।"
+
+#: includes/capabilities/class-ucp-checkout.php:268
+msgid "Cannot update a confirmed session."
+msgstr "पुष्टि किए गए सत्र को अपडेट नहीं किया जा सकता।"
+
+#: includes/capabilities/class-ucp-checkout.php:362
+msgid "Session has already been confirmed."
+msgstr "सत्र पहले ही पुष्टि हो चुका है।"
+
+#: includes/capabilities/class-ucp-checkout.php:407
+msgid "Please complete payment at the checkout URL."
+msgstr "कृपया चेकआउट URL पर भुगतान पूरा करें।"
+
+#. translators: %s: Product identifier (SKU, product ID, or variant ID)
+#: includes/capabilities/class-ucp-checkout.php:480
+#, php-format
+msgid "Product not found: %s"
+msgstr "उत्पाद नहीं मिला: %s"
+
+#. translators: %s: Product name
+#: includes/capabilities/class-ucp-checkout.php:491
+#, php-format
+msgid "Product is not purchasable: %s"
+msgstr "उत्पाद खरीदा नहीं जा सकता: %s"
+
+#. translators: %s: Product name
+#: includes/capabilities/class-ucp-checkout.php:502
+#, php-format
+msgid "Insufficient stock for: %s"
+msgstr "अपर्याप्त स्टॉक: %s"
+
+#: includes/webhooks/class-ucp-webhook-sender.php:58
+msgid "Invalid webhook URL configured."
+msgstr "अमान्य वेबहुक URL कॉन्फ़िगर किया गया।"
+
+#. translators: %d: HTTP status code
+#: includes/webhooks/class-ucp-webhook-sender.php:226
+#: includes/webhooks/class-ucp-webhook-sender.php:235
+#, php-format
+msgid "Webhook returned %d status code"
+msgstr "वेबहुक ने %d स्थिति कोड लौटाया"
+
+#: includes/rest/class-ucp-checkout-controller.php:72
+msgid "Unique session identifier."
+msgstr "अद्वितीय सत्र पहचानकर्ता।"
+
+#: includes/rest/class-ucp-checkout-controller.php:119
+msgid "Array of items to add to the checkout."
+msgstr "चेकआउट में जोड़ने के लिए आइटम की सूची।"
+
+#: includes/rest/class-ucp-checkout-controller.php:125
+msgid "Product SKU."
+msgstr "उत्पाद SKU।"
+
+#: includes/rest/class-ucp-checkout-controller.php:129
+msgid "Product ID."
+msgstr "उत्पाद ID।"
+
+#: includes/rest/class-ucp-checkout-controller.php:133
+msgid "Variant/variation ID."
+msgstr "वैरिएंट/वेरिएशन ID।"
+
+#: includes/rest/class-ucp-checkout-controller.php:137
+msgid "Quantity."
+msgstr "मात्रा।"
+
+#: includes/rest/class-ucp-checkout-controller.php:147
+msgid "Shipping address."
+msgstr "शिपिंग पता।"
+
+#: includes/rest/class-ucp-checkout-controller.php:164
+msgid "Billing address."
+msgstr "बिलिंग पता।"
+
+#: includes/rest/class-ucp-checkout-controller.php:169
+msgid "Coupon code to apply."
+msgstr "लागू करने के लिए कूपन कोड।"
+
+#: includes/rest/class-ucp-checkout-controller.php:174
+msgid "Customer note for the order."
+msgstr "ऑर्डर के लिए ग्राहक नोट।"
+
+#: includes/rest/class-ucp-checkout-controller.php:189
+msgid "Session ID."
+msgstr "सत्र ID।"
+
+#: includes/rest/class-ucp-checkout-controller.php:195
+msgid "Selected shipping method ID."
+msgstr "चयनित शिपिंग विधि ID।"
+
+#: includes/rest/class-ucp-checkout-controller.php:200
+msgid "Payment method ID."
+msgstr "भुगतान विधि ID।"
+
+#: includes/rest/class-ucp-order-controller.php:72
+msgid "Order ID."
+msgstr "ऑर्डर ID।"
+
+#: includes/rest/class-ucp-order-controller.php:133
+msgid "Page number."
+msgstr "पृष्ठ संख्या।"
+
+#: includes/rest/class-ucp-order-controller.php:141
+msgid "Items per page."
+msgstr "प्रति पृष्ठ आइटम।"
+
+#: includes/rest/class-ucp-order-controller.php:157
+msgid "Filter by order status."
+msgstr "ऑर्डर स्थिति के अनुसार फ़िल्टर करें।"
+
+#: includes/rest/class-ucp-order-controller.php:163
+msgid "Orders created after this date."
+msgstr "इस तारीख के बाद बनाए गए ऑर्डर।"
+
+#: includes/rest/class-ucp-order-controller.php:169
+msgid "Orders created before this date."
+msgstr "इस तारीख से पहले बनाए गए ऑर्डर।"
+
+#: includes/rest/class-ucp-order-controller.php:175
+msgid "Filter by customer email."
+msgstr "ग्राहक ईमेल के अनुसार फ़िल्टर करें।"
+
+#: includes/rest/class-ucp-rest-controller.php:46
+#: includes/rest/class-ucp-rest-controller.php:63
+msgid "UCP is currently disabled for this store."
+msgstr "इस स्टोर के लिए UCP वर्तमान में अक्षम है।"
+
+#: admin/partials/settings-page.php:23
+msgid "UCP Status"
+msgstr "UCP स्थिति"
+
+#: admin/partials/settings-page.php:28
+msgid "Plugin Version"
+msgstr "प्लगइन संस्करण"
+
+#: admin/partials/settings-page.php:32
+msgid "Discovery URL"
+msgstr "खोज URL"
+
+#: admin/partials/settings-page.php:36
+msgid "View"
+msgstr "देखें"
+
+#: admin/partials/settings-page.php:41
+msgid "Signing Key"
+msgstr "साइनिंग कुंजी"
+
+#: admin/partials/settings-page.php:45
+msgid "Active"
+msgstr "सक्रिय"
+
+#: admin/partials/settings-page.php:48
+msgid "Key ID:"
+msgstr "कुंजी ID:"
+
+#: admin/partials/settings-page.php:53
+msgid "Rotate Key"
+msgstr "कुंजी बदलें"
+
+#: admin/partials/settings-page.php:57
+msgid "Not configured"
+msgstr "कॉन्फ़िगर नहीं किया गया"
+
+#: admin/partials/settings-page.php:62
+msgid "Failed Webhooks"
+msgstr "विफल वेबहुक"
+
+#. translators: %d: number of failed webhooks
+#: admin/partials/settings-page.php:69
+#, php-format
+msgid "%d failed webhook"
+msgid_plural "%d failed webhooks"
+msgstr[0] "%d विफल वेबहुक"
+msgstr[1] "%d विफल वेबहुक"
+
+#: admin/partials/settings-page.php:74
+msgid "Retry All"
+msgstr "सभी पुनः प्रयास करें"
+
+#: admin/partials/settings-page.php:78
+msgid "No failed webhooks"
+msgstr "कोई विफल वेबहुक नहीं"
+
+#: admin/partials/settings-page.php:97
+msgid "Test Webhook"
+msgstr "वेबहुक परीक्षण"
+
+#: admin/partials/settings-page.php:98
+msgid "Send a test webhook to verify your integration."
+msgstr "अपने एकीकरण को सत्यापित करने के लिए एक परीक्षण वेबहुक भेजें।"
+
+#: admin/partials/settings-page.php:100
+msgid "Send Test Webhook"
+msgstr "परीक्षण वेबहुक भेजें"
+
+#: admin/partials/settings-page.php:107
+msgid "Documentation"
+msgstr "दस्तावेज़ीकरण"
+
+#: admin/partials/settings-page.php:109
+msgid "Learn more about the Universal Commerce Protocol:"
+msgstr "Universal Commerce Protocol के बारे में और जानें:"
+
+#: admin/partials/settings-page.php:114
+msgid "UCP Specification"
+msgstr "UCP विनिर्देश"
+
+#: admin/partials/settings-page.php:119
+msgid "Checkout REST Binding"
+msgstr "चेकआउट REST बाइंडिंग"
+
+#: admin/partials/settings-page.php:124
+msgid "Order Capability"
+msgstr "ऑर्डर क्षमता"
+
+#: admin/class-ucp-admin.php:52
+msgid "UCP Settings"
+msgstr "UCP सेटिंग्स"
+
+#: admin/class-ucp-admin.php:53
+msgid "UCP"
+msgstr "UCP"
+
+#: admin/class-ucp-admin.php:67
+msgid "General Settings"
+msgstr "सामान्य सेटिंग्स"
+
+#: admin/class-ucp-admin.php:84
+msgid "Enable UCP"
+msgstr "UCP सक्षम करें"
+
+#: admin/class-ucp-admin.php:90
+msgid "Enable Universal Commerce Protocol integration"
+msgstr "Universal Commerce Protocol एकीकरण सक्षम करें"
+
+#: admin/class-ucp-admin.php:91
+msgid "When enabled, your store will be discoverable by AI agents."
+msgstr "सक्षम होने पर, आपका स्टोर AI एजेंटों द्वारा खोजा जा सकेगा।"
+
+#: admin/class-ucp-admin.php:107
+msgid "Guest Checkout"
+msgstr "अतिथि चेकआउट"
+
+#: admin/class-ucp-admin.php:113
+msgid "Allow guest checkout via UCP"
+msgstr "UCP के माध्यम से अतिथि चेकआउट की अनुमति दें"
+
+#: admin/class-ucp-admin.php:114
+msgid "Required for agent purchases without identity linking."
+msgstr "पहचान लिंकिंग के बिना एजेंट खरीद के लिए आवश्यक।"
+
+#: admin/class-ucp-admin.php:121
+msgid "Webhook Settings"
+msgstr "वेबहुक सेटिंग्स"
+
+#: admin/class-ucp-admin.php:138
+msgid "Webhook URL"
+msgstr "वेबहुक URL"
+
+#: admin/class-ucp-admin.php:147
+msgid "Debug Settings"
+msgstr "डीबग सेटिंग्स"
+
+#: admin/class-ucp-admin.php:164
+msgid "Debug Logging"
+msgstr "डीबग लॉगिंग"
+
+#: admin/class-ucp-admin.php:170
+msgid "Enable debug logging"
+msgstr "डीबग लॉगिंग सक्षम करें"
+
+#: admin/class-ucp-admin.php:171
+msgid "Log UCP requests and responses to the error log."
+msgstr "UCP अनुरोधों और प्रतिक्रियाओं को त्रुटि लॉग में लॉग करें।"
+
+#: admin/class-ucp-admin.php:201
+msgid "Please enter a valid webhook URL."
+msgstr "कृपया एक मान्य वेबहुक URL दर्ज करें।"
+
+#: admin/class-ucp-admin.php:240
+msgid ""
+"Are you sure you want to rotate the signing key? This will invalidate any "
+"existing webhook integrations."
+msgstr ""
+"क्या आप वाकई साइनिंग कुंजी बदलना चाहते हैं? यह सभी मौजूदा वेबहुक "
+"एकीकरणों को अमान्य कर देगा।"
+
+#: admin/class-ucp-admin.php:241
+msgid "Rotating..."
+msgstr "बदल रहा है..."
+
+#: admin/class-ucp-admin.php:242
+msgid "Testing..."
+msgstr "परीक्षण हो रहा है..."
+
+#: admin/class-ucp-admin.php:243
+msgid "Retrying..."
+msgstr "पुनः प्रयास हो रहा है..."
+
+#: admin/class-ucp-admin.php:244
+msgid "Success!"
+msgstr "सफलता!"
+
+#: admin/class-ucp-admin.php:245
+msgid "Error:"
+msgstr "त्रुटि:"
+
+#: admin/class-ucp-admin.php:256
+msgid "You do not have permission to access this page."
+msgstr "आपको इस पृष्ठ तक पहुँचने की अनुमति नहीं है।"
+
+#: admin/class-ucp-admin.php:266
+msgid "Configure general UCP settings for your store."
+msgstr "अपने स्टोर के लिए सामान्य UCP सेटिंग्स कॉन्फ़िगर करें।"
+
+#: admin/class-ucp-admin.php:275
+msgid ""
+"Webhooks allow your store to send real-time order event notifications to "
+"external platforms."
+msgstr ""
+"वेबहुक आपके स्टोर को बाहरी प्लेटफ़ॉर्म पर रीयल-टाइम ऑर्डर इवेंट "
+"सूचनाएं भेजने की अनुमति देते हैं।"
+
+#: admin/class-ucp-admin.php:276
+msgid "This is optional."
+msgstr "यह वैकल्पिक है।"
+
+#: admin/class-ucp-admin.php:276
+msgid "Leave blank if you only need the checkout and order REST APIs."
+msgstr "यदि आपको केवल चेकआउट और ऑर्डर REST API की आवश्यकता है तो खाली छोड़ दें।"
+
+#: admin/class-ucp-admin.php:285
+msgid "Debug and troubleshooting options."
+msgstr "डीबग और समस्या निवारण विकल्प।"
+
+#: admin/class-ucp-admin.php:342
+msgid "The external URL where order events will be sent via HTTP POST."
+msgstr "बाहरी URL जहां HTTP POST के माध्यम से ऑर्डर इवेंट भेजे जाएंगे।"
+
+#: admin/class-ucp-admin.php:346
+msgid "Who provides this URL?"
+msgstr "यह URL कौन प्रदान करता है?"
+
+#: admin/class-ucp-admin.php:348
+msgid "AI Agent Platform:"
+msgstr "AI एजेंट प्लेटफ़ॉर्म:"
+
+#: admin/class-ucp-admin.php:348
+msgid ""
+"The platform integrating with your store provides a callback URL to receive "
+"order updates."
+msgstr ""
+"आपके स्टोर के साथ एकीकृत प्लेटफ़ॉर्म ऑर्डर अपडेट प्राप्त करने के लिए "
+"कॉलबैक URL प्रदान करता है।"
+
+#: admin/class-ucp-admin.php:349
+msgid "Your Backend:"
+msgstr "आपका बैकएंड:"
+
+#: admin/class-ucp-admin.php:349
+msgid "Create an endpoint on your own server to process order events."
+msgstr "ऑर्डर इवेंट्स को संसाधित करने के लिए अपने सर्वर पर एक एंडपॉइंट बनाएं।"
+
+#: admin/class-ucp-admin.php:350
+msgid "Integration Services:"
+msgstr "एकीकरण सेवाएं:"
+
+#: admin/class-ucp-admin.php:350
+msgid "Use services like Zapier, Make, or n8n to receive webhooks."
+msgstr "वेबहुक प्राप्त करने के लिए Zapier, Make या n8n जैसी सेवाओं का उपयोग करें।"
+
+#: admin/class-ucp-admin.php:351
+msgid "Testing:"
+msgstr "परीक्षण:"
+
+#: admin/class-ucp-admin.php:351
+msgid ""
+"Use webhook.site or requestbin.com to inspect webhook payloads during "
+"development."
+msgstr ""
+"विकास के दौरान वेबहुक पेलोड का निरीक्षण करने के लिए webhook.site या "
+"requestbin.com का उपयोग करें।"
+
+#: admin/class-ucp-admin.php:354
+msgid "Events sent to this URL:"
+msgstr "इस URL पर भेजे गए इवेंट:"
+
+#: admin/class-ucp-admin.php:356
+msgid "When a new order is placed via UCP"
+msgstr "जब UCP के माध्यम से नया ऑर्डर दिया जाता है"
+
+#: admin/class-ucp-admin.php:357
+msgid "When order status changes (e.g., pending to processing)"
+msgstr "जब ऑर्डर स्थिति बदलती है (जैसे, लंबित से प्रसंस्करण में)"
+
+#: admin/class-ucp-admin.php:358
+msgid "When payment is completed"
+msgstr "जब भुगतान पूरा हो जाता है"
+
+#: admin/class-ucp-admin.php:359
+msgid "When a refund is issued"
+msgstr "जब रिफंड जारी किया जाता है"
+
+#: admin/class-ucp-admin.php:362
+msgid ""
+"All webhooks are signed with HMAC-SHA256 for security. The signing key is "
+"shown in the Status panel above."
+msgstr ""
+"सुरक्षा के लिए सभी वेबहुक HMAC-SHA256 के साथ हस्ताक्षरित हैं। साइनिंग "
+"कुंजी ऊपर स्थिति पैनल में दिखाई गई है।"
+
+#: admin/class-ucp-admin.php:374 admin/class-ucp-admin.php:395
+#: admin/class-ucp-admin.php:429
+msgid "Permission denied."
+msgstr "अनुमति नहीं है।"
+
+#: admin/class-ucp-admin.php:382
+msgid "Signing key rotated successfully."
+msgstr "साइनिंग कुंजी सफलतापूर्वक बदली गई।"
+
+#: admin/class-ucp-admin.php:401
+msgid "No webhook URL configured."
+msgstr "कोई वेबहुक URL कॉन्फ़िगर नहीं है।"
+
+#: admin/class-ucp-admin.php:419
+msgid "Test webhook sent successfully."
+msgstr "परीक्षण वेबहुक सफलतापूर्वक भेजा गया।"
+
+#. translators: 1: success count, 2: failed count
+#: admin/class-ucp-admin.php:442
+#, php-format
+msgid "Retry complete. %1$d succeeded, %2$d failed."
+msgstr "पुनः प्रयास पूर्ण। %1$d सफल, %2$d विफल।"
+
+#: admin/class-ucp-admin.php:479
+msgid "Unknown"
+msgstr "अज्ञात"
+
+#: ucp-for-woocommerce.php:56
+msgid "WooCommerce UCP requires WooCommerce to be installed and active."
+msgstr "WooCommerce UCP के लिए WooCommerce का इंस्टॉल और सक्रिय होना आवश्यक है।"

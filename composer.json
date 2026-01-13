@@ -1,0 +1,47 @@
+{
+    "name": "harmonytics/ucp-for-woocommerce",
+    "description": "UCP for WooCommerce - Universal Commerce Protocol integration for WooCommerce",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Harmonytics",
+            "email": "dev@harmonytics.com",
+            "homepage": "https://harmonytics.com"
+        }
+    ],
+    "support": {
+        "email": "support@harmonytics.com",
+        "issues": "https://github.com/harmonytics/ucp-for-woocommerce/issues",
+        "docs": "https://github.com/harmonytics/ucp-for-woocommerce/wiki"
+    },
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "wp-coding-standards/wpcs": "^3.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "UCP_WC\\": "includes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UCP_WC\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpcs": "phpcs --standard=WordPress .",
+        "phpcbf": "phpcbf --standard=WordPress ."
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
