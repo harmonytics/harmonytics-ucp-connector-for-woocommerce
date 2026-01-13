@@ -53,6 +53,55 @@ class UCP_WC_Loader {
     protected $order_controller;
 
     /**
+     * Product controller instance.
+     *
+     * @var UCP_WC_Product_Controller
+     */
+    protected $product_controller;
+
+    /**
+     * Category controller instance.
+     *
+     * @var UCP_WC_Category_Controller
+     */
+    protected $category_controller;
+
+    /**
+     * Cart controller instance.
+     *
+     * @var UCP_WC_Cart_Controller
+     */
+    protected $cart_controller;
+
+    /**
+     * Shipping controller instance.
+     *
+     * @var UCP_WC_Shipping_Controller
+     */
+    protected $shipping_controller;
+
+    /**
+     * Coupon controller instance.
+     *
+     * @var UCP_WC_Coupon_Controller
+     */
+    protected $coupon_controller;
+
+    /**
+     * Customer controller instance.
+     *
+     * @var UCP_WC_Customer_Controller
+     */
+    protected $customer_controller;
+
+    /**
+     * Review controller instance.
+     *
+     * @var UCP_WC_Review_Controller
+     */
+    protected $review_controller;
+
+    /**
      * WooCommerce hooks handler instance.
      *
      * @var UCP_WC_Woo_Hooks
@@ -60,12 +109,35 @@ class UCP_WC_Loader {
     protected $woo_hooks;
 
     /**
+     * Auth handler instance.
+     *
+     * @var UCP_WC_Auth
+     */
+    protected $auth;
+
+    /**
+     * Auth controller instance.
+     *
+     * @var UCP_WC_Auth_Controller
+     */
+    protected $auth_controller;
+
+    /**
      * Initialize the loader.
      */
     public function __construct() {
         $this->well_known          = new UCP_WC_Well_Known();
+        $this->auth                = new UCP_WC_Auth();
+        $this->auth_controller     = new UCP_WC_Auth_Controller();
         $this->checkout_controller = new UCP_WC_Checkout_Controller();
         $this->order_controller    = new UCP_WC_Order_Controller();
+        $this->product_controller  = new UCP_WC_Product_Controller();
+        $this->category_controller = new UCP_WC_Category_Controller();
+        $this->cart_controller     = new UCP_WC_Cart_Controller();
+        $this->shipping_controller = new UCP_WC_Shipping_Controller();
+        $this->coupon_controller   = new UCP_WC_Coupon_Controller();
+        $this->customer_controller = new UCP_WC_Customer_Controller();
+        $this->review_controller   = new UCP_WC_Review_Controller();
         $this->woo_hooks           = new UCP_WC_Woo_Hooks();
     }
 
@@ -127,8 +199,16 @@ class UCP_WC_Loader {
         $this->add_filter( 'query_vars', $this->well_known, 'add_query_vars' );
 
         // Register REST API endpoints
+        $this->add_action( 'rest_api_init', $this->auth_controller, 'register_routes' );
         $this->add_action( 'rest_api_init', $this->checkout_controller, 'register_routes' );
         $this->add_action( 'rest_api_init', $this->order_controller, 'register_routes' );
+        $this->add_action( 'rest_api_init', $this->product_controller, 'register_routes' );
+        $this->add_action( 'rest_api_init', $this->category_controller, 'register_routes' );
+        $this->add_action( 'rest_api_init', $this->cart_controller, 'register_routes' );
+        $this->add_action( 'rest_api_init', $this->shipping_controller, 'register_routes' );
+        $this->add_action( 'rest_api_init', $this->coupon_controller, 'register_routes' );
+        $this->add_action( 'rest_api_init', $this->customer_controller, 'register_routes' );
+        $this->add_action( 'rest_api_init', $this->review_controller, 'register_routes' );
 
         // Register WooCommerce hooks
         $this->add_action( 'woocommerce_new_order', $this->woo_hooks, 'on_order_created', 10, 2 );

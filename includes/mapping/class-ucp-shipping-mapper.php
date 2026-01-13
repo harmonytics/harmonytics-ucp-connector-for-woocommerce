@@ -276,4 +276,219 @@ class UCP_WC_Shipping_Mapper {
 
         return array();
     }
+
+    /**
+     * Map a WC_Shipping_Rate object for API response.
+     *
+     * @param WC_Shipping_Rate   $rate   Shipping rate object.
+     * @param WC_Shipping_Method $method Shipping method object (optional).
+     * @return array
+     */
+    public function map_shipping_rate_for_api( $rate, $method = null ) {
+        $currency = get_woocommerce_currency();
+
+        $mapped = array(
+            'id'           => $rate->get_id(),
+            'method_id'    => $rate->get_method_id(),
+            'method_title' => $method ? $method->get_method_title() : $rate->get_method_id(),
+            'label'        => $rate->get_label(),
+            'cost'         => wc_format_decimal( $rate->get_cost(), wc_get_price_decimals() ),
+            'taxes'        => wc_format_decimal( $rate->get_shipping_tax(), wc_get_price_decimals() ),
+            'currency'     => $currency,
+        );
+
+        // Add instance ID if available.
+        $instance_id = $rate->get_instance_id();
+        if ( $instance_id ) {
+            $mapped['instance_id'] = $instance_id;
+        }
+
+        // Add estimated delivery if available.
+        $estimated_delivery = $this->get_rate_estimated_delivery( $rate, $method );
+        if ( $estimated_delivery ) {
+            $mapped['estimated_delivery'] = $estimated_delivery;
+        }
+
+        // Add meta data if present.
+        $meta_data = $rate->get_meta_data();
+        if ( ! empty( $meta_data ) ) {
+            $mapped['meta_data'] = $meta_data;
+        }
+
+        return $mapped;
+    }
+
+    /**
+     * Get estimated delivery for a shipping rate.
+     *
+     * @param WC_Shipping_Rate   $rate   Shipping rate object.
+     * @param WC_Shipping_Method $method Shipping method object (optional).
+     * @return string|null
+     */
+    private function get_rate_estimated_delivery( $rate, $method = null ) {
+        // Check rate meta data first.
+        $meta_data = $rate->get_meta_data();
+
+        $delivery_keys = array(
+            'delivery_time',
+            'estimated_delivery',
+            'delivery_days',
+            'shipping_time',
+            'estimated_days',
+        );
+
+        foreach ( $delivery_keys as $key ) {
+            if ( isset( $meta_data[ $key ] ) && ! empty( $meta_data[ $key ] ) ) {
+                return $meta_data[ $key ];
+            }
+        }
+
+        // Check method instance settings if method provided.
+        if ( $method ) {
+            $estimated = $this->get_estimated_delivery( $method );
+            if ( $estimated ) {
+                if ( isset( $estimated['min_days'] ) && isset( $estimated['max_days'] ) ) {
+                    return sprintf(
+                        /* translators: 1: minimum days, 2: maximum days */
+                        __( '%1$d-%2$d business days', 'ucp-for-woocommerce' ),
+                        $estimated['min_days'],
+                        $estimated['max_days']
+                    );
+                }
+                if ( isset( $estimated['description'] ) ) {
+                    return $estimated['description'];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Map a shipping zone for API response.
+     *
+     * @param WC_Shipping_Zone $zone Shipping zone object.
+     * @return array
+     */
+    public function map_shipping_zone( $zone ) {
+        $zone_locations = $zone->get_zone_locations();
+        $zone_methods   = $zone->get_shipping_methods( false );
+
+        $locations = array();
+        foreach ( $zone_locations as $location ) {
+            $locations[] = array(
+                'code' => $location->code,
+                'type' => $location->type, // 'country', 'state', 'postcode', 'continent'.
+            );
+        }
+
+        $methods = array();
+        foreach ( $zone_methods as $method ) {
+            $methods[] = array(
+                'id'          => $method->id,
+                'instance_id' => $method->get_instance_id(),
+                'title'       => $method->get_title(),
+                'enabled'     => $method->is_enabled(),
+            );
+        }
+
+        return array(
+            'id'        => $zone->get_id(),
+            'name'      => $zone->get_zone_name(),
+            'order'     => $zone->get_zone_order(),
+            'locations' => $locations,
+            'methods'   => $methods,
+        );
+    }
+
+    /**
+     * Map shipping method info for API response.
+     *
+     * @param WC_Shipping_Method $method Shipping method object.
+     * @return array
+     */
+    public function map_shipping_method_info( $method ) {
+        return array(
+            'id'                 => $method->id,
+            'title'              => $method->get_method_title(),
+            'description'        => $method->get_method_description(),
+            'supports'           => $method->supports,
+            'has_settings'       => $method->has_settings(),
+            'supports_shipping_zones' => $method->supports( 'shipping-zones' ),
+            'supports_instance_settings' => $method->supports( 'instance-settings' ),
+        );
+    }
+
+    /**
+     * Calculate package weight from items.
+     *
+     * @param array $items Array of cart items.
+     * @return float
+     */
+    public function calculate_package_weight( $items ) {
+        $total_weight = 0;
+
+        foreach ( $items as $item ) {
+            $product = isset( $item['data'] ) ? $item['data'] : null;
+
+            if ( ! $product || ! is_a( $product, 'WC_Product' ) ) {
+                continue;
+            }
+
+            $weight   = floatval( $product->get_weight() );
+            $quantity = isset( $item['quantity'] ) ? absint( $item['quantity'] ) : 1;
+
+            if ( $weight > 0 ) {
+                $total_weight += $weight * $quantity;
+            }
+        }
+
+        return $total_weight;
+    }
+
+    /**
+     * Calculate package dimensions from items.
+     *
+     * @param array $items Array of cart items.
+     * @return array
+     */
+    public function calculate_package_dimensions( $items ) {
+        $total_volume  = 0;
+        $max_length    = 0;
+        $max_width     = 0;
+        $max_height    = 0;
+
+        foreach ( $items as $item ) {
+            $product = isset( $item['data'] ) ? $item['data'] : null;
+
+            if ( ! $product || ! is_a( $product, 'WC_Product' ) ) {
+                continue;
+            }
+
+            $quantity = isset( $item['quantity'] ) ? absint( $item['quantity'] ) : 1;
+
+            $length = floatval( $product->get_length() );
+            $width  = floatval( $product->get_width() );
+            $height = floatval( $product->get_height() );
+
+            if ( $length > 0 && $width > 0 && $height > 0 ) {
+                // Calculate volume.
+                $item_volume   = $length * $width * $height * $quantity;
+                $total_volume += $item_volume;
+
+                // Track max dimensions.
+                $max_length = max( $max_length, $length );
+                $max_width  = max( $max_width, $width );
+                $max_height = max( $max_height, $height );
+            }
+        }
+
+        return array(
+            'length'       => (string) $max_length,
+            'width'        => (string) $max_width,
+            'height'       => (string) $max_height,
+            'total_volume' => (string) $total_volume,
+            'unit'         => get_option( 'woocommerce_dimension_unit', 'cm' ),
+        );
+    }
 }

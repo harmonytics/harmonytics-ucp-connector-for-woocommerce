@@ -203,12 +203,16 @@ class Test_UCP_Checkout extends WC_Unit_Test_Case {
      * Test totals calculation.
      */
     public function test_totals_calculation() {
-        $this->product->set_price( 25.00 );
+        // Set regular price (not just active price) to ensure proper persistence.
+        $this->product->set_regular_price( 25.00 );
         $this->product->save();
+
+        // Reload product from database to ensure fresh data.
+        $product = wc_get_product( $this->product->get_id() );
 
         $items = array(
             array(
-                'product_id' => $this->product->get_id(),
+                'product_id' => $product->get_id(),
                 'quantity'   => 2,
             ),
         );

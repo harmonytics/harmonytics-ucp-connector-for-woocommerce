@@ -25,6 +25,20 @@ class UCP_WC_Activator {
     const SESSIONS_TABLE = 'ucp_sessions';
 
     /**
+     * Database table name for UCP carts.
+     *
+     * @var string
+     */
+    const CARTS_TABLE = 'ucp_carts';
+
+    /**
+     * Database table name for UCP API keys.
+     *
+     * @var string
+     */
+    const API_KEYS_TABLE = 'ucp_api_keys';
+
+    /**
      * Option name for signing key.
      *
      * @var string
@@ -43,7 +57,7 @@ class UCP_WC_Activator {
      *
      * @var string
      */
-    const DB_VERSION = '1.0.0';
+    const DB_VERSION = '1.2.0';
 
     /**
      * Activate the plugin.
@@ -69,9 +83,10 @@ class UCP_WC_Activator {
         global $wpdb;
 
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name      = $wpdb->prefix . self::SESSIONS_TABLE;
 
-        $sql = "CREATE TABLE {$table_name} (
+        // Sessions table.
+        $sessions_table = $wpdb->prefix . self::SESSIONS_TABLE;
+        $sessions_sql   = "CREATE TABLE {$sessions_table} (
             id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             session_id VARCHAR(64) UNIQUE NOT NULL,
             wc_order_id BIGINT UNSIGNED NULL,
@@ -88,8 +103,44 @@ class UCP_WC_Activator {
             INDEX idx_expires_at (expires_at)
         ) {$charset_collate};";
 
+        // Carts table.
+        $carts_table = $wpdb->prefix . self::CARTS_TABLE;
+        $carts_sql   = "CREATE TABLE {$carts_table} (
+            id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            cart_id VARCHAR(64) UNIQUE NOT NULL,
+            items LONGTEXT,
+            metadata LONGTEXT,
+            status VARCHAR(32) DEFAULT 'active',
+            checkout_session_id VARCHAR(64) NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            expires_at DATETIME,
+            INDEX idx_status (status),
+            INDEX idx_checkout_session_id (checkout_session_id),
+            INDEX idx_expires_at (expires_at)
+        ) {$charset_collate};";
+
+        // API keys table.
+        $api_keys_table = $wpdb->prefix . self::API_KEYS_TABLE;
+        $api_keys_sql   = "CREATE TABLE {$api_keys_table} (
+            id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            key_id VARCHAR(50) UNIQUE NOT NULL,
+            secret_hash VARCHAR(255) NOT NULL,
+            description VARCHAR(255),
+            permissions TEXT,
+            user_id BIGINT UNSIGNED DEFAULT 0,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            last_used_at DATETIME NULL,
+            status VARCHAR(20) DEFAULT 'active',
+            INDEX idx_key_id (key_id),
+            INDEX idx_status (status),
+            INDEX idx_user_id (user_id)
+        ) {$charset_collate};";
+
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-        dbDelta( $sql );
+        dbDelta( $sessions_sql );
+        dbDelta( $carts_sql );
+        dbDelta( $api_keys_sql );
 
         update_option( self::DB_VERSION_OPTION, self::DB_VERSION );
     }
@@ -164,6 +215,26 @@ class UCP_WC_Activator {
     public static function get_sessions_table() {
         global $wpdb;
         return $wpdb->prefix . self::SESSIONS_TABLE;
+    }
+
+    /**
+     * Get the carts table name.
+     *
+     * @return string
+     */
+    public static function get_carts_table() {
+        global $wpdb;
+        return $wpdb->prefix . self::CARTS_TABLE;
+    }
+
+    /**
+     * Get the API keys table name.
+     *
+     * @return string
+     */
+    public static function get_api_keys_table() {
+        global $wpdb;
+        return $wpdb->prefix . self::API_KEYS_TABLE;
     }
 
     /**

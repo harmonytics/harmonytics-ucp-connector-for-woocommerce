@@ -28,11 +28,14 @@ zip -r "$ZIP_NAME" "$PLUGIN_SLUG" \
     -x "${PLUGIN_SLUG}/.gitignore" \
     -x "${PLUGIN_SLUG}/.github/*" \
     -x "${PLUGIN_SLUG}/tests/*" \
+    -x "${PLUGIN_SLUG}/bin/*" \
     -x "${PLUGIN_SLUG}/vendor/*" \
     -x "${PLUGIN_SLUG}/node_modules/*" \
     -x "${PLUGIN_SLUG}/phpunit.xml" \
+    -x "${PLUGIN_SLUG}/phpunit.xml.dist" \
     -x "${PLUGIN_SLUG}/composer.json" \
     -x "${PLUGIN_SLUG}/composer.lock" \
+    -x "${PLUGIN_SLUG}/docker-compose*.yml" \
     -x "${PLUGIN_SLUG}/CONTRIBUTING.md" \
     -x "${PLUGIN_SLUG}/.distignore" \
     -x "${PLUGIN_SLUG}/build-zip.sh" \

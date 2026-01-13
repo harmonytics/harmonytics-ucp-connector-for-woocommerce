@@ -1,0 +1,33 @@
+services:
+  db:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress_test
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+    tmpfs:
+      - /var/lib/mysql
+    volumes:
+      - ./bin/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  test:
+    image: php:8.2-cli
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WP_TESTS_DIR: /tmp/wordpress-tests-lib
+      WP_CORE_DIR: /tmp/wordpress
+      WP_TESTS_DB_HOST: db
+      WP_TESTS_DB_USER: root
+      WP_TESTS_DB_PASS: root
+      WP_TESTS_DB_NAME: wordpress_test
+    volumes:
+      - .:/plugin
+    working_dir: /plugin
+    command: ["bash", "/plugin/bin/run-tests.sh"]

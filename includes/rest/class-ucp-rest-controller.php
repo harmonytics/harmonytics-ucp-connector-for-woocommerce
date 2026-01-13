@@ -68,6 +68,48 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
     }
 
     /**
+     * Check if the current request is authenticated via API key or WordPress user.
+     *
+     * @return bool
+     */
+    protected function is_authenticated() {
+        // Check if authenticated via API key.
+        if ( class_exists( 'UCP_WC_Auth' ) && UCP_WC_Auth::is_api_key_authenticated() ) {
+            return true;
+        }
+
+        // Check if authenticated as WordPress user.
+        return is_user_logged_in();
+    }
+
+    /**
+     * Check if the current request has the required permission level.
+     *
+     * @param string $permission Permission level to check (read, write, admin).
+     * @return bool
+     */
+    protected function has_permission( $permission ) {
+        if ( class_exists( 'UCP_WC_Auth' ) ) {
+            return UCP_WC_Auth::check_permission( $permission );
+        }
+
+        // Fallback: check WordPress capabilities.
+        return current_user_can( 'manage_woocommerce' );
+    }
+
+    /**
+     * Get the current authenticated API key info.
+     *
+     * @return array|null
+     */
+    protected function get_current_api_key() {
+        if ( class_exists( 'UCP_WC_Auth' ) ) {
+            return UCP_WC_Auth::get_current_api_key();
+        }
+        return null;
+    }
+
+    /**
      * Generate a unique session ID.
      *
      * @return string
