@@ -69,7 +69,7 @@ class UCP_WC_Checkout_Controller extends UCP_WC_REST_Controller {
                         'session_id' => array(
                             'required'          => true,
                             'type'              => 'string',
-                            'description'       => __( 'Unique session identifier.', 'ucp-for-woocommerce' ),
+                            'description'       => __( 'Unique session identifier.', 'harmonytics-ucp-connector-woocommerce' ),
                             'sanitize_callback' => 'sanitize_text_field',
                         ),
                     ),
@@ -116,25 +116,25 @@ class UCP_WC_Checkout_Controller extends UCP_WC_REST_Controller {
             'items'            => array(
                 'required'    => true,
                 'type'        => 'array',
-                'description' => __( 'Array of items to add to the checkout.', 'ucp-for-woocommerce' ),
+                'description' => __( 'Array of items to add to the checkout.', 'harmonytics-ucp-connector-woocommerce' ),
                 'items'       => array(
                     'type'       => 'object',
                     'properties' => array(
                         'sku'        => array(
                             'type'        => 'string',
-                            'description' => __( 'Product SKU.', 'ucp-for-woocommerce' ),
+                            'description' => __( 'Product SKU.', 'harmonytics-ucp-connector-woocommerce' ),
                         ),
                         'product_id' => array(
                             'type'        => 'integer',
-                            'description' => __( 'Product ID.', 'ucp-for-woocommerce' ),
+                            'description' => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
                         ),
                         'variant_id' => array(
                             'type'        => 'integer',
-                            'description' => __( 'Variant/variation ID.', 'ucp-for-woocommerce' ),
+                            'description' => __( 'Variant/variation ID.', 'harmonytics-ucp-connector-woocommerce' ),
                         ),
                         'quantity'   => array(
                             'type'        => 'integer',
-                            'description' => __( 'Quantity.', 'ucp-for-woocommerce' ),
+                            'description' => __( 'Quantity.', 'harmonytics-ucp-connector-woocommerce' ),
                             'default'     => 1,
                             'minimum'     => 1,
                         ),
@@ -144,7 +144,7 @@ class UCP_WC_Checkout_Controller extends UCP_WC_REST_Controller {
             'shipping_address' => array(
                 'required'    => false,
                 'type'        => 'object',
-                'description' => __( 'Shipping address.', 'ucp-for-woocommerce' ),
+                'description' => __( 'Shipping address.', 'harmonytics-ucp-connector-woocommerce' ),
                 'properties'  => array(
                     'first_name'  => array( 'type' => 'string' ),
                     'last_name'   => array( 'type' => 'string' ),
@@ -161,17 +161,17 @@ class UCP_WC_Checkout_Controller extends UCP_WC_REST_Controller {
             'billing_address'  => array(
                 'required'    => false,
                 'type'        => 'object',
-                'description' => __( 'Billing address.', 'ucp-for-woocommerce' ),
+                'description' => __( 'Billing address.', 'harmonytics-ucp-connector-woocommerce' ),
             ),
             'coupon_code'      => array(
                 'required'    => false,
                 'type'        => 'string',
-                'description' => __( 'Coupon code to apply.', 'ucp-for-woocommerce' ),
+                'description' => __( 'Coupon code to apply.', 'harmonytics-ucp-connector-woocommerce' ),
             ),
             'customer_note'    => array(
                 'required'    => false,
                 'type'        => 'string',
-                'description' => __( 'Customer note for the order.', 'ucp-for-woocommerce' ),
+                'description' => __( 'Customer note for the order.', 'harmonytics-ucp-connector-woocommerce' ),
             ),
         );
     }
@@ -186,18 +186,18 @@ class UCP_WC_Checkout_Controller extends UCP_WC_REST_Controller {
             'session_id'       => array(
                 'required'          => true,
                 'type'              => 'string',
-                'description'       => __( 'Session ID.', 'ucp-for-woocommerce' ),
+                'description'       => __( 'Session ID.', 'harmonytics-ucp-connector-woocommerce' ),
                 'sanitize_callback' => 'sanitize_text_field',
             ),
             'shipping_method'  => array(
                 'required'    => false,
                 'type'        => 'string',
-                'description' => __( 'Selected shipping method ID.', 'ucp-for-woocommerce' ),
+                'description' => __( 'Selected shipping method ID.', 'harmonytics-ucp-connector-woocommerce' ),
             ),
             'payment_method'   => array(
                 'required'    => false,
                 'type'        => 'string',
-                'description' => __( 'Payment method ID.', 'ucp-for-woocommerce' ),
+                'description' => __( 'Payment method ID.', 'harmonytics-ucp-connector-woocommerce' ),
             ),
         );
     }

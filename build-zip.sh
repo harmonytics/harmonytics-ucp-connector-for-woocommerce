@@ -7,7 +7,10 @@
 set -e
 
 PLUGIN_SLUG="ucp-for-woocommerce"
-VERSION=$(grep -oP "Version:\s*\K[0-9.]+" "$PLUGIN_SLUG.php" 2>/dev/null || echo "1.0.0")
+# Main plugin file name
+PLUGIN_MAIN_FILE="harmonytics-ucp-connector-woocommerce.php"
+# Read version from the plugin header in the main file
+VERSION=$(grep -oP "Version:\s*\K[0-9.]+" "$PLUGIN_MAIN_FILE" 2>/dev/null || echo "1.0.0")
 ZIP_NAME="${PLUGIN_SLUG}-${VERSION}.zip"
 
 # Get script directory (plugin root)

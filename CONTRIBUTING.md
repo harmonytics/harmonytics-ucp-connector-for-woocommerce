@@ -93,7 +93,7 @@ composer phpcbf
 
 ```
 ucp-for-woocommerce/
-├── ucp-for-woocommerce.php    # Main plugin file
+├── harmonytics-ucp-connector-woocommerce.php    # Main plugin file
 ├── includes/              # Core plugin classes
 │   ├── rest/              # REST API controllers
 │   ├── capabilities/      # UCP capability handlers

@@ -1,7 +1,7 @@
 <?php
 // SPDX-License-Identifier: GPL-2.0-or-later
 /**
- * Plugin Name: UCP for WooCommerce
+ * Plugin Name: Harmonytics UCP Connector for WooCommerce
  * Plugin URI: https://github.com/harmonytics/ucp-for-woocommerce
  * Description: Adds Universal Commerce Protocol (UCP) capabilities to WooCommerce, enabling AI agents to discover, browse, and complete purchases.
  * Version: 1.0.0
@@ -11,8 +11,9 @@
  * Author URI: https://harmonytics.com
  * License: GPL-2.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: ucp-for-woocommerce
+ * Text Domain: harmonytics-ucp-connector-woocommerce
  * Domain Path: /languages
+ * Requires Plugins: woocommerce
  * WC requires at least: 8.0
  * WC tested up to: 10.4.3
  *
@@ -53,7 +54,7 @@ function ucp_wc_is_woocommerce_active() {
 function ucp_wc_woocommerce_missing_notice() {
     ?>
     <div class="notice notice-error">
-        <p><?php esc_html_e( 'WooCommerce UCP requires WooCommerce to be installed and active.', 'ucp-for-woocommerce' ); ?></p>
+        <p><?php esc_html_e( 'WooCommerce UCP requires WooCommerce to be installed and active.', 'harmonytics-ucp-connector-woocommerce' ); ?></p>
     </div>
     <?php
 }
@@ -62,6 +63,13 @@ function ucp_wc_woocommerce_missing_notice() {
  * Initialize the plugin
  */
 function ucp_wc_init() {
+    // Load translations
+    load_plugin_textdomain(
+        'harmonytics-ucp-connector-woocommerce',
+        false,
+        dirname( plugin_basename( __FILE__ ) ) . '/languages'
+    );
+
     // Check WooCommerce dependency
     if ( ! ucp_wc_is_woocommerce_active() ) {
         add_action( 'admin_notices', 'ucp_wc_woocommerce_missing_notice' );

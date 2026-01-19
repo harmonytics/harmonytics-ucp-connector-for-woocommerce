@@ -99,11 +99,11 @@ class UCP_WC_Auth {
 			return $user_id;
 		}
 
-		// Store the authenticated key data.
-		self::$current_api_key = $key_data;
+        // Store the authenticated key data.
+        self::$current_api_key = $key_data;
 
-		// Update last used timestamp.
-		$this->update_last_used( $key_data['id'] );
+        // Update last used timestamp and invalidate caches.
+        $this->update_last_used( $key_data['id'], isset( $key_data['key_id'] ) ? $key_data['key_id'] : null );
 
 		// Return the user ID associated with the key, or a fallback admin user.
 		if ( ! empty( $key_data['user_id'] ) ) {
@@ -323,7 +323,7 @@ class UCP_WC_Auth {
 		if ( empty( $permissions ) ) {
 			return new WP_Error(
 				'invalid_permissions',
-				__( 'At least one valid permission (read, write, admin) is required.', 'ucp-for-woocommerce' )
+				__( 'At least one valid permission (read, write, admin) is required.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -356,7 +356,7 @@ class UCP_WC_Auth {
 		if ( false === $result ) {
 			return new WP_Error(
 				'db_error',
-				__( 'Failed to create API key.', 'ucp-for-woocommerce' )
+				__( 'Failed to create API key.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -523,7 +523,7 @@ class UCP_WC_Auth {
 		if ( ! $existing ) {
 			return new WP_Error(
 				'key_not_found',
-				__( 'API key not found.', 'ucp-for-woocommerce' )
+				__( 'API key not found.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -540,7 +540,7 @@ class UCP_WC_Auth {
 		if ( false === $result ) {
 			return new WP_Error(
 				'db_error',
-				__( 'Failed to revoke API key.', 'ucp-for-woocommerce' )
+				__( 'Failed to revoke API key.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -566,7 +566,7 @@ class UCP_WC_Auth {
 		if ( ! $existing ) {
 			return new WP_Error(
 				'key_not_found',
-				__( 'API key not found.', 'ucp-for-woocommerce' )
+				__( 'API key not found.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -580,7 +580,7 @@ class UCP_WC_Auth {
 		if ( false === $result ) {
 			return new WP_Error(
 				'db_error',
-				__( 'Failed to delete API key.', 'ucp-for-woocommerce' )
+				__( 'Failed to delete API key.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -614,22 +614,28 @@ class UCP_WC_Auth {
 	/**
 	 * Update the last used timestamp for a key.
 	 *
-	 * @param int $key_db_id Database ID of the key.
-	 */
-	private function update_last_used( $key_db_id ) {
-		global $wpdb;
+     * @param int         $key_db_id Database ID of the key.
+     * @param string|null $key_id    Optional public key_id for cache invalidation.
+     */
+    private function update_last_used( $key_db_id, $key_id = null ) {
+        global $wpdb;
 
-		$table_name = $wpdb->prefix . self::TABLE_NAME;
+        $table_name = $wpdb->prefix . self::TABLE_NAME;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table, timestamp update doesn't require cache invalidation.
-		$wpdb->update(
-			$table_name,
-			array( 'last_used_at' => current_time( 'mysql' ) ),
-			array( 'id' => $key_db_id ),
-			array( '%s' ),
-			array( '%d' )
-		);
-	}
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table, timestamp update doesn't require cache invalidation.
+        $wpdb->update(
+            $table_name,
+            array( 'last_used_at' => current_time( 'mysql' ) ),
+            array( 'id' => $key_db_id ),
+            array( '%s' ),
+            array( '%d' )
+        );
+
+        // Invalidate cached key info so subsequent reads get the updated timestamp.
+        if ( $key_id ) {
+            $this->invalidate_key_cache( $key_id );
+        }
+    }
 
 	/**
 	 * Invalidate cache for a specific API key.

@@ -22,7 +22,7 @@ class UCP_WC_Admin {
      *
      * @var string
      */
-    const PAGE_SLUG = 'ucp-for-woocommerce';
+    const PAGE_SLUG = 'harmonytics-ucp-connector-woocommerce';
 
     /**
      * Settings option group.
@@ -38,9 +38,9 @@ class UCP_WC_Admin {
         add_action( 'admin_menu', array( $this, 'add_menu_page' ) );
         add_action( 'admin_init', array( $this, 'register_settings' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-        add_action( 'wp_ajax_ucp_rotate_key', array( $this, 'ajax_rotate_key' ) );
-        add_action( 'wp_ajax_ucp_test_webhook', array( $this, 'ajax_test_webhook' ) );
-        add_action( 'wp_ajax_ucp_retry_failed', array( $this, 'ajax_retry_failed' ) );
+        add_action( 'wp_ajax_ucp_wc_rotate_key', array( $this, 'ajax_rotate_key' ) );
+        add_action( 'wp_ajax_ucp_wc_test_webhook', array( $this, 'ajax_test_webhook' ) );
+        add_action( 'wp_ajax_ucp_wc_retry_failed', array( $this, 'ajax_retry_failed' ) );
     }
 
     /**
@@ -49,8 +49,8 @@ class UCP_WC_Admin {
     public function add_menu_page() {
         add_submenu_page(
             'woocommerce',
-            __( 'UCP Settings', 'ucp-for-woocommerce' ),
-            __( 'UCP', 'ucp-for-woocommerce' ),
+            __( 'UCP Settings', 'harmonytics-ucp-connector-woocommerce' ),
+            __( 'UCP', 'harmonytics-ucp-connector-woocommerce' ),
             'manage_woocommerce',
             self::PAGE_SLUG,
             array( $this, 'render_settings_page' )
@@ -64,7 +64,7 @@ class UCP_WC_Admin {
         // General settings section
         add_settings_section(
             'ucp_wc_general',
-            __( 'General Settings', 'ucp-for-woocommerce' ),
+            __( 'General Settings', 'harmonytics-ucp-connector-woocommerce' ),
             array( $this, 'render_general_section' ),
             self::PAGE_SLUG
         );
@@ -81,14 +81,14 @@ class UCP_WC_Admin {
         );
         add_settings_field(
             'ucp_wc_enabled',
-            __( 'Enable UCP', 'ucp-for-woocommerce' ),
+            __( 'Enable UCP', 'harmonytics-ucp-connector-woocommerce' ),
             array( $this, 'render_checkbox_field' ),
             self::PAGE_SLUG,
             'ucp_wc_general',
             array(
                 'name'        => 'ucp_wc_enabled',
-                'label'       => __( 'Enable Universal Commerce Protocol integration', 'ucp-for-woocommerce' ),
-                'description' => __( 'When enabled, your store will be discoverable by AI agents.', 'ucp-for-woocommerce' ),
+                'label'       => __( 'Enable Universal Commerce Protocol integration', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'When enabled, your store will be discoverable by AI agents.', 'harmonytics-ucp-connector-woocommerce' ),
             )
         );
 
@@ -104,21 +104,21 @@ class UCP_WC_Admin {
         );
         add_settings_field(
             'ucp_wc_guest_checkout',
-            __( 'Guest Checkout', 'ucp-for-woocommerce' ),
+            __( 'Guest Checkout', 'harmonytics-ucp-connector-woocommerce' ),
             array( $this, 'render_checkbox_field' ),
             self::PAGE_SLUG,
             'ucp_wc_general',
             array(
                 'name'        => 'ucp_wc_guest_checkout',
-                'label'       => __( 'Allow guest checkout via UCP', 'ucp-for-woocommerce' ),
-                'description' => __( 'Required for agent purchases without identity linking.', 'ucp-for-woocommerce' ),
+                'label'       => __( 'Allow guest checkout via UCP', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'Required for agent purchases without identity linking.', 'harmonytics-ucp-connector-woocommerce' ),
             )
         );
 
         // Webhook settings section
         add_settings_section(
             'ucp_wc_webhooks',
-            __( 'Webhook Settings', 'ucp-for-woocommerce' ),
+            __( 'Webhook Settings', 'harmonytics-ucp-connector-woocommerce' ),
             array( $this, 'render_webhooks_section' ),
             self::PAGE_SLUG
         );
@@ -135,7 +135,7 @@ class UCP_WC_Admin {
         );
         add_settings_field(
             'ucp_wc_webhook_url',
-            __( 'Webhook URL', 'ucp-for-woocommerce' ),
+            __( 'Webhook URL', 'harmonytics-ucp-connector-woocommerce' ),
             array( $this, 'render_webhook_url_field' ),
             self::PAGE_SLUG,
             'ucp_wc_webhooks'
@@ -144,7 +144,7 @@ class UCP_WC_Admin {
         // Debug settings section
         add_settings_section(
             'ucp_wc_debug',
-            __( 'Debug Settings', 'ucp-for-woocommerce' ),
+            __( 'Debug Settings', 'harmonytics-ucp-connector-woocommerce' ),
             array( $this, 'render_debug_section' ),
             self::PAGE_SLUG
         );
@@ -161,14 +161,14 @@ class UCP_WC_Admin {
         );
         add_settings_field(
             'ucp_wc_debug_logging',
-            __( 'Debug Logging', 'ucp-for-woocommerce' ),
+            __( 'Debug Logging', 'harmonytics-ucp-connector-woocommerce' ),
             array( $this, 'render_checkbox_field' ),
             self::PAGE_SLUG,
             'ucp_wc_debug',
             array(
                 'name'        => 'ucp_wc_debug_logging',
-                'label'       => __( 'Enable debug logging', 'ucp-for-woocommerce' ),
-                'description' => __( 'Log UCP requests and responses to the error log.', 'ucp-for-woocommerce' ),
+                'label'       => __( 'Enable debug logging', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'Log UCP requests and responses to the error log.', 'harmonytics-ucp-connector-woocommerce' ),
             )
         );
     }
@@ -198,7 +198,7 @@ class UCP_WC_Admin {
             add_settings_error(
                 'ucp_wc_webhook_url',
                 'invalid_url',
-                __( 'Please enter a valid webhook URL.', 'ucp-for-woocommerce' )
+                __( 'Please enter a valid webhook URL.', 'harmonytics-ucp-connector-woocommerce' )
             );
             return get_option( 'ucp_wc_webhook_url', '' );
         }
@@ -237,12 +237,12 @@ class UCP_WC_Admin {
                 'ajax_url'     => admin_url( 'admin-ajax.php' ),
                 'nonce'        => wp_create_nonce( 'ucp_admin_nonce' ),
                 'strings'      => array(
-                    'confirm_rotate' => __( 'Are you sure you want to rotate the signing key? This will invalidate any existing webhook integrations.', 'ucp-for-woocommerce' ),
-                    'rotating'       => __( 'Rotating...', 'ucp-for-woocommerce' ),
-                    'testing'        => __( 'Testing...', 'ucp-for-woocommerce' ),
-                    'retrying'       => __( 'Retrying...', 'ucp-for-woocommerce' ),
-                    'success'        => __( 'Success!', 'ucp-for-woocommerce' ),
-                    'error'          => __( 'Error:', 'ucp-for-woocommerce' ),
+                    'confirm_rotate' => __( 'Are you sure you want to rotate the signing key? This will invalidate any existing webhook integrations.', 'harmonytics-ucp-connector-woocommerce' ),
+                    'rotating'       => __( 'Rotating...', 'harmonytics-ucp-connector-woocommerce' ),
+                    'testing'        => __( 'Testing...', 'harmonytics-ucp-connector-woocommerce' ),
+                    'retrying'       => __( 'Retrying...', 'harmonytics-ucp-connector-woocommerce' ),
+                    'success'        => __( 'Success!', 'harmonytics-ucp-connector-woocommerce' ),
+                    'error'          => __( 'Error:', 'harmonytics-ucp-connector-woocommerce' ),
                 ),
             )
         );
@@ -253,7 +253,7 @@ class UCP_WC_Admin {
      */
     public function render_settings_page() {
         if ( ! current_user_can( 'manage_woocommerce' ) ) {
-            wp_die( esc_html__( 'You do not have permission to access this page.', 'ucp-for-woocommerce' ) );
+            wp_die( esc_html__( 'You do not have permission to access this page.', 'harmonytics-ucp-connector-woocommerce' ) );
         }
 
         include UCP_WC_PLUGIN_DIR . 'admin/partials/settings-page.php';
@@ -263,7 +263,7 @@ class UCP_WC_Admin {
      * Render general section description.
      */
     public function render_general_section() {
-        echo '<p>' . esc_html__( 'Configure general UCP settings for your store.', 'ucp-for-woocommerce' ) . '</p>';
+        echo '<p>' . esc_html__( 'Configure general UCP settings for your store.', 'harmonytics-ucp-connector-woocommerce' ) . '</p>';
     }
 
     /**
@@ -272,8 +272,8 @@ class UCP_WC_Admin {
     public function render_webhooks_section() {
         ?>
         <div class="ucp-section-description">
-            <p><?php esc_html_e( 'Webhooks allow your store to send real-time order event notifications to external platforms.', 'ucp-for-woocommerce' ); ?></p>
-            <p><strong><?php esc_html_e( 'This is optional.', 'ucp-for-woocommerce' ); ?></strong> <?php esc_html_e( 'Leave blank if you only need the checkout and order REST APIs.', 'ucp-for-woocommerce' ); ?></p>
+            <p><?php esc_html_e( 'Webhooks allow your store to send real-time order event notifications to external platforms.', 'harmonytics-ucp-connector-woocommerce' ); ?></p>
+            <p><strong><?php esc_html_e( 'This is optional.', 'harmonytics-ucp-connector-woocommerce' ); ?></strong> <?php esc_html_e( 'Leave blank if you only need the checkout and order REST APIs.', 'harmonytics-ucp-connector-woocommerce' ); ?></p>
         </div>
         <?php
     }
@@ -282,7 +282,7 @@ class UCP_WC_Admin {
      * Render debug section description.
      */
     public function render_debug_section() {
-        echo '<p>' . esc_html__( 'Debug and troubleshooting options.', 'ucp-for-woocommerce' ) . '</p>';
+        echo '<p>' . esc_html__( 'Debug and troubleshooting options.', 'harmonytics-ucp-connector-woocommerce' ) . '</p>';
     }
 
     /**
@@ -339,27 +339,27 @@ class UCP_WC_Admin {
             placeholder="https://your-platform.com/webhooks/ucp"
         />
         <p class="description">
-            <?php esc_html_e( 'The external URL where order events will be sent via HTTP POST.', 'ucp-for-woocommerce' ); ?>
+            <?php esc_html_e( 'The external URL where order events will be sent via HTTP POST.', 'harmonytics-ucp-connector-woocommerce' ); ?>
         </p>
 
         <div class="ucp-webhook-help">
-            <h4><?php esc_html_e( 'Who provides this URL?', 'ucp-for-woocommerce' ); ?></h4>
+            <h4><?php esc_html_e( 'Who provides this URL?', 'harmonytics-ucp-connector-woocommerce' ); ?></h4>
             <ul>
-                <li><strong><?php esc_html_e( 'AI Agent Platform:', 'ucp-for-woocommerce' ); ?></strong> <?php esc_html_e( 'The platform integrating with your store provides a callback URL to receive order updates.', 'ucp-for-woocommerce' ); ?></li>
-                <li><strong><?php esc_html_e( 'Your Backend:', 'ucp-for-woocommerce' ); ?></strong> <?php esc_html_e( 'Create an endpoint on your own server to process order events.', 'ucp-for-woocommerce' ); ?></li>
-                <li><strong><?php esc_html_e( 'Integration Services:', 'ucp-for-woocommerce' ); ?></strong> <?php esc_html_e( 'Use services like Zapier, Make, or n8n to receive webhooks.', 'ucp-for-woocommerce' ); ?></li>
-                <li><strong><?php esc_html_e( 'Testing:', 'ucp-for-woocommerce' ); ?></strong> <?php esc_html_e( 'Use webhook.site or requestbin.com to inspect webhook payloads during development.', 'ucp-for-woocommerce' ); ?></li>
+                <li><strong><?php esc_html_e( 'AI Agent Platform:', 'harmonytics-ucp-connector-woocommerce' ); ?></strong> <?php esc_html_e( 'The platform integrating with your store provides a callback URL to receive order updates.', 'harmonytics-ucp-connector-woocommerce' ); ?></li>
+                <li><strong><?php esc_html_e( 'Your Backend:', 'harmonytics-ucp-connector-woocommerce' ); ?></strong> <?php esc_html_e( 'Create an endpoint on your own server to process order events.', 'harmonytics-ucp-connector-woocommerce' ); ?></li>
+                <li><strong><?php esc_html_e( 'Integration Services:', 'harmonytics-ucp-connector-woocommerce' ); ?></strong> <?php esc_html_e( 'Use services like Zapier, Make, or n8n to receive webhooks.', 'harmonytics-ucp-connector-woocommerce' ); ?></li>
+                <li><strong><?php esc_html_e( 'Testing:', 'harmonytics-ucp-connector-woocommerce' ); ?></strong> <?php esc_html_e( 'Use webhook.site or requestbin.com to inspect webhook payloads during development.', 'harmonytics-ucp-connector-woocommerce' ); ?></li>
             </ul>
 
-            <h4><?php esc_html_e( 'Events sent to this URL:', 'ucp-for-woocommerce' ); ?></h4>
+            <h4><?php esc_html_e( 'Events sent to this URL:', 'harmonytics-ucp-connector-woocommerce' ); ?></h4>
             <ul>
-                <li><code>order.created</code> - <?php esc_html_e( 'When a new order is placed via UCP', 'ucp-for-woocommerce' ); ?></li>
-                <li><code>order.status_changed</code> - <?php esc_html_e( 'When order status changes (e.g., pending to processing)', 'ucp-for-woocommerce' ); ?></li>
-                <li><code>order.paid</code> - <?php esc_html_e( 'When payment is completed', 'ucp-for-woocommerce' ); ?></li>
-                <li><code>order.refunded</code> - <?php esc_html_e( 'When a refund is issued', 'ucp-for-woocommerce' ); ?></li>
+                <li><code>order.created</code> - <?php esc_html_e( 'When a new order is placed via UCP', 'harmonytics-ucp-connector-woocommerce' ); ?></li>
+                <li><code>order.status_changed</code> - <?php esc_html_e( 'When order status changes (e.g., pending to processing)', 'harmonytics-ucp-connector-woocommerce' ); ?></li>
+                <li><code>order.paid</code> - <?php esc_html_e( 'When payment is completed', 'harmonytics-ucp-connector-woocommerce' ); ?></li>
+                <li><code>order.refunded</code> - <?php esc_html_e( 'When a refund is issued', 'harmonytics-ucp-connector-woocommerce' ); ?></li>
             </ul>
 
-            <p><em><?php esc_html_e( 'All webhooks are signed with HMAC-SHA256 for security. The signing key is shown in the Status panel above.', 'ucp-for-woocommerce' ); ?></em></p>
+            <p><em><?php esc_html_e( 'All webhooks are signed with HMAC-SHA256 for security. The signing key is shown in the Status panel above.', 'harmonytics-ucp-connector-woocommerce' ); ?></em></p>
         </div>
         <?php
     }
@@ -371,7 +371,7 @@ class UCP_WC_Admin {
         check_ajax_referer( 'ucp_admin_nonce', 'nonce' );
 
         if ( ! current_user_can( 'manage_woocommerce' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'ucp-for-woocommerce' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'harmonytics-ucp-connector-woocommerce' ) ) );
         }
 
         $new_key = UCP_WC_Activator::rotate_signing_key();
@@ -379,7 +379,7 @@ class UCP_WC_Admin {
 
         wp_send_json_success(
             array(
-                'message' => __( 'Signing key rotated successfully.', 'ucp-for-woocommerce' ),
+                'message' => __( 'Signing key rotated successfully.', 'harmonytics-ucp-connector-woocommerce' ),
                 'key_id'  => substr( hash( 'sha256', $new_key ), 0, 16 ),
             )
         );
@@ -392,13 +392,13 @@ class UCP_WC_Admin {
         check_ajax_referer( 'ucp_admin_nonce', 'nonce' );
 
         if ( ! current_user_can( 'manage_woocommerce' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'ucp-for-woocommerce' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'harmonytics-ucp-connector-woocommerce' ) ) );
         }
 
         $webhook_url = get_option( 'ucp_wc_webhook_url' );
 
         if ( empty( $webhook_url ) ) {
-            wp_send_json_error( array( 'message' => __( 'No webhook URL configured.', 'ucp-for-woocommerce' ) ) );
+            wp_send_json_error( array( 'message' => __( 'No webhook URL configured.', 'harmonytics-ucp-connector-woocommerce' ) ) );
         }
 
         $sender = new UCP_WC_Webhook_Sender();
@@ -416,7 +416,7 @@ class UCP_WC_Admin {
             wp_send_json_error( array( 'message' => $result->get_error_message() ) );
         }
 
-        wp_send_json_success( array( 'message' => __( 'Test webhook sent successfully.', 'ucp-for-woocommerce' ) ) );
+        wp_send_json_success( array( 'message' => __( 'Test webhook sent successfully.', 'harmonytics-ucp-connector-woocommerce' ) ) );
     }
 
     /**
@@ -426,7 +426,7 @@ class UCP_WC_Admin {
         check_ajax_referer( 'ucp_admin_nonce', 'nonce' );
 
         if ( ! current_user_can( 'manage_woocommerce' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'ucp-for-woocommerce' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'harmonytics-ucp-connector-woocommerce' ) ) );
         }
 
         $sender  = new UCP_WC_Webhook_Sender();
@@ -439,7 +439,7 @@ class UCP_WC_Admin {
             array(
                 'message' => sprintf(
                     /* translators: 1: success count, 2: failed count */
-                    __( 'Retry complete. %1$d succeeded, %2$d failed.', 'ucp-for-woocommerce' ),
+                    __( 'Retry complete. %1$d succeeded, %2$d failed.', 'harmonytics-ucp-connector-woocommerce' ),
                     $success_count,
                     $failed_count
                 ),
@@ -476,7 +476,7 @@ class UCP_WC_Admin {
         return array(
             'exists'     => true,
             'key_id'     => substr( hash( 'sha256', $signing_key ), 0, 16 ),
-            'created_at' => get_option( 'ucp_wc_key_created_at', __( 'Unknown', 'ucp-for-woocommerce' ) ),
+            'created_at' => get_option( 'ucp_wc_key_created_at', __( 'Unknown', 'harmonytics-ucp-connector-woocommerce' ) ),
         );
     }
 

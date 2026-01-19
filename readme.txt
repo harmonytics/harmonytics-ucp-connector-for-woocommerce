@@ -1,4 +1,4 @@
-=== UCP for WooCommerce ===
+=== Harmonytics UCP Connector for WooCommerce ===
 Contributors: harmonytics
 Tags: woocommerce, ucp, ai, commerce, checkout, api
 Requires at least: 6.0
@@ -12,7 +12,12 @@ Enable AI agents to discover, browse, and complete purchases on your WooCommerce
 
 == Description ==
 
-**UCP for WooCommerce** brings the power of the [Universal Commerce Protocol](https://ucp.dev) to your WooCommerce store, making it accessible to AI shopping agents and automated commerce platforms.
+**Harmonytics UCP Connector for WooCommerce** brings the power of the [Universal Commerce Protocol](https://ucp.dev) to your WooCommerce store, making it accessible to AI shopping agents and automated commerce platforms.
+
+== Disclaimer ==
+
+- "WooCommerce" is a registered trademark of Automattic Inc. This plugin is not affiliated with, endorsed, or sponsored by Automattic.
+- "UCP" (Universal Commerce Protocol) is a project by Google. This plugin is not affiliated with, endorsed, or sponsored by Google.
 
 = What is UCP? =
 

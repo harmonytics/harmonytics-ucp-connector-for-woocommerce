@@ -1,4 +1,4 @@
-# UCP for WooCommerce
+# Harmonytics UCP Connector for WooCommerce
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue.svg)](https://wordpress.org/)
@@ -43,7 +43,9 @@ Then activate the plugin in WordPress admin.
 
 ### From WordPress.org
 
-Search for "UCP for WooCommerce" in Plugins > Add New.
+Search for "Harmonytics UCP Connector for WooCommerce" in Plugins > Add New.
+
+> Trademarks/attribution: “WooCommerce” is a registered trademark of Automattic Inc. “UCP” (Universal Commerce Protocol) is a project by Google. This plugin is not affiliated with, endorsed, or sponsored by Automattic or Google.
 
 ## Quick Start
 

@@ -83,7 +83,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 						'key_id' => array(
 							'required'          => true,
 							'type'              => 'string',
-							'description'       => __( 'The API key ID to revoke.', 'ucp-for-woocommerce' ),
+							'description'       => __( 'The API key ID to revoke.', 'harmonytics-ucp-connector-woocommerce' ),
 							'sanitize_callback' => 'sanitize_text_field',
 						),
 					),
@@ -104,7 +104,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 						'api_key' => array(
 							'required'          => false,
 							'type'              => 'string',
-							'description'       => __( 'The API key to verify (key_id:secret format). If not provided, uses the key from the request header.', 'ucp-for-woocommerce' ),
+							'description'       => __( 'The API key to verify (key_id:secret format). If not provided, uses the key from the request header.', 'harmonytics-ucp-connector-woocommerce' ),
 							'sanitize_callback' => 'sanitize_text_field',
 						),
 					),
@@ -124,14 +124,14 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 				'required'          => false,
 				'type'              => 'string',
 				'default'           => '',
-				'description'       => __( 'Description for the API key (e.g., "AI Agent - Claude").', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Description for the API key (e.g., "AI Agent - Claude").', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'permissions' => array(
 				'required'    => false,
 				'type'        => 'array',
 				'default'     => array( 'read' ),
-				'description' => __( 'Array of permissions: read, write, admin.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Array of permissions: read, write, admin.', 'harmonytics-ucp-connector-woocommerce' ),
 				'items'       => array(
 					'type' => 'string',
 					'enum' => array( 'read', 'write', 'admin' ),
@@ -141,7 +141,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 				'required'          => false,
 				'type'              => 'integer',
 				'default'           => 0,
-				'description'       => __( 'WordPress user ID to associate with this key.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'WordPress user ID to associate with this key.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 		);
@@ -159,7 +159,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'string',
 				'default'           => 'active',
 				'enum'              => array( 'active', 'revoked', 'all' ),
-				'description'       => __( 'Filter by key status.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Filter by key status.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'page'     => array(
@@ -167,7 +167,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'integer',
 				'default'           => 1,
 				'minimum'           => 1,
-				'description'       => __( 'Page number.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'per_page' => array(
@@ -176,7 +176,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 				'default'           => 20,
 				'minimum'           => 1,
 				'maximum'           => 100,
-				'description'       => __( 'Items per page.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 		);
@@ -193,7 +193,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 		if ( ! $this->is_ucp_enabled() ) {
 			return new WP_Error(
 				'ucp_disabled',
-				__( 'UCP is currently disabled for this store.', 'ucp-for-woocommerce' ),
+				__( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-woocommerce' ),
 				array( 'status' => 503 )
 			);
 		}
@@ -210,7 +210,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 
 		return new WP_Error(
 			'ucp_forbidden',
-			__( 'Admin permission is required to manage API keys.', 'ucp-for-woocommerce' ),
+			__( 'Admin permission is required to manage API keys.', 'harmonytics-ucp-connector-woocommerce' ),
 			array( 'status' => 403 )
 		);
 	}
@@ -240,7 +240,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 			if ( ! $user ) {
 				return $this->error_response(
 					'invalid_user',
-					__( 'The specified user does not exist.', 'ucp-for-woocommerce' ),
+					__( 'The specified user does not exist.', 'harmonytics-ucp-connector-woocommerce' ),
 					400
 				);
 			}
@@ -273,7 +273,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 			'created_at'  => $result['created_at'],
 			'last_used'   => $result['last_used'],
 			'secret'      => $result['secret'], // Only shown once at creation!
-			'message'     => __( 'API key created successfully. Save the secret now - it will not be shown again.', 'ucp-for-woocommerce' ),
+			'message'     => __( 'API key created successfully. Save the secret now - it will not be shown again.', 'harmonytics-ucp-connector-woocommerce' ),
 		);
 
 		return $this->success_response( $response, 201 );
@@ -325,7 +325,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 		if ( ! $key_info ) {
 			return $this->error_response(
 				'key_not_found',
-				__( 'API key not found.', 'ucp-for-woocommerce' ),
+				__( 'API key not found.', 'harmonytics-ucp-connector-woocommerce' ),
 				404
 			);
 		}
@@ -334,7 +334,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 		if ( 'revoked' === $key_info['status'] ) {
 			return $this->error_response(
 				'already_revoked',
-				__( 'API key is already revoked.', 'ucp-for-woocommerce' ),
+				__( 'API key is already revoked.', 'harmonytics-ucp-connector-woocommerce' ),
 				400
 			);
 		}
@@ -356,7 +356,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 			array(
 				'key_id'  => $key_id,
 				'status'  => 'revoked',
-				'message' => __( 'API key revoked successfully.', 'ucp-for-woocommerce' ),
+				'message' => __( 'API key revoked successfully.', 'harmonytics-ucp-connector-woocommerce' ),
 			)
 		);
 	}
@@ -377,7 +377,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 			if ( ! $current_key ) {
 				return $this->error_response(
 					'no_api_key',
-					__( 'No API key provided or found in request headers.', 'ucp-for-woocommerce' ),
+					__( 'No API key provided or found in request headers.', 'harmonytics-ucp-connector-woocommerce' ),
 					400
 				);
 			}
@@ -404,7 +404,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 			return $this->success_response(
 				array(
 					'valid'   => false,
-					'message' => __( 'Invalid or expired API key.', 'ucp-for-woocommerce' ),
+					'message' => __( 'Invalid or expired API key.', 'harmonytics-ucp-connector-woocommerce' ),
 				)
 			);
 		}

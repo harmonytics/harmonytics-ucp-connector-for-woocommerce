@@ -16,6 +16,21 @@ if ( file_exists( $autoloader ) ) {
 
 // Define test constants
 define( 'UCP_WC_TESTING', true );
+// Disable WP-Cron during tests to avoid core warnings accessing REQUEST_URI in CLI.
+if ( ! defined( 'DISABLE_WP_CRON' ) ) {
+    define( 'DISABLE_WP_CRON', true );
+}
+
+// Provide sane server defaults for CLI test runs.
+if ( ! isset( $_SERVER['REQUEST_URI'] ) || null === $_SERVER['REQUEST_URI'] ) {
+    $_SERVER['REQUEST_URI'] = '/';
+}
+if ( ! isset( $_SERVER['HTTP_HOST'] ) ) {
+    $_SERVER['HTTP_HOST'] = 'example.org';
+}
+if ( ! isset( $_SERVER['SERVER_NAME'] ) ) {
+    $_SERVER['SERVER_NAME'] = 'example.org';
+}
 
 // Load WordPress test environment
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
@@ -52,7 +67,7 @@ function _manually_load_plugin() {
     require UCP_WC_TEST_WC_DIR . '/woocommerce.php';
 
     // Load our plugin
-    require dirname( __DIR__ ) . '/ucp-for-woocommerce.php';
+    require dirname( __DIR__ ) . '/harmonytics-ucp-connector-woocommerce.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );

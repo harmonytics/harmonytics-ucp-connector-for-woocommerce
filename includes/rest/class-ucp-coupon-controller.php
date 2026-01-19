@@ -95,24 +95,24 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 			'code'           => array(
 				'required'          => true,
 				'type'              => 'string',
-				'description'       => __( 'Coupon code to validate.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Coupon code to validate.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'items'          => array(
 				'required'    => false,
 				'type'        => 'array',
-				'description' => __( 'Array of items to validate coupon against.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Array of items to validate coupon against.', 'harmonytics-ucp-connector-woocommerce' ),
 				'items'       => array(
 					'type'       => 'object',
 					'properties' => array(
 						'product_id' => array(
 							'type'        => 'integer',
-							'description' => __( 'Product ID.', 'ucp-for-woocommerce' ),
+							'description' => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
 							'required'    => true,
 						),
 						'quantity'   => array(
 							'type'        => 'integer',
-							'description' => __( 'Quantity.', 'ucp-for-woocommerce' ),
+							'description' => __( 'Quantity.', 'harmonytics-ucp-connector-woocommerce' ),
 							'default'     => 1,
 							'minimum'     => 1,
 						),
@@ -123,7 +123,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				'required'          => false,
 				'type'              => 'string',
 				'format'            => 'email',
-				'description'       => __( 'Customer email for validation.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Customer email for validation.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_email',
 			),
 		);
@@ -139,30 +139,30 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 			'code'  => array(
 				'required'          => true,
 				'type'              => 'string',
-				'description'       => __( 'Coupon code.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Coupon code.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'items' => array(
 				'required'    => true,
 				'type'        => 'array',
-				'description' => __( 'Array of items to calculate discount for.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Array of items to calculate discount for.', 'harmonytics-ucp-connector-woocommerce' ),
 				'items'       => array(
 					'type'       => 'object',
 					'properties' => array(
 						'product_id' => array(
 							'type'        => 'integer',
-							'description' => __( 'Product ID.', 'ucp-for-woocommerce' ),
+							'description' => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
 							'required'    => true,
 						),
 						'quantity'   => array(
 							'type'        => 'integer',
-							'description' => __( 'Quantity.', 'ucp-for-woocommerce' ),
+							'description' => __( 'Quantity.', 'harmonytics-ucp-connector-woocommerce' ),
 							'default'     => 1,
 							'minimum'     => 1,
 						),
 						'price'      => array(
 							'type'        => 'string',
-							'description' => __( 'Item price.', 'ucp-for-woocommerce' ),
+							'description' => __( 'Item price.', 'harmonytics-ucp-connector-woocommerce' ),
 							'required'    => true,
 						),
 					),
@@ -183,7 +183,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'integer',
 				'default'           => 1,
 				'minimum'           => 1,
-				'description'       => __( 'Page number.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'per_page' => array(
@@ -192,7 +192,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				'default'           => 10,
 				'minimum'           => 1,
 				'maximum'           => 50,
-				'description'       => __( 'Items per page.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 		);
@@ -225,7 +225,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		if ( ! $coupon->get_id() ) {
 			return $this->error_response(
 				'coupon_not_found',
-				__( 'Coupon code not found.', 'ucp-for-woocommerce' ),
+				__( 'Coupon code not found.', 'harmonytics-ucp-connector-woocommerce' ),
 				404
 			);
 		}
@@ -270,7 +270,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		if ( empty( $items ) || ! is_array( $items ) ) {
 			return $this->error_response(
 				'invalid_items',
-				__( 'Items array is required and must not be empty.', 'ucp-for-woocommerce' ),
+				__( 'Items array is required and must not be empty.', 'harmonytics-ucp-connector-woocommerce' ),
 				400
 			);
 		}
@@ -282,7 +282,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		if ( ! $coupon->get_id() ) {
 			return $this->error_response(
 				'coupon_not_found',
-				__( 'Coupon code not found.', 'ucp-for-woocommerce' ),
+				__( 'Coupon code not found.', 'harmonytics-ucp-connector-woocommerce' ),
 				404
 			);
 		}
@@ -313,7 +313,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				'minimum_spend_not_met',
 				sprintf(
 					/* translators: %s: minimum spend amount */
-					__( 'This coupon requires a minimum spend of %s.', 'ucp-for-woocommerce' ),
+					__( 'This coupon requires a minimum spend of %s.', 'harmonytics-ucp-connector-woocommerce' ),
 					wc_price( $minimum_amount )
 				),
 				400
@@ -350,7 +350,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		if ( get_option( 'ucp_wc_public_coupons', 'no' ) !== 'yes' ) {
 			return $this->error_response(
 				'public_coupons_disabled',
-				__( 'Public coupon listing is not enabled for this store.', 'ucp-for-woocommerce' ),
+				__( 'Public coupon listing is not enabled for this store.', 'harmonytics-ucp-connector-woocommerce' ),
 				403
 			);
 		}
@@ -445,7 +445,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		if ( 'publish' !== get_post_status( $coupon->get_id() ) ) {
 			return new WP_Error(
 				'coupon_disabled',
-				__( 'This coupon is not currently active.', 'ucp-for-woocommerce' )
+				__( 'This coupon is not currently active.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -454,7 +454,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		if ( $expiry_date && time() > $expiry_date->getTimestamp() ) {
 			return new WP_Error(
 				'coupon_expired',
-				__( 'This coupon has expired.', 'ucp-for-woocommerce' )
+				__( 'This coupon has expired.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -465,7 +465,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		if ( $usage_limit && $usage_count >= $usage_limit ) {
 			return new WP_Error(
 				'coupon_usage_limit_reached',
-				__( 'This coupon has reached its usage limit.', 'ucp-for-woocommerce' )
+				__( 'This coupon has reached its usage limit.', 'harmonytics-ucp-connector-woocommerce' )
 			);
 		}
 
@@ -479,7 +479,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				if ( $customer_usage >= $usage_limit_per_user ) {
 					return new WP_Error(
 						'coupon_usage_limit_per_user_reached',
-						__( 'You have already used this coupon the maximum number of times.', 'ucp-for-woocommerce' )
+						__( 'You have already used this coupon the maximum number of times.', 'harmonytics-ucp-connector-woocommerce' )
 					);
 				}
 			}
@@ -506,7 +506,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				if ( ! $email_allowed ) {
 					return new WP_Error(
 						'coupon_email_restricted',
-						__( 'This coupon is not valid for your email address.', 'ucp-for-woocommerce' )
+						__( 'This coupon is not valid for your email address.', 'harmonytics-ucp-connector-woocommerce' )
 					);
 				}
 			}
@@ -565,7 +565,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 			if ( $has_restrictions && ! $valid_item_found ) {
 				return new WP_Error(
 					'coupon_not_applicable',
-					__( 'This coupon is not applicable to the selected products.', 'ucp-for-woocommerce' )
+					__( 'This coupon is not applicable to the selected products.', 'harmonytics-ucp-connector-woocommerce' )
 				);
 			}
 		}

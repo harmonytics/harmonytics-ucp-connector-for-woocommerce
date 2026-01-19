@@ -69,7 +69,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 						'cart_id' => array(
 							'required'          => true,
 							'type'              => 'string',
-							'description'       => __( 'Unique cart identifier.', 'ucp-for-woocommerce' ),
+							'description'       => __( 'Unique cart identifier.', 'harmonytics-ucp-connector-woocommerce' ),
 							'sanitize_callback' => 'sanitize_text_field',
 							'validate_callback' => array( $this, 'validate_cart_id' ),
 						),
@@ -91,7 +91,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 						'cart_id' => array(
 							'required'          => true,
 							'type'              => 'string',
-							'description'       => __( 'Unique cart identifier.', 'ucp-for-woocommerce' ),
+							'description'       => __( 'Unique cart identifier.', 'harmonytics-ucp-connector-woocommerce' ),
 							'sanitize_callback' => 'sanitize_text_field',
 							'validate_callback' => array( $this, 'validate_cart_id' ),
 						),
@@ -141,14 +141,14 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 						'cart_id'  => array(
 							'required'          => true,
 							'type'              => 'string',
-							'description'       => __( 'Unique cart identifier.', 'ucp-for-woocommerce' ),
+							'description'       => __( 'Unique cart identifier.', 'harmonytics-ucp-connector-woocommerce' ),
 							'sanitize_callback' => 'sanitize_text_field',
 							'validate_callback' => array( $this, 'validate_cart_id' ),
 						),
 						'item_key' => array(
 							'required'          => true,
 							'type'              => 'string',
-							'description'       => __( 'Unique item key within the cart.', 'ucp-for-woocommerce' ),
+							'description'       => __( 'Unique item key within the cart.', 'harmonytics-ucp-connector-woocommerce' ),
 							'sanitize_callback' => 'sanitize_text_field',
 							'validate_callback' => array( $this, 'validate_item_key' ),
 						),
@@ -182,7 +182,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 			'metadata' => array(
 				'required'    => false,
 				'type'        => 'object',
-				'description' => __( 'Optional metadata for the cart (e.g., agent_id, session reference).', 'ucp-for-woocommerce' ),
+				'description' => __( 'Optional metadata for the cart (e.g., agent_id, session reference).', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 		);
 	}
@@ -197,29 +197,29 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 			'cart_id'    => array(
 				'required'          => true,
 				'type'              => 'string',
-				'description'       => __( 'Unique cart identifier.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Unique cart identifier.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( $this, 'validate_cart_id' ),
 			),
 			'sku'        => array(
 				'required'    => false,
 				'type'        => 'string',
-				'description' => __( 'Product SKU.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Product SKU.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'product_id' => array(
 				'required'    => false,
 				'type'        => 'integer',
-				'description' => __( 'Product ID.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'variant_id' => array(
 				'required'    => false,
 				'type'        => 'integer',
-				'description' => __( 'Variant/variation ID.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Variant/variation ID.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'quantity'   => array(
 				'required'    => false,
 				'type'        => 'integer',
-				'description' => __( 'Quantity to add.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Quantity to add.', 'harmonytics-ucp-connector-woocommerce' ),
 				'default'     => 1,
 				'minimum'     => 1,
 			),
@@ -236,21 +236,21 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 			'cart_id'  => array(
 				'required'          => true,
 				'type'              => 'string',
-				'description'       => __( 'Unique cart identifier.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Unique cart identifier.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( $this, 'validate_cart_id' ),
 			),
 			'item_key' => array(
 				'required'          => true,
 				'type'              => 'string',
-				'description'       => __( 'Unique item key within the cart.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Unique item key within the cart.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( $this, 'validate_item_key' ),
 			),
 			'quantity' => array(
 				'required'    => true,
 				'type'        => 'integer',
-				'description' => __( 'New quantity (0 to remove item).', 'ucp-for-woocommerce' ),
+				'description' => __( 'New quantity (0 to remove item).', 'harmonytics-ucp-connector-woocommerce' ),
 				'minimum'     => 0,
 			),
 		);
@@ -266,14 +266,14 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 			'cart_id'          => array(
 				'required'          => true,
 				'type'              => 'string',
-				'description'       => __( 'Unique cart identifier.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Unique cart identifier.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 				'validate_callback' => array( $this, 'validate_cart_id' ),
 			),
 			'shipping_address' => array(
 				'required'    => false,
 				'type'        => 'object',
-				'description' => __( 'Shipping address.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Shipping address.', 'harmonytics-ucp-connector-woocommerce' ),
 				'properties'  => array(
 					'first_name' => array( 'type' => 'string' ),
 					'last_name'  => array( 'type' => 'string' ),
@@ -293,17 +293,17 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 			'billing_address'  => array(
 				'required'    => false,
 				'type'        => 'object',
-				'description' => __( 'Billing address.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Billing address.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'coupon_code'      => array(
 				'required'    => false,
 				'type'        => 'string',
-				'description' => __( 'Coupon code to apply.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Coupon code to apply.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'customer_note'    => array(
 				'required'    => false,
 				'type'        => 'string',
-				'description' => __( 'Customer note for the order.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Customer note for the order.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 		);
 	}
@@ -320,7 +320,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 		if ( ! preg_match( '/^cart_[a-f0-9]{32}$/', $cart_id ) ) {
 			return new WP_Error(
 				'invalid_cart_id',
-				__( 'Invalid cart ID format.', 'ucp-for-woocommerce' ),
+				__( 'Invalid cart ID format.', 'harmonytics-ucp-connector-woocommerce' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -339,7 +339,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 		if ( ! preg_match( '/^item_[a-zA-Z0-9_]+$/', $item_key ) ) {
 			return new WP_Error(
 				'invalid_item_key',
-				__( 'Invalid item key format.', 'ucp-for-woocommerce' ),
+				__( 'Invalid item key format.', 'harmonytics-ucp-connector-woocommerce' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -424,7 +424,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 		if ( empty( $item['sku'] ) && empty( $item['product_id'] ) && empty( $item['variant_id'] ) ) {
 			return $this->error_response(
 				'missing_product_identifier',
-				__( 'At least one of sku, product_id, or variant_id is required.', 'ucp-for-woocommerce' ),
+				__( 'At least one of sku, product_id, or variant_id is required.', 'harmonytics-ucp-connector-woocommerce' ),
 				400
 			);
 		}

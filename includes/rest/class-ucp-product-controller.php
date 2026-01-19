@@ -83,7 +83,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 						'product_id' => array(
 							'required'          => true,
 							'type'              => 'integer',
-							'description'       => __( 'Product ID.', 'ucp-for-woocommerce' ),
+							'description'       => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
 							'sanitize_callback' => 'absint',
 						),
 					),
@@ -104,7 +104,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'integer',
 				'default'           => 1,
 				'minimum'           => 1,
-				'description'       => __( 'Page number.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'per_page'     => array(
@@ -113,19 +113,19 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				'default'           => 10,
 				'minimum'           => 1,
 				'maximum'           => 100,
-				'description'       => __( 'Items per page.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'category'     => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Filter by category slug or ID.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Filter by category slug or ID.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'tag'          => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Filter by tag slug or ID.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Filter by tag slug or ID.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'status'       => array(
@@ -133,40 +133,40 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				'type'        => 'string',
 				'enum'        => array( 'publish', 'draft', 'pending', 'any' ),
 				'default'     => 'publish',
-				'description' => __( 'Filter by product status.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Filter by product status.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'type'         => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'simple', 'variable', 'grouped', 'external', 'any' ),
 				'default'     => 'any',
-				'description' => __( 'Filter by product type.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Filter by product type.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'featured'     => array(
 				'required'    => false,
 				'type'        => 'boolean',
-				'description' => __( 'Filter by featured status.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Filter by featured status.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'on_sale'      => array(
 				'required'    => false,
 				'type'        => 'boolean',
-				'description' => __( 'Filter by on sale status.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Filter by on sale status.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'in_stock'     => array(
 				'required'    => false,
 				'type'        => 'boolean',
-				'description' => __( 'Filter by stock status.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Filter by stock status.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'min_price'    => array(
 				'required'          => false,
 				'type'              => 'number',
-				'description'       => __( 'Minimum price filter.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Minimum price filter.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'floatval',
 			),
 			'max_price'    => array(
 				'required'          => false,
 				'type'              => 'number',
-				'description'       => __( 'Maximum price filter.', 'ucp-for-woocommerce' ),
+				'description'       => __( 'Maximum price filter.', 'harmonytics-ucp-connector-woocommerce' ),
 				'sanitize_callback' => 'floatval',
 			),
 			'orderby'      => array(
@@ -174,14 +174,14 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				'type'        => 'string',
 				'enum'        => array( 'date', 'id', 'title', 'price', 'popularity', 'rating', 'menu_order' ),
 				'default'     => 'date',
-				'description' => __( 'Sort collection by attribute.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 			'order'        => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'asc', 'desc' ),
 				'default'     => 'desc',
-				'description' => __( 'Order sort direction.', 'ucp-for-woocommerce' ),
+				'description' => __( 'Order sort direction.', 'harmonytics-ucp-connector-woocommerce' ),
 			),
 		);
 	}
@@ -198,7 +198,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		$args['q'] = array(
 			'required'          => true,
 			'type'              => 'string',
-			'description'       => __( 'Search query string.', 'ucp-for-woocommerce' ),
+			'description'       => __( 'Search query string.', 'harmonytics-ucp-connector-woocommerce' ),
 			'sanitize_callback' => 'sanitize_text_field',
 		);
 
@@ -269,7 +269,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		if ( empty( $search_query ) ) {
 			return $this->error_response(
 				'invalid_search_query',
-				__( 'Search query is required.', 'ucp-for-woocommerce' ),
+				__( 'Search query is required.', 'harmonytics-ucp-connector-woocommerce' ),
 				400
 			);
 		}
@@ -409,7 +409,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		if ( ! $product ) {
 			return $this->error_response(
 				'product_not_found',
-				__( 'Product not found.', 'ucp-for-woocommerce' ),
+				__( 'Product not found.', 'harmonytics-ucp-connector-woocommerce' ),
 				404
 			);
 		}
@@ -418,7 +418,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		if ( 'publish' !== $product->get_status() ) {
 			return $this->error_response(
 				'product_not_accessible',
-				__( 'Product is not accessible.', 'ucp-for-woocommerce' ),
+				__( 'Product is not accessible.', 'harmonytics-ucp-connector-woocommerce' ),
 				404
 			);
 		}

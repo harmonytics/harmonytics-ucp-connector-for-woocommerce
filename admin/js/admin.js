@@ -40,7 +40,7 @@
                 url: ucpAdmin.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'ucp_rotate_key',
+                    action: 'ucp_wc_rotate_key',
                     nonce: ucpAdmin.nonce
                 },
                 success: function(response) {
@@ -77,7 +77,7 @@
                 url: ucpAdmin.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'ucp_test_webhook',
+                    action: 'ucp_wc_test_webhook',
                     nonce: ucpAdmin.nonce
                 },
                 success: function(response) {
@@ -111,7 +111,7 @@
                 url: ucpAdmin.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'ucp_retry_failed',
+                    action: 'ucp_wc_retry_failed',
                     nonce: ucpAdmin.nonce
                 },
                 success: function(response) {
