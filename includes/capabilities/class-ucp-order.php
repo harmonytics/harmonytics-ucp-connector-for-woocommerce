@@ -122,7 +122,7 @@ class UCP_WC_Order {
         if ( ! $order ) {
             return new WP_Error(
                 'order_not_found',
-                __( 'Order not found.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Order not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }
@@ -153,7 +153,7 @@ class UCP_WC_Order {
         if ( ! $session || empty( $session['wc_order_id'] ) ) {
             return new WP_Error(
                 'order_not_found',
-                __( 'No order found for this session.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'No order found for this session.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }
@@ -173,7 +173,7 @@ class UCP_WC_Order {
         if ( ! $order ) {
             return new WP_Error(
                 'order_not_found',
-                __( 'Order not found.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Order not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }

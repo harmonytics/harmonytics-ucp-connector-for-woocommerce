@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=========================================="
-echo "  UCP for WooCommerce - Test Runner"
+echo "  Harmonytics UCP Connector for WooCommerce - Test Runner"
 echo "=========================================="
 
 # Install dependencies

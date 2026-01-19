@@ -189,12 +189,12 @@ class UCP_WC_Address_Mapper {
         $errors = array();
 
         $required_fields = array(
-            'first_name' => __( 'First name', 'harmonytics-ucp-connector-woocommerce' ),
-            'last_name'  => __( 'Last name', 'harmonytics-ucp-connector-woocommerce' ),
-            'address_1'  => __( 'Address', 'harmonytics-ucp-connector-woocommerce' ),
-            'city'       => __( 'City', 'harmonytics-ucp-connector-woocommerce' ),
-            'postcode'   => __( 'Postcode', 'harmonytics-ucp-connector-woocommerce' ),
-            'country'    => __( 'Country', 'harmonytics-ucp-connector-woocommerce' ),
+            'first_name' => __( 'First name', 'harmonytics-ucp-connector-for-woocommerce' ),
+            'last_name'  => __( 'Last name', 'harmonytics-ucp-connector-for-woocommerce' ),
+            'address_1'  => __( 'Address', 'harmonytics-ucp-connector-for-woocommerce' ),
+            'city'       => __( 'City', 'harmonytics-ucp-connector-for-woocommerce' ),
+            'postcode'   => __( 'Postcode', 'harmonytics-ucp-connector-for-woocommerce' ),
+            'country'    => __( 'Country', 'harmonytics-ucp-connector-for-woocommerce' ),
         );
 
         foreach ( $required_fields as $field => $label ) {
@@ -202,7 +202,7 @@ class UCP_WC_Address_Mapper {
             if ( empty( $value ) ) {
                 $errors[] = sprintf(
                     /* translators: %s: field name */
-                    __( '%s is required.', 'harmonytics-ucp-connector-woocommerce' ),
+                    __( '%s is required.', 'harmonytics-ucp-connector-for-woocommerce' ),
                     $label
                 );
             }
@@ -212,13 +212,13 @@ class UCP_WC_Address_Mapper {
         if ( ! empty( $address['country'] ) ) {
             $countries = WC()->countries->get_countries();
             if ( ! isset( $countries[ $address['country'] ] ) ) {
-                $errors[] = __( 'Invalid country code.', 'harmonytics-ucp-connector-woocommerce' );
+                $errors[] = __( 'Invalid country code.', 'harmonytics-ucp-connector-for-woocommerce' );
             }
         }
 
         // Validate email if present
         if ( ! empty( $address['email'] ) && ! is_email( $address['email'] ) ) {
-            $errors[] = __( 'Invalid email address.', 'harmonytics-ucp-connector-woocommerce' );
+            $errors[] = __( 'Invalid email address.', 'harmonytics-ucp-connector-for-woocommerce' );
         }
 
         return $errors;

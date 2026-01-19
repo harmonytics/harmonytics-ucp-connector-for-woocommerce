@@ -77,7 +77,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 						'category_id' => array(
 							'required'          => true,
 							'type'              => 'integer',
-							'description'       => __( 'Category ID.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description'       => __( 'Category ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 							'sanitize_callback' => 'absint',
 						),
 					),
@@ -112,7 +112,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'integer',
 				'default'           => 1,
 				'minimum'           => 1,
-				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'per_page'   => array(
@@ -121,40 +121,40 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				'default'           => 100,
 				'minimum'           => 1,
 				'maximum'           => 100,
-				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'parent'     => array(
 				'required'          => false,
 				'type'              => 'integer',
-				'description'       => __( 'Filter by parent category ID. Use 0 for top-level categories only.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Filter by parent category ID. Use 0 for top-level categories only.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'intval',
 			),
 			'hide_empty' => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'default'     => false,
-				'description' => __( 'Hide empty categories.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Hide empty categories.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'orderby'    => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'name', 'id', 'slug', 'count', 'menu_order' ),
 				'default'     => 'name',
-				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'order'      => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'asc', 'desc' ),
 				'default'     => 'asc',
-				'description' => __( 'Order sort direction.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Order sort direction.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'hierarchy'  => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'default'     => false,
-				'description' => __( 'Return categories as a hierarchical tree.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Return categories as a hierarchical tree.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 		);
 	}
@@ -169,7 +169,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 			'category_id'     => array(
 				'required'          => true,
 				'type'              => 'integer',
-				'description'       => __( 'Category ID.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Category ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'page'            => array(
@@ -177,7 +177,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'integer',
 				'default'           => 1,
 				'minimum'           => 1,
-				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'per_page'        => array(
@@ -186,38 +186,38 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				'default'           => 10,
 				'minimum'           => 1,
 				'maximum'           => 100,
-				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'include_children' => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'default'     => true,
-				'description' => __( 'Include products from child categories.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Include products from child categories.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'orderby'         => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'date', 'id', 'title', 'price', 'popularity', 'rating', 'menu_order' ),
 				'default'     => 'date',
-				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'order'           => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'asc', 'desc' ),
 				'default'     => 'desc',
-				'description' => __( 'Order sort direction.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Order sort direction.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'in_stock'        => array(
 				'required'    => false,
 				'type'        => 'boolean',
-				'description' => __( 'Filter by stock status.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Filter by stock status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'on_sale'         => array(
 				'required'    => false,
 				'type'        => 'boolean',
-				'description' => __( 'Filter by on sale status.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Filter by on sale status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 		);
 	}
@@ -267,7 +267,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 		if ( is_wp_error( $terms ) ) {
 			return $this->error_response(
 				'category_query_error',
-				__( 'Failed to retrieve categories.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Failed to retrieve categories.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				500
 			);
 		}
@@ -318,7 +318,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 		if ( ! $term || is_wp_error( $term ) ) {
 			return $this->error_response(
 				'category_not_found',
-				__( 'Category not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Category not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}
@@ -358,7 +358,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 		if ( ! $term || is_wp_error( $term ) ) {
 			return $this->error_response(
 				'category_not_found',
-				__( 'Category not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Category not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}

@@ -43,7 +43,7 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
         if ( ! $this->is_ucp_enabled() ) {
             return new WP_Error(
                 'ucp_disabled',
-                __( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 503 )
             );
         }
@@ -60,7 +60,7 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
         if ( ! $this->is_ucp_enabled() ) {
             return new WP_Error(
                 'ucp_disabled',
-                __( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 503 )
             );
         }

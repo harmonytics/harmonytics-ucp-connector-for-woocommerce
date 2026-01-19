@@ -1,14 +1,14 @@
 #!/bin/bash
 #
-# Build distribution ZIP for UCP for WooCommerce
+# Build distribution ZIP for Harmonytics UCP Connector for WooCommerce
 # Excludes development files based on .distignore
 #
 
 set -e
 
-PLUGIN_SLUG="ucp-for-woocommerce"
+PLUGIN_SLUG="harmonytics-ucp-connector-for-woocommerce"
 # Main plugin file name
-PLUGIN_MAIN_FILE="harmonytics-ucp-connector-woocommerce.php"
+PLUGIN_MAIN_FILE="harmonytics-ucp-connector-for-woocommerce.php"
 # Read version from the plugin header in the main file
 VERSION=$(grep -oP "Version:\s*\K[0-9.]+" "$PLUGIN_MAIN_FILE" 2>/dev/null || echo "1.0.0")
 ZIP_NAME="${PLUGIN_SLUG}-${VERSION}.zip"
@@ -44,6 +44,7 @@ zip -r "$ZIP_NAME" "$PLUGIN_SLUG" \
     -x "${PLUGIN_SLUG}/build-zip.sh" \
     -x "${PLUGIN_SLUG}/.idea/*" \
     -x "${PLUGIN_SLUG}/.vscode/*" \
+    -x "${PLUGIN_SLUG}/.claude/*" \
     -x "${PLUGIN_SLUG}/*.code-workspace" \
     -x "${PLUGIN_SLUG}/.DS_Store" \
     -x "${PLUGIN_SLUG}/Thumbs.db" \

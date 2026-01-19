@@ -1,6 +1,6 @@
-# Contributing to UCP for WooCommerce
+# Contributing to Harmonytics UCP Connector for WooCommerce
 
-Thank you for your interest in contributing to UCP for WooCommerce! This document provides guidelines for contributing to the project.
+Thank you for your interest in contributing to Harmonytics UCP Connector for WooCommerce! This document provides guidelines for contributing to the project.
 
 ## Code of Conduct
 
@@ -12,7 +12,7 @@ By participating in this project, you agree to maintain a respectful and inclusi
 
 Before submitting a bug report:
 
-1. Check the [existing issues](https://github.com/harmonytics/ucp-for-woocommerce/issues) to avoid duplicates
+1. Check the [existing issues](https://github.com/harmonytics/harmonytics-ucp-connector-for-woocommerce/issues) to avoid duplicates
 2. Ensure you're using the latest version
 3. Verify the issue is with this plugin and not WooCommerce or WordPress core
 
@@ -58,8 +58,8 @@ Feature requests are welcome! Please:
 ### Installation
 
 ```bash
-git clone https://github.com/harmonytics/ucp-for-woocommerce.git
-cd ucp-for-woocommerce
+git clone https://github.com/harmonytics/harmonytics-ucp-connector-for-woocommerce.git
+cd harmonytics-ucp-connector-for-woocommerce
 composer install
 ```
 
@@ -92,8 +92,8 @@ composer phpcbf
 ## File Structure
 
 ```
-ucp-for-woocommerce/
-├── harmonytics-ucp-connector-woocommerce.php    # Main plugin file
+harmonytics-ucp-connector-for-woocommerce/
+├── harmonytics-ucp-connector-for-woocommerce.php    # Main plugin file
 ├── includes/              # Core plugin classes
 │   ├── rest/              # REST API controllers
 │   ├── capabilities/      # UCP capability handlers

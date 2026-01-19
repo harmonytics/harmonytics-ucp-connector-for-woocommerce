@@ -116,23 +116,23 @@ class UCP_WC_Coupon_Mapper {
 			case 'percent':
 				return sprintf(
 					/* translators: %s: discount percentage */
-					__( '%s%% off your order', 'harmonytics-ucp-connector-woocommerce' ),
+					__( '%s%% off your order', 'harmonytics-ucp-connector-for-woocommerce' ),
 					$amount
 				);
 			case 'fixed_cart':
 				return sprintf(
 					/* translators: %s: discount amount with currency */
-					__( '%s off your order', 'harmonytics-ucp-connector-woocommerce' ),
+					__( '%s off your order', 'harmonytics-ucp-connector-for-woocommerce' ),
 					wc_price( $amount )
 				);
 			case 'fixed_product':
 				return sprintf(
 					/* translators: %s: discount amount with currency */
-					__( '%s off per product', 'harmonytics-ucp-connector-woocommerce' ),
+					__( '%s off per product', 'harmonytics-ucp-connector-for-woocommerce' ),
 					wc_price( $amount )
 				);
 			default:
-				return __( 'Discount coupon', 'harmonytics-ucp-connector-woocommerce' );
+				return __( 'Discount coupon', 'harmonytics-ucp-connector-for-woocommerce' );
 		}
 	}
 

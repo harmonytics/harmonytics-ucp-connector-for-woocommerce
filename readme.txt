@@ -1,6 +1,6 @@
 === Harmonytics UCP Connector for WooCommerce ===
 Contributors: harmonytics
-Tags: woocommerce, ucp, ai, commerce, checkout, api
+Tags: woocommerce, ucp, ai, checkout, api
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.0
@@ -209,7 +209,7 @@ Works without requiring customer accounts, perfect for agent-driven purchases.
 
 == Installation ==
 
-1. Upload the `ucp-for-woocommerce` folder to `/wp-content/plugins/`
+1. Upload the `harmonytics-ucp-connector-for-woocommerce` folder to `/wp-content/plugins/`
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go to WooCommerce → UCP to configure settings
 4. Generate an API key for your AI agent
@@ -235,11 +235,11 @@ AI agents authenticate using API keys. Generate a key in WooCommerce → UCP →
 
 = Is this compatible with all payment gateways? =
 
-UCP for WooCommerce works with any payment gateway. For AI-driven checkouts, the plugin returns a web checkout URL where customers complete payment securely. This ensures compatibility with 3D Secure, PayPal, and other redirect-based payment flows.
+Harmonytics UCP Connector for WooCommerce works with any payment gateway. For AI-driven checkouts, the plugin returns a web checkout URL where customers complete payment securely. This ensures compatibility with 3D Secure, PayPal, and other redirect-based payment flows.
 
 = Do I need to modify my theme? =
 
-No. UCP for WooCommerce operates entirely via REST API and doesn't affect your theme or frontend.
+No. Harmonytics UCP Connector for WooCommerce operates entirely via REST API and doesn't affect your theme or frontend.
 
 = Is it secure? =
 
@@ -254,7 +254,7 @@ Yes. The plugin follows WordPress and WooCommerce security best practices:
 
 = Can I use this with my existing WooCommerce extensions? =
 
-Yes. UCP for WooCommerce integrates with WooCommerce core functionality and should work with most extensions. Shipping methods, tax calculations, and coupons are fully supported.
+Yes. Harmonytics UCP Connector for WooCommerce integrates with WooCommerce core functionality and should work with most extensions. Shipping methods, tax calculations, and coupons are fully supported.
 
 = What happens when an AI agent places an order? =
 
@@ -280,7 +280,7 @@ Yes. You can mark coupons as "UCP Public" in the coupon edit screen. AI agents c
 
 == Privacy Policy ==
 
-UCP for WooCommerce is designed with privacy in mind.
+Harmonytics UCP Connector for WooCommerce is designed with privacy in mind.
 
 = Data Storage =
 
@@ -343,12 +343,12 @@ This plugin implements the [Universal Commerce Protocol (UCP)](https://ucp.dev) 
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of UCP for WooCommerce.
+Initial release of Harmonytics UCP Connector for WooCommerce.
 
 == Technical Documentation ==
 
 For detailed API documentation and integration guides, visit:
-https://harmonytics.com/plugins/ucp-for-woocommerce/docs
+https://harmonytics.com/plugins/harmonytics-ucp-connector-for-woocommerce/docs
 
 = Example: Authenticate and Create Cart =
 
@@ -444,4 +444,4 @@ For support inquiries, please contact:
 
 Developed by [Harmonytics OÜ](https://harmonytics.com)
 
-UCP for WooCommerce implements the [Universal Commerce Protocol](https://ucp.dev) specification.
+Harmonytics UCP Connector for WooCommerce implements the [Universal Commerce Protocol](https://ucp.dev) specification.

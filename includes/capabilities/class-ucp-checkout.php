@@ -64,7 +64,7 @@ class UCP_WC_Checkout {
         if ( empty( $items ) || ! is_array( $items ) ) {
             return new WP_Error(
                 'invalid_items',
-                __( 'Items array is required and cannot be empty.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Items array is required and cannot be empty.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 400 )
             );
         }
@@ -188,7 +188,7 @@ class UCP_WC_Checkout {
         if ( ! $session ) {
             return new WP_Error(
                 'session_not_found',
-                __( 'Checkout session not found.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Checkout session not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }
@@ -197,7 +197,7 @@ class UCP_WC_Checkout {
         if ( strtotime( $session['expires_at'] ) < time() ) {
             return new WP_Error(
                 'session_expired',
-                __( 'Checkout session has expired.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Checkout session has expired.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 410 )
             );
         }
@@ -207,7 +207,7 @@ class UCP_WC_Checkout {
         if ( ! $order ) {
             return new WP_Error(
                 'order_not_found',
-                __( 'Associated order not found.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Associated order not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }
@@ -257,7 +257,7 @@ class UCP_WC_Checkout {
         if ( ! $session ) {
             return new WP_Error(
                 'session_not_found',
-                __( 'Checkout session not found.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Checkout session not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }
@@ -265,7 +265,7 @@ class UCP_WC_Checkout {
         if ( $session['status'] === 'confirmed' ) {
             return new WP_Error(
                 'session_already_confirmed',
-                __( 'Cannot update a confirmed session.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Cannot update a confirmed session.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 400 )
             );
         }
@@ -274,7 +274,7 @@ class UCP_WC_Checkout {
         if ( ! $order ) {
             return new WP_Error(
                 'order_not_found',
-                __( 'Associated order not found.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Associated order not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }
@@ -351,7 +351,7 @@ class UCP_WC_Checkout {
         if ( ! $session ) {
             return new WP_Error(
                 'session_not_found',
-                __( 'Checkout session not found.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Checkout session not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }
@@ -359,7 +359,7 @@ class UCP_WC_Checkout {
         if ( $session['status'] === 'confirmed' ) {
             return new WP_Error(
                 'session_already_confirmed',
-                __( 'Session has already been confirmed.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Session has already been confirmed.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 400 )
             );
         }
@@ -368,7 +368,7 @@ class UCP_WC_Checkout {
         if ( ! $order ) {
             return new WP_Error(
                 'order_not_found',
-                __( 'Associated order not found.', 'harmonytics-ucp-connector-woocommerce' ),
+                __( 'Associated order not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
                 array( 'status' => 404 )
             );
         }
@@ -404,7 +404,7 @@ class UCP_WC_Checkout {
                 'next_action'      => 'web_checkout',
                 'web_checkout_url' => $order->get_checkout_payment_url(),
                 'totals'           => $this->get_order_totals( $order ),
-                'message'          => __( 'Please complete payment at the checkout URL.', 'harmonytics-ucp-connector-woocommerce' ),
+                'message'          => __( 'Please complete payment at the checkout URL.', 'harmonytics-ucp-connector-for-woocommerce' ),
             );
         }
 
@@ -477,7 +477,7 @@ class UCP_WC_Checkout {
                 'product_not_found',
                 sprintf(
                     /* translators: %s: Product identifier (SKU, product ID, or variant ID) */
-                    __( 'Product not found: %s', 'harmonytics-ucp-connector-woocommerce' ),
+                    __( 'Product not found: %s', 'harmonytics-ucp-connector-for-woocommerce' ),
                     $item['sku'] ?? $item['product_id'] ?? $item['variant_id'] ?? 'unknown'
                 ),
                 array( 'status' => 404 )
@@ -488,7 +488,7 @@ class UCP_WC_Checkout {
             return new WP_Error(
                 'product_not_purchasable',
                 /* translators: %s: Product name */
-                sprintf( __( 'Product is not purchasable: %s', 'harmonytics-ucp-connector-woocommerce' ), $product->get_name() ),
+                sprintf( __( 'Product is not purchasable: %s', 'harmonytics-ucp-connector-for-woocommerce' ), $product->get_name() ),
                 array( 'status' => 400 )
             );
         }
@@ -499,7 +499,7 @@ class UCP_WC_Checkout {
             return new WP_Error(
                 'insufficient_stock',
                 /* translators: %s: Product name */
-                sprintf( __( 'Insufficient stock for: %s', 'harmonytics-ucp-connector-woocommerce' ), $product->get_name() ),
+                sprintf( __( 'Insufficient stock for: %s', 'harmonytics-ucp-connector-for-woocommerce' ), $product->get_name() ),
                 array( 'status' => 400 )
             );
         }

@@ -350,7 +350,7 @@ class UCP_WC_Shipping_Mapper {
                 if ( isset( $estimated['min_days'] ) && isset( $estimated['max_days'] ) ) {
                     return sprintf(
                         /* translators: 1: minimum days, 2: maximum days */
-                        __( '%1$d-%2$d business days', 'harmonytics-ucp-connector-woocommerce' ),
+                        __( '%1$d-%2$d business days', 'harmonytics-ucp-connector-for-woocommerce' ),
                         $estimated['min_days'],
                         $estimated['max_days']
                     );

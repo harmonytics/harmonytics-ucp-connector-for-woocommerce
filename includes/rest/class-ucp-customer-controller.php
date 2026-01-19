@@ -69,7 +69,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 						'customer_id' => array(
 							'required'          => true,
 							'type'              => 'integer',
-							'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 							'sanitize_callback' => 'absint',
 						),
 					),
@@ -104,7 +104,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 						'customer_id' => array(
 							'required'          => true,
 							'type'              => 'integer',
-							'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 							'sanitize_callback' => 'absint',
 						),
 					),
@@ -154,7 +154,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 							'required'          => true,
 							'type'              => 'string',
 							'format'            => 'email',
-							'description'       => __( 'Customer email address.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description'       => __( 'Customer email address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 							'sanitize_callback' => 'sanitize_email',
 						),
 					),
@@ -174,41 +174,41 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 				'required'          => true,
 				'type'              => 'string',
 				'format'            => 'email',
-				'description'       => __( 'Customer email address.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer email address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_email',
 			),
 			'first_name'       => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Customer first name.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer first name.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'last_name'        => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Customer last name.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer last name.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'username'         => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Customer username.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer username.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_user',
 			),
 			'password'         => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Customer password.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer password.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'billing_address'  => array(
 				'required'    => false,
 				'type'        => 'object',
-				'description' => __( 'Customer billing address.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Customer billing address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'shipping_address' => array(
 				'required'    => false,
 				'type'        => 'object',
-				'description' => __( 'Customer shipping address.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Customer shipping address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 		);
 	}
@@ -223,37 +223,37 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			'customer_id'      => array(
 				'required'          => true,
 				'type'              => 'integer',
-				'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'email'            => array(
 				'required'          => false,
 				'type'              => 'string',
 				'format'            => 'email',
-				'description'       => __( 'Customer email address.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer email address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_email',
 			),
 			'first_name'       => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Customer first name.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer first name.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'last_name'        => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Customer last name.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer last name.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'billing_address'  => array(
 				'required'    => false,
 				'type'        => 'object',
-				'description' => __( 'Customer billing address.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Customer billing address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'shipping_address' => array(
 				'required'    => false,
 				'type'        => 'object',
-				'description' => __( 'Customer shipping address.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Customer shipping address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 		);
 	}
@@ -268,7 +268,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			'customer_id' => array(
 				'required'          => true,
 				'type'              => 'integer',
-				'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'type'        => array(
@@ -276,24 +276,24 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 				'type'        => 'string',
 				'enum'        => array( 'billing', 'shipping' ),
 				'default'     => 'shipping',
-				'description' => __( 'Address type.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Address type.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'label'       => array(
 				'required'          => false,
 				'type'              => 'string',
-				'description'       => __( 'Address label (e.g., "Home", "Work").', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Address label (e.g., "Home", "Work").', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'set_default' => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'default'     => false,
-				'description' => __( 'Set as default address for this type.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Set as default address for this type.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'address'     => array(
 				'required'    => true,
 				'type'        => 'object',
-				'description' => __( 'Address details.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Address details.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 		);
 	}
@@ -308,7 +308,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			'customer_id' => array(
 				'required'          => true,
 				'type'              => 'integer',
-				'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Customer ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'page'        => array(
@@ -316,7 +316,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 				'type'        => 'integer',
 				'default'     => 1,
 				'minimum'     => 1,
-				'description' => __( 'Page number.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Page number.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'per_page'    => array(
 				'required'    => false,
@@ -324,7 +324,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 				'default'     => 10,
 				'minimum'     => 1,
 				'maximum'     => 100,
-				'description' => __( 'Items per page.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Items per page.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'status'      => array(
 				'required'    => false,
@@ -340,7 +340,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 					'any',
 				),
 				'default'     => 'any',
-				'description' => __( 'Filter by order status.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Filter by order status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 		);
 	}
@@ -357,7 +357,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		if ( ! $this->is_ucp_enabled() ) {
 			return new WP_Error(
 				'ucp_disabled',
-				__( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 503 )
 			);
 		}
@@ -379,7 +379,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		if ( 0 === $current_user_id && ! $this->is_authenticated() ) {
 			return new WP_Error(
 				'ucp_unauthorized',
-				__( 'Authentication is required to access customer data.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Authentication is required to access customer data.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 401 )
 			);
 		}
@@ -387,7 +387,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		if ( $current_user_id !== (int) $customer_id ) {
 			return new WP_Error(
 				'ucp_forbidden',
-				__( 'You do not have permission to access this customer data.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'You do not have permission to access this customer data.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 403 )
 			);
 		}
@@ -406,7 +406,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		if ( ! $this->is_ucp_enabled() ) {
 			return new WP_Error(
 				'ucp_disabled',
-				__( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 503 )
 			);
 		}
@@ -420,7 +420,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			return new WP_Error(
 				'ucp_forbidden',
-				__( 'Admin or API key authentication is required for customer lookup.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Admin or API key authentication is required for customer lookup.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 403 )
 			);
 		}
@@ -444,7 +444,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		if ( $existing_user ) {
 			return $this->error_response(
 				'ucp_customer_exists',
-				__( 'A customer with this email address already exists.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'A customer with this email address already exists.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				409
 			);
 		}
@@ -534,7 +534,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			return $this->success_response(
 				array(
 					'customer' => $this->mapper->map_customer( $customer ),
-					'message'  => __( 'Customer created successfully.', 'harmonytics-ucp-connector-woocommerce' ),
+					'message'  => __( 'Customer created successfully.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				),
 				201
 			);
@@ -567,7 +567,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			if ( 0 === $customer->get_id() ) {
 				return $this->error_response(
 					'ucp_customer_not_found',
-					__( 'Customer not found.', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'Customer not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					404
 				);
 			}
@@ -577,7 +577,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		} catch ( Exception $e ) {
 			return $this->error_response(
 				'ucp_customer_not_found',
-				__( 'Customer not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Customer not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}
@@ -600,7 +600,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			if ( 0 === $customer->get_id() ) {
 				return $this->error_response(
 					'ucp_customer_not_found',
-					__( 'Customer not found.', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'Customer not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					404
 				);
 			}
@@ -623,7 +623,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 				if ( $existing_user && $existing_user->ID !== $customer_id ) {
 					return $this->error_response(
 						'ucp_email_exists',
-						__( 'This email address is already in use by another customer.', 'harmonytics-ucp-connector-woocommerce' ),
+						__( 'This email address is already in use by another customer.', 'harmonytics-ucp-connector-for-woocommerce' ),
 						409
 					);
 				}
@@ -685,7 +685,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			return $this->success_response(
 				array(
 					'customer' => $this->mapper->map_customer( $customer ),
-					'message'  => __( 'Customer updated successfully.', 'harmonytics-ucp-connector-woocommerce' ),
+					'message'  => __( 'Customer updated successfully.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				)
 			);
 
@@ -717,7 +717,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			if ( 0 === $customer->get_id() ) {
 				return $this->error_response(
 					'ucp_customer_not_found',
-					__( 'Customer not found.', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'Customer not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					404
 				);
 			}
@@ -734,7 +734,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		} catch ( Exception $e ) {
 			return $this->error_response(
 				'ucp_customer_not_found',
-				__( 'Customer not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Customer not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}
@@ -761,7 +761,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			if ( 0 === $customer->get_id() ) {
 				return $this->error_response(
 					'ucp_customer_not_found',
-					__( 'Customer not found.', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'Customer not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					404
 				);
 			}
@@ -833,7 +833,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 				array(
 					'customer_id' => $customer_id,
 					'addresses'   => $addresses,
-					'message'     => __( 'Address added successfully.', 'harmonytics-ucp-connector-woocommerce' ),
+					'message'     => __( 'Address added successfully.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				),
 				201
 			);
@@ -869,7 +869,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			if ( 0 === $customer->get_id() ) {
 				return $this->error_response(
 					'ucp_customer_not_found',
-					__( 'Customer not found.', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'Customer not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					404
 				);
 			}
@@ -894,7 +894,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		} catch ( Exception $e ) {
 			return $this->error_response(
 				'ucp_customer_not_found',
-				__( 'Customer not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Customer not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}
@@ -919,7 +919,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 					'found'    => false,
 					'email'    => $email,
 					'customer' => null,
-					'message'  => __( 'No customer found with this email address.', 'harmonytics-ucp-connector-woocommerce' ),
+					'message'  => __( 'No customer found with this email address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				)
 			);
 		}
@@ -933,7 +933,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 						'found'    => false,
 						'email'    => $email,
 						'customer' => null,
-						'message'  => __( 'No customer found with this email address.', 'harmonytics-ucp-connector-woocommerce' ),
+						'message'  => __( 'No customer found with this email address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					)
 				);
 			}
@@ -952,7 +952,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 					'found'    => false,
 					'email'    => $email,
 					'customer' => null,
-					'message'  => __( 'No customer found with this email address.', 'harmonytics-ucp-connector-woocommerce' ),
+					'message'  => __( 'No customer found with this email address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				)
 			);
 		}

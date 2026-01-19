@@ -55,7 +55,7 @@ class UCP_WC_Webhook_Sender {
         // Validate URL
         if ( ! filter_var( $webhook_url, FILTER_VALIDATE_URL ) ) {
             $this->log( 'Invalid webhook URL', array( 'url' => $webhook_url ) );
-            return new WP_Error( 'invalid_url', __( 'Invalid webhook URL configured.', 'harmonytics-ucp-connector-woocommerce' ) );
+            return new WP_Error( 'invalid_url', __( 'Invalid webhook URL configured.', 'harmonytics-ucp-connector-for-woocommerce' ) );
         }
 
         // Prepare payload
@@ -82,7 +82,7 @@ class UCP_WC_Webhook_Sender {
             'api_version'  => '1.0',
             'source'       => array(
                 'platform'     => 'WooCommerce',
-                'plugin'       => 'harmonytics-ucp-connector-woocommerce',
+                'plugin'       => 'harmonytics-ucp-connector-for-woocommerce',
                 'version'      => UCP_WC_VERSION,
                 'site_url'     => home_url(),
             ),
@@ -223,7 +223,7 @@ class UCP_WC_Webhook_Sender {
             return new WP_Error(
                 'client_error',
                 /* translators: %d: HTTP status code */
-                sprintf( __( 'Webhook returned %d status code', 'harmonytics-ucp-connector-woocommerce' ), $status_code ),
+                sprintf( __( 'Webhook returned %d status code', 'harmonytics-ucp-connector-for-woocommerce' ), $status_code ),
                 array( 'status' => $status_code )
             );
         }
@@ -232,7 +232,7 @@ class UCP_WC_Webhook_Sender {
         return new WP_Error(
             'server_error',
             /* translators: %d: HTTP status code */
-            sprintf( __( 'Webhook returned %d status code', 'harmonytics-ucp-connector-woocommerce' ), $status_code ),
+            sprintf( __( 'Webhook returned %d status code', 'harmonytics-ucp-connector-for-woocommerce' ), $status_code ),
             array( 'status' => $status_code )
         );
     }

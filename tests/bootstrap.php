@@ -67,7 +67,7 @@ function _manually_load_plugin() {
     require UCP_WC_TEST_WC_DIR . '/woocommerce.php';
 
     // Load our plugin
-    require dirname( __DIR__ ) . '/harmonytics-ucp-connector-woocommerce.php';
+    require dirname( __DIR__ ) . '/harmonytics-ucp-connector-for-woocommerce.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );

@@ -69,7 +69,7 @@ class UCP_WC_Order_Controller extends UCP_WC_REST_Controller {
                         'order_id' => array(
                             'required'          => true,
                             'type'              => 'integer',
-                            'description'       => __( 'Order ID.', 'harmonytics-ucp-connector-woocommerce' ),
+                            'description'       => __( 'Order ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
                             'sanitize_callback' => 'absint',
                         ),
                     ),
@@ -130,7 +130,7 @@ class UCP_WC_Order_Controller extends UCP_WC_REST_Controller {
                 'type'        => 'integer',
                 'default'     => 1,
                 'minimum'     => 1,
-                'description' => __( 'Page number.', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'Page number.', 'harmonytics-ucp-connector-for-woocommerce' ),
             ),
             'per_page'   => array(
                 'required'    => false,
@@ -138,7 +138,7 @@ class UCP_WC_Order_Controller extends UCP_WC_REST_Controller {
                 'default'     => 10,
                 'minimum'     => 1,
                 'maximum'     => 100,
-                'description' => __( 'Items per page.', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'Items per page.', 'harmonytics-ucp-connector-for-woocommerce' ),
             ),
             'status'     => array(
                 'required'    => false,
@@ -154,25 +154,25 @@ class UCP_WC_Order_Controller extends UCP_WC_REST_Controller {
                     'any',
                 ),
                 'default'     => 'any',
-                'description' => __( 'Filter by order status.', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'Filter by order status.', 'harmonytics-ucp-connector-for-woocommerce' ),
             ),
             'after'      => array(
                 'required'    => false,
                 'type'        => 'string',
                 'format'      => 'date-time',
-                'description' => __( 'Orders created after this date.', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'Orders created after this date.', 'harmonytics-ucp-connector-for-woocommerce' ),
             ),
             'before'     => array(
                 'required'    => false,
                 'type'        => 'string',
                 'format'      => 'date-time',
-                'description' => __( 'Orders created before this date.', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'Orders created before this date.', 'harmonytics-ucp-connector-for-woocommerce' ),
             ),
             'customer_email' => array(
                 'required'    => false,
                 'type'        => 'string',
                 'format'      => 'email',
-                'description' => __( 'Filter by customer email.', 'harmonytics-ucp-connector-woocommerce' ),
+                'description' => __( 'Filter by customer email.', 'harmonytics-ucp-connector-for-woocommerce' ),
             ),
         );
     }

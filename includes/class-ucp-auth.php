@@ -209,13 +209,10 @@ class UCP_WC_Auth {
 		$key_data  = wp_cache_get( $cache_key, 'ucp_api_keys' );
 
 		if ( false === $key_data ) {
-			$table_name = $wpdb->prefix . self::TABLE_NAME;
-
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for UCP API keys, no WP API available.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for UCP API keys.
 			$key_data = $wpdb->get_row(
 				$wpdb->prepare(
-					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name uses constant prefix.
-					"SELECT * FROM {$table_name} WHERE key_id = %s AND status = 'active'",
+					'SELECT * FROM ' . $wpdb->prefix . "ucp_api_keys WHERE key_id = %s AND status = 'active'",
 					$key_id
 				),
 				ARRAY_A
@@ -323,7 +320,7 @@ class UCP_WC_Auth {
 		if ( empty( $permissions ) ) {
 			return new WP_Error(
 				'invalid_permissions',
-				__( 'At least one valid permission (read, write, admin) is required.', 'harmonytics-ucp-connector-woocommerce' )
+				__( 'At least one valid permission (read, write, admin) is required.', 'harmonytics-ucp-connector-for-woocommerce' )
 			);
 		}
 
@@ -356,7 +353,7 @@ class UCP_WC_Auth {
 		if ( false === $result ) {
 			return new WP_Error(
 				'db_error',
-				__( 'Failed to create API key.', 'harmonytics-ucp-connector-woocommerce' )
+				__( 'Failed to create API key.', 'harmonytics-ucp-connector-for-woocommerce' )
 			);
 		}
 
@@ -389,20 +386,19 @@ class UCP_WC_Auth {
 
 		$args = wp_parse_args( $args, $defaults );
 
-		$table_name = $wpdb->prefix . self::TABLE_NAME;
-		$offset     = ( absint( $args['page'] ) - 1 ) * absint( $args['per_page'] );
+		$offset = ( absint( $args['page'] ) - 1 ) * absint( $args['per_page'] );
 
 		// Build query based on status filter.
 		if ( 'all' !== $args['status'] ) {
 			$status = sanitize_key( $args['status'] );
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table, table name uses constant prefix.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP API keys.
 			$keys = $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
-					FROM {$table_name}
+					'SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
+					FROM ' . $wpdb->prefix . 'ucp_api_keys
 					WHERE status = %s
 					ORDER BY created_at DESC
-					LIMIT %d OFFSET %d",
+					LIMIT %d OFFSET %d',
 					$status,
 					absint( $args['per_page'] ),
 					$offset
@@ -410,29 +406,29 @@ class UCP_WC_Auth {
 				ARRAY_A
 			);
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table, table name uses constant prefix.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP API keys.
 			$total = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT COUNT(*) FROM {$table_name} WHERE status = %s",
+					'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'ucp_api_keys WHERE status = %s',
 					$status
 				)
 			);
 		} else {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table, table name uses constant prefix.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP API keys.
 			$keys = $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
-					FROM {$table_name}
+					'SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
+					FROM ' . $wpdb->prefix . 'ucp_api_keys
 					ORDER BY created_at DESC
-					LIMIT %d OFFSET %d",
+					LIMIT %d OFFSET %d',
 					absint( $args['per_page'] ),
 					$offset
 				),
 				ARRAY_A
 			);
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table, table name uses constant prefix.
-			$total = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name}" );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP API keys.
+			$total = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'ucp_api_keys' );
 		}
 
 		$formatted_keys = array();
@@ -472,14 +468,12 @@ class UCP_WC_Auth {
 		$key       = wp_cache_get( $cache_key, 'ucp_api_keys' );
 
 		if ( false === $key ) {
-			$table_name = $wpdb->prefix . self::TABLE_NAME;
-
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Custom table for UCP API keys, table name uses constant prefix.
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for UCP API keys.
 			$key = $wpdb->get_row(
 				$wpdb->prepare(
-					"SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
-					FROM {$table_name}
-					WHERE key_id = %s",
+					'SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
+					FROM ' . $wpdb->prefix . 'ucp_api_keys
+					WHERE key_id = %s',
 					$key_id
 				),
 				ARRAY_A
@@ -523,7 +517,7 @@ class UCP_WC_Auth {
 		if ( ! $existing ) {
 			return new WP_Error(
 				'key_not_found',
-				__( 'API key not found.', 'harmonytics-ucp-connector-woocommerce' )
+				__( 'API key not found.', 'harmonytics-ucp-connector-for-woocommerce' )
 			);
 		}
 
@@ -540,7 +534,7 @@ class UCP_WC_Auth {
 		if ( false === $result ) {
 			return new WP_Error(
 				'db_error',
-				__( 'Failed to revoke API key.', 'harmonytics-ucp-connector-woocommerce' )
+				__( 'Failed to revoke API key.', 'harmonytics-ucp-connector-for-woocommerce' )
 			);
 		}
 
@@ -566,7 +560,7 @@ class UCP_WC_Auth {
 		if ( ! $existing ) {
 			return new WP_Error(
 				'key_not_found',
-				__( 'API key not found.', 'harmonytics-ucp-connector-woocommerce' )
+				__( 'API key not found.', 'harmonytics-ucp-connector-for-woocommerce' )
 			);
 		}
 
@@ -580,7 +574,7 @@ class UCP_WC_Auth {
 		if ( false === $result ) {
 			return new WP_Error(
 				'db_error',
-				__( 'Failed to delete API key.', 'harmonytics-ucp-connector-woocommerce' )
+				__( 'Failed to delete API key.', 'harmonytics-ucp-connector-for-woocommerce' )
 			);
 		}
 

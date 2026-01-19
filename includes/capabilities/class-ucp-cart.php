@@ -89,7 +89,7 @@ class UCP_WC_Cart {
 		if ( false === $result ) {
 			return new WP_Error(
 				'cart_creation_failed',
-				__( 'Failed to create cart.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Failed to create cart.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 500 )
 			);
 		}
@@ -131,7 +131,7 @@ class UCP_WC_Cart {
 		if ( ! $cart ) {
 			return new WP_Error(
 				'cart_not_found',
-				__( 'Cart not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Cart not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -140,7 +140,7 @@ class UCP_WC_Cart {
 		if ( strtotime( $cart['expires_at'] ) < time() ) {
 			return new WP_Error(
 				'cart_expired',
-				__( 'Cart has expired.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Cart has expired.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 410 )
 			);
 		}
@@ -149,7 +149,7 @@ class UCP_WC_Cart {
 		if ( 'converted' === $cart['status'] ) {
 			return new WP_Error(
 				'cart_converted',
-				__( 'Cart has been converted to a checkout session.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Cart has been converted to a checkout session.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array(
 					'status'     => 410,
 					'session_id' => $cart['checkout_session_id'],
@@ -201,7 +201,7 @@ class UCP_WC_Cart {
 				'cart_full',
 				sprintf(
 					/* translators: %d: Maximum number of items allowed in cart */
-					__( 'Cart cannot contain more than %d items.', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'Cart cannot contain more than %d items.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					self::MAX_ITEMS
 				),
 				array( 'status' => 400 )
@@ -234,7 +234,7 @@ class UCP_WC_Cart {
 				return new WP_Error(
 					'insufficient_stock',
 					/* translators: %s: Product name */
-					sprintf( __( 'Insufficient stock for: %s', 'harmonytics-ucp-connector-woocommerce' ), $product->get_name() ),
+					sprintf( __( 'Insufficient stock for: %s', 'harmonytics-ucp-connector-for-woocommerce' ), $product->get_name() ),
 					array( 'status' => 400 )
 				);
 			}
@@ -292,7 +292,7 @@ class UCP_WC_Cart {
 		if ( false === $item_index ) {
 			return new WP_Error(
 				'item_not_found',
-				__( 'Item not found in cart.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Item not found in cart.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -311,7 +311,7 @@ class UCP_WC_Cart {
 		if ( ! $product ) {
 			return new WP_Error(
 				'product_not_found',
-				__( 'Product no longer exists.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Product no longer exists.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -321,7 +321,7 @@ class UCP_WC_Cart {
 			return new WP_Error(
 				'insufficient_stock',
 				/* translators: %s: Product name */
-				sprintf( __( 'Insufficient stock for: %s', 'harmonytics-ucp-connector-woocommerce' ), $product->get_name() ),
+				sprintf( __( 'Insufficient stock for: %s', 'harmonytics-ucp-connector-for-woocommerce' ), $product->get_name() ),
 				array( 'status' => 400 )
 			);
 		}
@@ -368,7 +368,7 @@ class UCP_WC_Cart {
 		if ( false === $item_index ) {
 			return new WP_Error(
 				'item_not_found',
-				__( 'Item not found in cart.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Item not found in cart.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -445,7 +445,7 @@ class UCP_WC_Cart {
 		if ( false === $result ) {
 			return new WP_Error(
 				'cart_delete_failed',
-				__( 'Failed to delete cart.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Failed to delete cart.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 500 )
 			);
 		}
@@ -453,7 +453,7 @@ class UCP_WC_Cart {
 		return array(
 			'cart_id' => $cart_id,
 			'deleted' => true,
-			'message' => __( 'Cart has been deleted.', 'harmonytics-ucp-connector-woocommerce' ),
+			'message' => __( 'Cart has been deleted.', 'harmonytics-ucp-connector-for-woocommerce' ),
 		);
 	}
 
@@ -483,7 +483,7 @@ class UCP_WC_Cart {
 		if ( empty( $items ) ) {
 			return new WP_Error(
 				'cart_empty',
-				__( 'Cannot checkout with an empty cart.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Cannot checkout with an empty cart.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -564,7 +564,7 @@ class UCP_WC_Cart {
 		if ( ! $cart ) {
 			return new WP_Error(
 				'cart_not_found',
-				__( 'Cart not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Cart not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -573,7 +573,7 @@ class UCP_WC_Cart {
 		if ( strtotime( $cart['expires_at'] ) < time() ) {
 			return new WP_Error(
 				'cart_expired',
-				__( 'Cart has expired.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Cart has expired.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array( 'status' => 410 )
 			);
 		}
@@ -582,7 +582,7 @@ class UCP_WC_Cart {
 		if ( 'converted' === $cart['status'] ) {
 			return new WP_Error(
 				'cart_converted',
-				__( 'Cart has been converted to a checkout session.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Cart has been converted to a checkout session.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				array(
 					'status'     => 410,
 					'session_id' => $cart['checkout_session_id'],
@@ -661,7 +661,7 @@ class UCP_WC_Cart {
 				'product_not_found',
 				sprintf(
 					/* translators: %s: Product identifier (SKU, product ID, or variant ID) */
-					__( 'Product not found: %s', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'Product not found: %s', 'harmonytics-ucp-connector-for-woocommerce' ),
 					$item['sku'] ?? $item['product_id'] ?? $item['variant_id'] ?? 'unknown'
 				),
 				array( 'status' => 404 )
@@ -683,7 +683,7 @@ class UCP_WC_Cart {
 			return new WP_Error(
 				'product_not_purchasable',
 				/* translators: %s: Product name */
-				sprintf( __( 'Product is not purchasable: %s', 'harmonytics-ucp-connector-woocommerce' ), $product->get_name() ),
+				sprintf( __( 'Product is not purchasable: %s', 'harmonytics-ucp-connector-for-woocommerce' ), $product->get_name() ),
 				array( 'status' => 400 )
 			);
 		}
@@ -694,7 +694,7 @@ class UCP_WC_Cart {
 			return new WP_Error(
 				'product_out_of_stock',
 				/* translators: %s: Product name */
-				sprintf( __( 'Product is out of stock: %s', 'harmonytics-ucp-connector-woocommerce' ), $product->get_name() ),
+				sprintf( __( 'Product is out of stock: %s', 'harmonytics-ucp-connector-for-woocommerce' ), $product->get_name() ),
 				array( 'status' => 400 )
 			);
 		}
@@ -703,7 +703,7 @@ class UCP_WC_Cart {
 			return new WP_Error(
 				'insufficient_stock',
 				/* translators: %s: Product name */
-				sprintf( __( 'Insufficient stock for: %s', 'harmonytics-ucp-connector-woocommerce' ), $product->get_name() ),
+				sprintf( __( 'Insufficient stock for: %s', 'harmonytics-ucp-connector-for-woocommerce' ), $product->get_name() ),
 				array( 'status' => 400 )
 			);
 		}
@@ -785,7 +785,7 @@ class UCP_WC_Cart {
 			'currency'           => get_woocommerce_currency(),
 			'currency_symbol'    => get_woocommerce_currency_symbol(),
 			'prices_include_tax' => wc_prices_include_tax(),
-			'note'               => __( 'Tax and shipping calculated at checkout.', 'harmonytics-ucp-connector-woocommerce' ),
+			'note'               => __( 'Tax and shipping calculated at checkout.', 'harmonytics-ucp-connector-for-woocommerce' ),
 		);
 	}
 
@@ -800,7 +800,7 @@ class UCP_WC_Cart {
 			'currency'           => get_woocommerce_currency(),
 			'currency_symbol'    => get_woocommerce_currency_symbol(),
 			'prices_include_tax' => wc_prices_include_tax(),
-			'note'               => __( 'Tax and shipping calculated at checkout.', 'harmonytics-ucp-connector-woocommerce' ),
+			'note'               => __( 'Tax and shipping calculated at checkout.', 'harmonytics-ucp-connector-for-woocommerce' ),
 		);
 	}
 

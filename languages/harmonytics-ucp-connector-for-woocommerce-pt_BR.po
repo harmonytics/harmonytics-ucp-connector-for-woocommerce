@@ -1,306 +1,306 @@
-# Turkish translation for UCP for WooCommerce
+# Brazilian Portuguese translation for Harmonytics UCP Connector for WooCommerce
 # Copyright (C) 2026 Harmonytics OÜ
 # This file is distributed under the GPL-2.0-or-later license.
 msgid ""
 msgstr ""
-"Project-Id-Version: UCP for WooCommerce 1.0.0\n"
+"Project-Id-Version: Harmonytics UCP Connector for WooCommerce 1.0.0\n"
 "Report-Msgid-Bugs-To: support@harmonytics.com\n"
 "POT-Creation-Date: 2026-01-13 19:07+0000\n"
-"PO-Revision-Date: 2026-01-13 19:15+0000\n"
+"PO-Revision-Date: 2026-01-13 19:20+0000\n"
 "Last-Translator: Harmonytics <dev@harmonytics.com>\n"
-"Language-Team: Turkish <tr@li.org>\n"
-"Language: tr_TR\n"
+"Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Claude\n"
-"X-Domain: ucp-for-woocommerce\n"
+"X-Domain: harmonytics-ucp-connector-for-woocommerce\n"
 
 #: includes/mapping/class-ucp-address-mapper.php:192
 msgid "First name"
-msgstr "Ad"
+msgstr "Nome"
 
 #: includes/mapping/class-ucp-address-mapper.php:193
 msgid "Last name"
-msgstr "Soyad"
+msgstr "Sobrenome"
 
 #: includes/mapping/class-ucp-address-mapper.php:194
 msgid "Address"
-msgstr "Adres"
+msgstr "Endereço"
 
 #: includes/mapping/class-ucp-address-mapper.php:195
 msgid "City"
-msgstr "Şehir"
+msgstr "Cidade"
 
 #: includes/mapping/class-ucp-address-mapper.php:196
 msgid "Postcode"
-msgstr "Posta kodu"
+msgstr "CEP"
 
 #: includes/mapping/class-ucp-address-mapper.php:197
 msgid "Country"
-msgstr "Ülke"
+msgstr "País"
 
 #. translators: %s: field name
 #: includes/mapping/class-ucp-address-mapper.php:205
 #, php-format
 msgid "%s is required."
-msgstr "%s zorunludur."
+msgstr "%s é obrigatório."
 
 #: includes/mapping/class-ucp-address-mapper.php:215
 msgid "Invalid country code."
-msgstr "Geçersiz ülke kodu."
+msgstr "Código de país inválido."
 
 #: includes/mapping/class-ucp-address-mapper.php:221
 msgid "Invalid email address."
-msgstr "Geçersiz e-posta adresi."
+msgstr "Endereço de e-mail inválido."
 
 #: includes/capabilities/class-ucp-order.php:125
 #: includes/capabilities/class-ucp-order.php:176
 msgid "Order not found."
-msgstr "Sipariş bulunamadı."
+msgstr "Pedido não encontrado."
 
 #: includes/capabilities/class-ucp-order.php:156
 msgid "No order found for this session."
-msgstr "Bu oturum için sipariş bulunamadı."
+msgstr "Nenhum pedido encontrado para esta sessão."
 
 #: includes/capabilities/class-ucp-checkout.php:67
 msgid "Items array is required and cannot be empty."
-msgstr "Ürün listesi zorunludur ve boş olamaz."
+msgstr "A lista de itens é obrigatória e não pode estar vazia."
 
 #: includes/capabilities/class-ucp-checkout.php:191
 #: includes/capabilities/class-ucp-checkout.php:260
 #: includes/capabilities/class-ucp-checkout.php:354
 msgid "Checkout session not found."
-msgstr "Ödeme oturumu bulunamadı."
+msgstr "Sessão de checkout não encontrada."
 
 #: includes/capabilities/class-ucp-checkout.php:200
 msgid "Checkout session has expired."
-msgstr "Ödeme oturumunun süresi doldu."
+msgstr "A sessão de checkout expirou."
 
 #: includes/capabilities/class-ucp-checkout.php:210
 #: includes/capabilities/class-ucp-checkout.php:277
 #: includes/capabilities/class-ucp-checkout.php:371
 msgid "Associated order not found."
-msgstr "İlişkili sipariş bulunamadı."
+msgstr "Pedido associado não encontrado."
 
 #: includes/capabilities/class-ucp-checkout.php:268
 msgid "Cannot update a confirmed session."
-msgstr "Onaylanmış bir oturum güncellenemez."
+msgstr "Não é possível atualizar uma sessão confirmada."
 
 #: includes/capabilities/class-ucp-checkout.php:362
 msgid "Session has already been confirmed."
-msgstr "Oturum zaten onaylanmış."
+msgstr "A sessão já foi confirmada."
 
 #: includes/capabilities/class-ucp-checkout.php:407
 msgid "Please complete payment at the checkout URL."
-msgstr "Lütfen ödeme URL'sinde ödemeyi tamamlayın."
+msgstr "Por favor, complete o pagamento na URL de checkout."
 
 #. translators: %s: Product identifier (SKU, product ID, or variant ID)
 #: includes/capabilities/class-ucp-checkout.php:480
 #, php-format
 msgid "Product not found: %s"
-msgstr "Ürün bulunamadı: %s"
+msgstr "Produto não encontrado: %s"
 
 #. translators: %s: Product name
 #: includes/capabilities/class-ucp-checkout.php:491
 #, php-format
 msgid "Product is not purchasable: %s"
-msgstr "Ürün satın alınamaz: %s"
+msgstr "Produto não pode ser comprado: %s"
 
 #. translators: %s: Product name
 #: includes/capabilities/class-ucp-checkout.php:502
 #, php-format
 msgid "Insufficient stock for: %s"
-msgstr "Yetersiz stok: %s"
+msgstr "Estoque insuficiente para: %s"
 
 #: includes/webhooks/class-ucp-webhook-sender.php:58
 msgid "Invalid webhook URL configured."
-msgstr "Geçersiz webhook URL'si yapılandırılmış."
+msgstr "URL de webhook inválida configurada."
 
 #. translators: %d: HTTP status code
 #: includes/webhooks/class-ucp-webhook-sender.php:226
 #: includes/webhooks/class-ucp-webhook-sender.php:235
 #, php-format
 msgid "Webhook returned %d status code"
-msgstr "Webhook %d durum kodu döndürdü"
+msgstr "Webhook retornou código de status %d"
 
 #: includes/rest/class-ucp-checkout-controller.php:72
 msgid "Unique session identifier."
-msgstr "Benzersiz oturum tanımlayıcı."
+msgstr "Identificador único de sessão."
 
 #: includes/rest/class-ucp-checkout-controller.php:119
 msgid "Array of items to add to the checkout."
-msgstr "Ödemeye eklenecek ürün listesi."
+msgstr "Lista de itens para adicionar ao checkout."
 
 #: includes/rest/class-ucp-checkout-controller.php:125
 msgid "Product SKU."
-msgstr "Ürün SKU'su."
+msgstr "SKU do produto."
 
 #: includes/rest/class-ucp-checkout-controller.php:129
 msgid "Product ID."
-msgstr "Ürün ID'si."
+msgstr "ID do produto."
 
 #: includes/rest/class-ucp-checkout-controller.php:133
 msgid "Variant/variation ID."
-msgstr "Varyant/çeşit ID'si."
+msgstr "ID da variante/variação."
 
 #: includes/rest/class-ucp-checkout-controller.php:137
 msgid "Quantity."
-msgstr "Miktar."
+msgstr "Quantidade."
 
 #: includes/rest/class-ucp-checkout-controller.php:147
 msgid "Shipping address."
-msgstr "Teslimat adresi."
+msgstr "Endereço de entrega."
 
 #: includes/rest/class-ucp-checkout-controller.php:164
 msgid "Billing address."
-msgstr "Fatura adresi."
+msgstr "Endereço de cobrança."
 
 #: includes/rest/class-ucp-checkout-controller.php:169
 msgid "Coupon code to apply."
-msgstr "Uygulanacak kupon kodu."
+msgstr "Código de cupom a aplicar."
 
 #: includes/rest/class-ucp-checkout-controller.php:174
 msgid "Customer note for the order."
-msgstr "Sipariş için müşteri notu."
+msgstr "Nota do cliente para o pedido."
 
 #: includes/rest/class-ucp-checkout-controller.php:189
 msgid "Session ID."
-msgstr "Oturum ID'si."
+msgstr "ID da sessão."
 
 #: includes/rest/class-ucp-checkout-controller.php:195
 msgid "Selected shipping method ID."
-msgstr "Seçilen kargo yöntemi ID'si."
+msgstr "ID do método de envio selecionado."
 
 #: includes/rest/class-ucp-checkout-controller.php:200
 msgid "Payment method ID."
-msgstr "Ödeme yöntemi ID'si."
+msgstr "ID do método de pagamento."
 
 #: includes/rest/class-ucp-order-controller.php:72
 msgid "Order ID."
-msgstr "Sipariş ID'si."
+msgstr "ID do pedido."
 
 #: includes/rest/class-ucp-order-controller.php:133
 msgid "Page number."
-msgstr "Sayfa numarası."
+msgstr "Número da página."
 
 #: includes/rest/class-ucp-order-controller.php:141
 msgid "Items per page."
-msgstr "Sayfa başına öğe."
+msgstr "Itens por página."
 
 #: includes/rest/class-ucp-order-controller.php:157
 msgid "Filter by order status."
-msgstr "Sipariş durumuna göre filtrele."
+msgstr "Filtrar por status do pedido."
 
 #: includes/rest/class-ucp-order-controller.php:163
 msgid "Orders created after this date."
-msgstr "Bu tarihten sonra oluşturulan siparişler."
+msgstr "Pedidos criados após esta data."
 
 #: includes/rest/class-ucp-order-controller.php:169
 msgid "Orders created before this date."
-msgstr "Bu tarihten önce oluşturulan siparişler."
+msgstr "Pedidos criados antes desta data."
 
 #: includes/rest/class-ucp-order-controller.php:175
 msgid "Filter by customer email."
-msgstr "Müşteri e-postasına göre filtrele."
+msgstr "Filtrar por e-mail do cliente."
 
 #: includes/rest/class-ucp-rest-controller.php:46
 #: includes/rest/class-ucp-rest-controller.php:63
 msgid "UCP is currently disabled for this store."
-msgstr "UCP şu anda bu mağaza için devre dışı."
+msgstr "O UCP está atualmente desabilitado para esta loja."
 
 #: admin/partials/settings-page.php:23
 msgid "UCP Status"
-msgstr "UCP Durumu"
+msgstr "Status do UCP"
 
 #: admin/partials/settings-page.php:28
 msgid "Plugin Version"
-msgstr "Eklenti Sürümü"
+msgstr "Versão do plugin"
 
 #: admin/partials/settings-page.php:32
 msgid "Discovery URL"
-msgstr "Keşif URL'si"
+msgstr "URL de descoberta"
 
 #: admin/partials/settings-page.php:36
 msgid "View"
-msgstr "Görüntüle"
+msgstr "Visualizar"
 
 #: admin/partials/settings-page.php:41
 msgid "Signing Key"
-msgstr "İmzalama Anahtarı"
+msgstr "Chave de assinatura"
 
 #: admin/partials/settings-page.php:45
 msgid "Active"
-msgstr "Aktif"
+msgstr "Ativo"
 
 #: admin/partials/settings-page.php:48
 msgid "Key ID:"
-msgstr "Anahtar ID:"
+msgstr "ID da chave:"
 
 #: admin/partials/settings-page.php:53
 msgid "Rotate Key"
-msgstr "Anahtarı Yenile"
+msgstr "Rotacionar chave"
 
 #: admin/partials/settings-page.php:57
 msgid "Not configured"
-msgstr "Yapılandırılmadı"
+msgstr "Não configurado"
 
 #: admin/partials/settings-page.php:62
 msgid "Failed Webhooks"
-msgstr "Başarısız Webhook'lar"
+msgstr "Webhooks com falha"
 
 #. translators: %d: number of failed webhooks
 #: admin/partials/settings-page.php:69
 #, php-format
 msgid "%d failed webhook"
 msgid_plural "%d failed webhooks"
-msgstr[0] "%d başarısız webhook"
-msgstr[1] "%d başarısız webhook"
+msgstr[0] "%d webhook com falha"
+msgstr[1] "%d webhooks com falha"
 
 #: admin/partials/settings-page.php:74
 msgid "Retry All"
-msgstr "Tümünü Yeniden Dene"
+msgstr "Tentar novamente todos"
 
 #: admin/partials/settings-page.php:78
 msgid "No failed webhooks"
-msgstr "Başarısız webhook yok"
+msgstr "Sem webhooks com falha"
 
 #: admin/partials/settings-page.php:97
 msgid "Test Webhook"
-msgstr "Webhook'u Test Et"
+msgstr "Testar webhook"
 
 #: admin/partials/settings-page.php:98
 msgid "Send a test webhook to verify your integration."
-msgstr "Entegrasyonunuzu doğrulamak için test webhook'u gönderin."
+msgstr "Envie um webhook de teste para verificar sua integração."
 
 #: admin/partials/settings-page.php:100
 msgid "Send Test Webhook"
-msgstr "Test Webhook'u Gönder"
+msgstr "Enviar webhook de teste"
 
 #: admin/partials/settings-page.php:107
 msgid "Documentation"
-msgstr "Dokümantasyon"
+msgstr "Documentação"
 
 #: admin/partials/settings-page.php:109
 msgid "Learn more about the Universal Commerce Protocol:"
-msgstr "Universal Commerce Protocol hakkında daha fazla bilgi edinin:"
+msgstr "Saiba mais sobre o Universal Commerce Protocol:"
 
 #: admin/partials/settings-page.php:114
 msgid "UCP Specification"
-msgstr "UCP Spesifikasyonu"
+msgstr "Especificação UCP"
 
 #: admin/partials/settings-page.php:119
 msgid "Checkout REST Binding"
-msgstr "Checkout REST Bağlaması"
+msgstr "Vinculação REST do Checkout"
 
 #: admin/partials/settings-page.php:124
 msgid "Order Capability"
-msgstr "Sipariş Yeteneği"
+msgstr "Capacidade de pedidos"
 
 #: admin/class-ucp-admin.php:52
 msgid "UCP Settings"
-msgstr "UCP Ayarları"
+msgstr "Configurações do UCP"
 
 #: admin/class-ucp-admin.php:53
 msgid "UCP"
@@ -308,219 +308,219 @@ msgstr "UCP"
 
 #: admin/class-ucp-admin.php:67
 msgid "General Settings"
-msgstr "Genel Ayarlar"
+msgstr "Configurações gerais"
 
 #: admin/class-ucp-admin.php:84
 msgid "Enable UCP"
-msgstr "UCP'yi Etkinleştir"
+msgstr "Habilitar UCP"
 
 #: admin/class-ucp-admin.php:90
 msgid "Enable Universal Commerce Protocol integration"
-msgstr "Universal Commerce Protocol entegrasyonunu etkinleştir"
+msgstr "Habilitar integração com Universal Commerce Protocol"
 
 #: admin/class-ucp-admin.php:91
 msgid "When enabled, your store will be discoverable by AI agents."
-msgstr "Etkinleştirildiğinde, mağazanız yapay zeka ajanları tarafından keşfedilebilir olacaktır."
+msgstr "Quando habilitado, sua loja será descoberta por agentes de IA."
 
 #: admin/class-ucp-admin.php:107
 msgid "Guest Checkout"
-msgstr "Misafir Ödemesi"
+msgstr "Checkout como visitante"
 
 #: admin/class-ucp-admin.php:113
 msgid "Allow guest checkout via UCP"
-msgstr "UCP üzerinden misafir ödemesine izin ver"
+msgstr "Permitir checkout como visitante via UCP"
 
 #: admin/class-ucp-admin.php:114
 msgid "Required for agent purchases without identity linking."
-msgstr "Kimlik bağlama olmadan ajan satın alımları için gereklidir."
+msgstr "Necessário para compras de agentes sem vinculação de identidade."
 
 #: admin/class-ucp-admin.php:121
 msgid "Webhook Settings"
-msgstr "Webhook Ayarları"
+msgstr "Configurações de webhook"
 
 #: admin/class-ucp-admin.php:138
 msgid "Webhook URL"
-msgstr "Webhook URL'si"
+msgstr "URL do webhook"
 
 #: admin/class-ucp-admin.php:147
 msgid "Debug Settings"
-msgstr "Hata Ayıklama Ayarları"
+msgstr "Configurações de depuração"
 
 #: admin/class-ucp-admin.php:164
 msgid "Debug Logging"
-msgstr "Hata Ayıklama Günlüğü"
+msgstr "Log de depuração"
 
 #: admin/class-ucp-admin.php:170
 msgid "Enable debug logging"
-msgstr "Hata ayıklama günlüğünü etkinleştir"
+msgstr "Habilitar log de depuração"
 
 #: admin/class-ucp-admin.php:171
 msgid "Log UCP requests and responses to the error log."
-msgstr "UCP istek ve yanıtlarını hata günlüğüne kaydet."
+msgstr "Registrar solicitações e respostas do UCP no log de erros."
 
 #: admin/class-ucp-admin.php:201
 msgid "Please enter a valid webhook URL."
-msgstr "Lütfen geçerli bir webhook URL'si girin."
+msgstr "Por favor, insira uma URL de webhook válida."
 
 #: admin/class-ucp-admin.php:240
 msgid ""
 "Are you sure you want to rotate the signing key? This will invalidate any "
 "existing webhook integrations."
 msgstr ""
-"İmzalama anahtarını yenilemek istediğinizden emin misiniz? Bu, mevcut tüm "
-"webhook entegrasyonlarını geçersiz kılacaktır."
+"Tem certeza de que deseja rotacionar a chave de assinatura? Isso invalidará "
+"todas as integrações de webhook existentes."
 
 #: admin/class-ucp-admin.php:241
 msgid "Rotating..."
-msgstr "Yenileniyor..."
+msgstr "Rotacionando..."
 
 #: admin/class-ucp-admin.php:242
 msgid "Testing..."
-msgstr "Test ediliyor..."
+msgstr "Testando..."
 
 #: admin/class-ucp-admin.php:243
 msgid "Retrying..."
-msgstr "Yeniden deneniyor..."
+msgstr "Tentando novamente..."
 
 #: admin/class-ucp-admin.php:244
 msgid "Success!"
-msgstr "Başarılı!"
+msgstr "Sucesso!"
 
 #: admin/class-ucp-admin.php:245
 msgid "Error:"
-msgstr "Hata:"
+msgstr "Erro:"
 
 #: admin/class-ucp-admin.php:256
 msgid "You do not have permission to access this page."
-msgstr "Bu sayfaya erişim izniniz yok."
+msgstr "Você não tem permissão para acessar esta página."
 
 #: admin/class-ucp-admin.php:266
 msgid "Configure general UCP settings for your store."
-msgstr "Mağazanız için genel UCP ayarlarını yapılandırın."
+msgstr "Configure as configurações gerais do UCP para sua loja."
 
 #: admin/class-ucp-admin.php:275
 msgid ""
 "Webhooks allow your store to send real-time order event notifications to "
 "external platforms."
 msgstr ""
-"Webhook'lar mağazanızın harici platformlara gerçek zamanlı sipariş olayı "
-"bildirimleri göndermesini sağlar."
+"Webhooks permitem que sua loja envie notificações de eventos de pedidos "
+"em tempo real para plataformas externas."
 
 #: admin/class-ucp-admin.php:276
 msgid "This is optional."
-msgstr "Bu isteğe bağlıdır."
+msgstr "Isso é opcional."
 
 #: admin/class-ucp-admin.php:276
 msgid "Leave blank if you only need the checkout and order REST APIs."
-msgstr "Yalnızca checkout ve sipariş REST API'lerine ihtiyacınız varsa boş bırakın."
+msgstr "Deixe em branco se você só precisa das APIs REST de checkout e pedidos."
 
 #: admin/class-ucp-admin.php:285
 msgid "Debug and troubleshooting options."
-msgstr "Hata ayıklama ve sorun giderme seçenekleri."
+msgstr "Opções de depuração e solução de problemas."
 
 #: admin/class-ucp-admin.php:342
 msgid "The external URL where order events will be sent via HTTP POST."
-msgstr "Sipariş olaylarının HTTP POST ile gönderileceği harici URL."
+msgstr "A URL externa para onde os eventos de pedidos serão enviados via HTTP POST."
 
 #: admin/class-ucp-admin.php:346
 msgid "Who provides this URL?"
-msgstr "Bu URL'yi kim sağlar?"
+msgstr "Quem fornece esta URL?"
 
 #: admin/class-ucp-admin.php:348
 msgid "AI Agent Platform:"
-msgstr "Yapay Zeka Ajan Platformu:"
+msgstr "Plataforma de agentes de IA:"
 
 #: admin/class-ucp-admin.php:348
 msgid ""
 "The platform integrating with your store provides a callback URL to receive "
 "order updates."
 msgstr ""
-"Mağazanızla entegre olan platform, sipariş güncellemelerini almak için bir "
-"geri çağırma URL'si sağlar."
+"A plataforma que integra com sua loja fornece uma URL de callback para "
+"receber atualizações de pedidos."
 
 #: admin/class-ucp-admin.php:349
 msgid "Your Backend:"
-msgstr "Arka Ucunuz:"
+msgstr "Seu backend:"
 
 #: admin/class-ucp-admin.php:349
 msgid "Create an endpoint on your own server to process order events."
-msgstr "Sipariş olaylarını işlemek için kendi sunucunuzda bir uç nokta oluşturun."
+msgstr "Crie um endpoint em seu próprio servidor para processar eventos de pedidos."
 
 #: admin/class-ucp-admin.php:350
 msgid "Integration Services:"
-msgstr "Entegrasyon Hizmetleri:"
+msgstr "Serviços de integração:"
 
 #: admin/class-ucp-admin.php:350
 msgid "Use services like Zapier, Make, or n8n to receive webhooks."
-msgstr "Webhook'ları almak için Zapier, Make veya n8n gibi hizmetleri kullanın."
+msgstr "Use serviços como Zapier, Make ou n8n para receber webhooks."
 
 #: admin/class-ucp-admin.php:351
 msgid "Testing:"
-msgstr "Test:"
+msgstr "Testes:"
 
 #: admin/class-ucp-admin.php:351
 msgid ""
 "Use webhook.site or requestbin.com to inspect webhook payloads during "
 "development."
 msgstr ""
-"Geliştirme sırasında webhook yüklerini incelemek için webhook.site veya "
-"requestbin.com kullanın."
+"Use webhook.site ou requestbin.com para inspecionar payloads de webhook "
+"durante o desenvolvimento."
 
 #: admin/class-ucp-admin.php:354
 msgid "Events sent to this URL:"
-msgstr "Bu URL'ye gönderilen olaylar:"
+msgstr "Eventos enviados para esta URL:"
 
 #: admin/class-ucp-admin.php:356
 msgid "When a new order is placed via UCP"
-msgstr "UCP üzerinden yeni bir sipariş verildiğinde"
+msgstr "Quando um novo pedido é feito via UCP"
 
 #: admin/class-ucp-admin.php:357
 msgid "When order status changes (e.g., pending to processing)"
-msgstr "Sipariş durumu değiştiğinde (ör. beklemede'den işleniyor'a)"
+msgstr "Quando o status do pedido muda (ex.: pendente para processando)"
 
 #: admin/class-ucp-admin.php:358
 msgid "When payment is completed"
-msgstr "Ödeme tamamlandığında"
+msgstr "Quando o pagamento é concluído"
 
 #: admin/class-ucp-admin.php:359
 msgid "When a refund is issued"
-msgstr "İade yapıldığında"
+msgstr "Quando um reembolso é emitido"
 
 #: admin/class-ucp-admin.php:362
 msgid ""
 "All webhooks are signed with HMAC-SHA256 for security. The signing key is "
 "shown in the Status panel above."
 msgstr ""
-"Tüm webhook'lar güvenlik için HMAC-SHA256 ile imzalanır. İmzalama anahtarı "
-"yukarıdaki Durum panelinde gösterilir."
+"Todos os webhooks são assinados com HMAC-SHA256 para segurança. A chave "
+"de assinatura é mostrada no painel de status acima."
 
 #: admin/class-ucp-admin.php:374 admin/class-ucp-admin.php:395
 #: admin/class-ucp-admin.php:429
 msgid "Permission denied."
-msgstr "İzin reddedildi."
+msgstr "Permissão negada."
 
 #: admin/class-ucp-admin.php:382
 msgid "Signing key rotated successfully."
-msgstr "İmzalama anahtarı başarıyla yenilendi."
+msgstr "Chave de assinatura rotacionada com sucesso."
 
 #: admin/class-ucp-admin.php:401
 msgid "No webhook URL configured."
-msgstr "Webhook URL'si yapılandırılmadı."
+msgstr "Nenhuma URL de webhook configurada."
 
 #: admin/class-ucp-admin.php:419
 msgid "Test webhook sent successfully."
-msgstr "Test webhook'u başarıyla gönderildi."
+msgstr "Webhook de teste enviado com sucesso."
 
 #. translators: 1: success count, 2: failed count
 #: admin/class-ucp-admin.php:442
 #, php-format
 msgid "Retry complete. %1$d succeeded, %2$d failed."
-msgstr "Yeniden deneme tamamlandı. %1$d başarılı, %2$d başarısız."
+msgstr "Tentativa concluída. %1$d bem-sucedidos, %2$d com falha."
 
 #: admin/class-ucp-admin.php:479
 msgid "Unknown"
-msgstr "Bilinmiyor"
+msgstr "Desconhecido"
 
-#: ucp-for-woocommerce.php:56
+#: harmonytics-ucp-connector-for-woocommerce.php:56
 msgid "WooCommerce UCP requires WooCommerce to be installed and active."
-msgstr "WooCommerce UCP, WooCommerce'in kurulu ve etkin olmasını gerektirir."
+msgstr "O WooCommerce UCP requer que o WooCommerce esteja instalado e ativo."

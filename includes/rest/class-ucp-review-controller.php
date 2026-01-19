@@ -69,7 +69,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 						'review_id' => array(
 							'required'          => true,
 							'type'              => 'integer',
-							'description'       => __( 'Review ID.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description'       => __( 'Review ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 							'sanitize_callback' => 'absint',
 						),
 					),
@@ -118,7 +118,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 						'product_id' => array(
 							'required'          => true,
 							'type'              => 'integer',
-							'description'       => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description'       => __( 'Product ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 							'sanitize_callback' => 'absint',
 						),
 					),
@@ -139,7 +139,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'integer',
 				'default'           => 1,
 				'minimum'           => 1,
-				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'per_page'   => array(
@@ -148,13 +148,13 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				'default'           => 10,
 				'minimum'           => 1,
 				'maximum'           => 100,
-				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'product_id' => array(
 				'required'          => false,
 				'type'              => 'integer',
-				'description'       => __( 'Filter by product ID.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Filter by product ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'rating'     => array(
@@ -162,34 +162,34 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'integer',
 				'minimum'           => 1,
 				'maximum'           => 5,
-				'description'       => __( 'Filter by rating (1-5).', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Filter by rating (1-5).', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'verified'   => array(
 				'required'    => false,
 				'type'        => 'boolean',
-				'description' => __( 'Filter verified purchases only.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Filter verified purchases only.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'status'     => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'approved', 'pending', 'spam', 'any' ),
 				'default'     => 'approved',
-				'description' => __( 'Filter by review status.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Filter by review status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'orderby'    => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'date', 'rating', 'id' ),
 				'default'     => 'date',
-				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'order'      => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'asc', 'desc' ),
 				'default'     => 'desc',
-				'description' => __( 'Order sort direction.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Order sort direction.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 		);
 	}
@@ -204,7 +204,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		$args['product_id'] = array(
 			'required'          => true,
 			'type'              => 'integer',
-			'description'       => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
+			'description'       => __( 'Product ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			'sanitize_callback' => 'absint',
 		);
 		return $args;
@@ -220,26 +220,26 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 			'product_id'     => array(
 				'required'          => true,
 				'type'              => 'integer',
-				'description'       => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Product ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 			'reviewer'       => array(
 				'required'          => true,
 				'type'              => 'string',
-				'description'       => __( 'Reviewer name.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Reviewer name.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 			'reviewer_email' => array(
 				'required'          => true,
 				'type'              => 'string',
 				'format'            => 'email',
-				'description'       => __( 'Reviewer email address.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Reviewer email address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_email',
 			),
 			'review'         => array(
 				'required'          => true,
 				'type'              => 'string',
-				'description'       => __( 'Review content.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Review content.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_textarea_field',
 			),
 			'rating'         => array(
@@ -247,7 +247,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				'type'              => 'integer',
 				'minimum'           => 1,
 				'maximum'           => 5,
-				'description'       => __( 'Rating (1-5).', 'harmonytics-ucp-connector-woocommerce' ),
+				'description'       => __( 'Rating (1-5).', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
 		);
@@ -320,7 +320,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		if ( ! $comment ) {
 			return $this->error_response(
 				'review_not_found',
-				__( 'Review not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Review not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}
@@ -329,7 +329,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		if ( 'review' !== $comment->comment_type && 'product' !== get_post_type( $comment->comment_post_ID ) ) {
 			return $this->error_response(
 				'not_product_review',
-				__( 'The requested comment is not a product review.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'The requested comment is not a product review.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}
@@ -339,7 +339,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 			if ( ! current_user_can( 'moderate_comments' ) ) {
 				return $this->error_response(
 					'review_not_accessible',
-					__( 'Review is not accessible.', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'Review is not accessible.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					404
 				);
 			}
@@ -367,7 +367,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		if ( ! $product ) {
 			return $this->error_response(
 				'product_not_found',
-				__( 'Product not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Product not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}
@@ -376,7 +376,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		if ( ! $product->get_reviews_allowed() ) {
 			return $this->error_response(
 				'reviews_disabled',
-				__( 'Reviews are not enabled for this product.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Reviews are not enabled for this product.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				403
 			);
 		}
@@ -386,7 +386,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		if ( $rating < 1 || $rating > 5 ) {
 			return $this->error_response(
 				'invalid_rating',
-				__( 'Rating must be between 1 and 5.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Rating must be between 1 and 5.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				400
 			);
 		}
@@ -421,7 +421,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 			if ( ! $allow_duplicates ) {
 				return $this->error_response(
 					'duplicate_review',
-					__( 'You have already reviewed this product.', 'harmonytics-ucp-connector-woocommerce' ),
+					__( 'You have already reviewed this product.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					409
 				);
 			}
@@ -433,7 +433,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		if ( ! $comment_id ) {
 			return $this->error_response(
 				'review_creation_failed',
-				__( 'Failed to create review.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Failed to create review.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				500
 			);
 		}
@@ -456,7 +456,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 
 		// Add moderation notice if applicable.
 		if ( '0' === $comment->comment_approved || 'hold' === $comment->comment_approved ) {
-			$mapped_review['_notice'] = __( 'Your review is pending moderation.', 'harmonytics-ucp-connector-woocommerce' );
+			$mapped_review['_notice'] = __( 'Your review is pending moderation.', 'harmonytics-ucp-connector-for-woocommerce' );
 		}
 
 		return $this->success_response( $mapped_review, 201 );
@@ -479,7 +479,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		if ( ! $product ) {
 			return $this->error_response(
 				'product_not_found',
-				__( 'Product not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Product not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}
@@ -507,7 +507,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		if ( ! $product ) {
 			return $this->error_response(
 				'product_not_found',
-				__( 'Product not found.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Product not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				404
 			);
 		}

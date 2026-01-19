@@ -34,8 +34,8 @@ The [Universal Commerce Protocol](https://ucp.dev) is an open standard that enab
 
 ```bash
 cd wp-content/plugins/
-git clone https://github.com/harmonytics/ucp-for-woocommerce.git
-cd ucp-for-woocommerce
+git clone https://github.com/harmonytics/harmonytics-ucp-connector-for-woocommerce.git
+cd harmonytics-ucp-connector-for-woocommerce
 composer install --no-dev
 ```
 
@@ -259,8 +259,8 @@ All webhooks are signed with HMAC-SHA256. Verify the `X-UCP-Signature` header.
 ### Setup
 
 ```bash
-git clone https://github.com/harmonytics/ucp-for-woocommerce.git
-cd ucp-for-woocommerce
+git clone https://github.com/harmonytics/harmonytics-ucp-connector-for-woocommerce.git
+cd harmonytics-ucp-connector-for-woocommerce
 composer install
 ```
 
@@ -307,8 +307,8 @@ composer plugin-check
 ## Documentation
 
 - [UCP Specification](https://ucp.dev/specification/overview/)
-- [Plugin Documentation](https://harmonytics.com/plugins/ucp-for-woocommerce/docs)
-- [GitHub Wiki](https://github.com/harmonytics/ucp-for-woocommerce/wiki)
+- [Plugin Documentation](https://harmonytics.com/plugins/harmonytics-ucp-connector-for-woocommerce/docs)
+- [GitHub Wiki](https://github.com/harmonytics/harmonytics-ucp-connector-for-woocommerce/wiki)
 
 ## Contributing
 
@@ -316,7 +316,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/harmonytics/ucp-for-woocommerce/issues)
+- **Issues:** [GitHub Issues](https://github.com/harmonytics/harmonytics-ucp-connector-for-woocommerce/issues)
 - **Email:** support@harmonytics.com
 - **Website:** [harmonytics.com/support](https://harmonytics.com/support)
 
@@ -328,4 +328,4 @@ GPL-2.0-or-later. See [LICENSE](LICENSE) for details.
 
 Developed by [Harmonytics OÜ](https://harmonytics.com)
 
-UCP for WooCommerce implements the [Universal Commerce Protocol](https://ucp.dev) specification.
+Harmonytics UCP Connector for WooCommerce implements the [Universal Commerce Protocol](https://ucp.dev) specification.

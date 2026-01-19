@@ -93,24 +93,24 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 			'items'       => array(
 				'required'    => true,
 				'type'        => 'array',
-				'description' => __( 'Array of items to calculate shipping for.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Array of items to calculate shipping for.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'items'       => array(
 					'type'       => 'object',
 					'properties' => array(
 						'product_id' => array(
 							'type'        => 'integer',
-							'description' => __( 'Product ID.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description' => __( 'Product ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 							'required'    => true,
 						),
 						'quantity'   => array(
 							'type'        => 'integer',
-							'description' => __( 'Quantity.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description' => __( 'Quantity.', 'harmonytics-ucp-connector-for-woocommerce' ),
 							'default'     => 1,
 							'minimum'     => 1,
 						),
 						'variant_id' => array(
 							'type'        => 'integer',
-							'description' => __( 'Variation ID for variable products.', 'harmonytics-ucp-connector-woocommerce' ),
+							'description' => __( 'Variation ID for variable products.', 'harmonytics-ucp-connector-for-woocommerce' ),
 						),
 					),
 				),
@@ -118,24 +118,24 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 			'destination' => array(
 				'required'    => true,
 				'type'        => 'object',
-				'description' => __( 'Shipping destination address.', 'harmonytics-ucp-connector-woocommerce' ),
+				'description' => __( 'Shipping destination address.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'properties'  => array(
 					'country'  => array(
 						'type'        => 'string',
-						'description' => __( 'Country code (ISO 3166-1 alpha-2).', 'harmonytics-ucp-connector-woocommerce' ),
+						'description' => __( 'Country code (ISO 3166-1 alpha-2).', 'harmonytics-ucp-connector-for-woocommerce' ),
 						'required'    => true,
 					),
 					'state'    => array(
 						'type'        => 'string',
-						'description' => __( 'State/province code.', 'harmonytics-ucp-connector-woocommerce' ),
+						'description' => __( 'State/province code.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					),
 					'postcode' => array(
 						'type'        => 'string',
-						'description' => __( 'Postal/ZIP code.', 'harmonytics-ucp-connector-woocommerce' ),
+						'description' => __( 'Postal/ZIP code.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					),
 					'city'     => array(
 						'type'        => 'string',
-						'description' => __( 'City name.', 'harmonytics-ucp-connector-woocommerce' ),
+						'description' => __( 'City name.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					),
 				),
 			),
@@ -164,7 +164,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 		if ( empty( $items ) || ! is_array( $items ) ) {
 			return $this->error_response(
 				'invalid_items',
-				__( 'Items array is required and must not be empty.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Items array is required and must not be empty.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				400
 			);
 		}
@@ -173,7 +173,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 		if ( empty( $destination ) || empty( $destination['country'] ) ) {
 			return $this->error_response(
 				'invalid_destination',
-				__( 'Destination with country is required.', 'harmonytics-ucp-connector-woocommerce' ),
+				__( 'Destination with country is required.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				400
 			);
 		}
@@ -198,7 +198,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 					'product_not_found',
 					sprintf(
 						/* translators: %d: Product ID */
-						__( 'Product with ID %d not found.', 'harmonytics-ucp-connector-woocommerce' ),
+						__( 'Product with ID %d not found.', 'harmonytics-ucp-connector-for-woocommerce' ),
 						$product_to_use_id
 					),
 					404
@@ -211,7 +211,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 					'product_not_purchasable',
 					sprintf(
 						/* translators: %s: Product name */
-						__( 'Product "%s" is not purchasable.', 'harmonytics-ucp-connector-woocommerce' ),
+						__( 'Product "%s" is not purchasable.', 'harmonytics-ucp-connector-for-woocommerce' ),
 						$product->get_name()
 					),
 					400
@@ -259,7 +259,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 					'package_details' => array(
 						'weight'      => '0',
 						'weight_unit' => get_option( 'woocommerce_weight_unit', 'kg' ),
-						'note'        => __( 'All products are virtual and do not require shipping.', 'harmonytics-ucp-connector-woocommerce' ),
+						'note'        => __( 'All products are virtual and do not require shipping.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					),
 				)
 			);
