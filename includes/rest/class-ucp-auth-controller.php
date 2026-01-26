@@ -91,6 +91,10 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 		);
 
 		// POST /auth/verify - Verify an API key and get permissions.
+		// This endpoint is intentionally public (check_public_read_permission) because:
+		// 1. It allows clients to test if their credentials are valid (similar to OAuth2 token introspection)
+		// 2. The API key to verify is provided in the request body or Authorization header
+		// 3. No sensitive data is exposed without providing valid credentials.
 		register_rest_route(
 			$this->namespace,
 			'/' . $this->rest_base . '/verify',
@@ -98,7 +102,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'verify_api_key' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => array(
 						'api_key' => array(
 							'required'          => false,

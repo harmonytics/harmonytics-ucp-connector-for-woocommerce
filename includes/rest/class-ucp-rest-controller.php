@@ -33,29 +33,22 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
 	}
 
 	/**
-	 * Permission callback for read endpoints.
+	 * Check if UCP integration is enabled and return appropriate response.
+	 *
+	 * IMPORTANT: This is NOT a permission/authorization check. It only verifies
+	 * the UCP feature is enabled. This method should NOT be used directly as
+	 * a permission_callback for REST routes.
+	 *
+	 * For route permission callbacks, use one of these methods instead:
+	 * - check_authenticated_read()  - requires API key with read permission
+	 * - check_authenticated_write() - requires API key with write permission
+	 * - check_admin_permission()    - requires API key with admin permission
+	 * - check_public_read_permission() - for intentionally public endpoints
 	 *
 	 * @param WP_REST_Request $request Request object.
-	 * @return bool|WP_Error
+	 * @return bool|WP_Error True if enabled, WP_Error if disabled.
 	 */
-	public function check_read_permission( $request ) {
-		if ( ! $this->is_ucp_enabled() ) {
-			return new WP_Error(
-				'ucp_disabled',
-				__( 'UCP is currently disabled for this store.', 'harmonytics-ucp-connector-for-woocommerce' ),
-				array( 'status' => 503 )
-			);
-		}
-		return true;
-	}
-
-	/**
-	 * Permission callback for write endpoints.
-	 *
-	 * @param WP_REST_Request $request Request object.
-	 * @return bool|WP_Error
-	 */
-	public function check_write_permission( $request ) {
+	protected function check_ucp_enabled( $request ) {
 		if ( ! $this->is_ucp_enabled() ) {
 			return new WP_Error(
 				'ucp_disabled',
