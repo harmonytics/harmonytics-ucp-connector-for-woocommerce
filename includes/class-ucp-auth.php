@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Authentication handler for UCP API keys.
  *
@@ -99,11 +98,11 @@ class UCP_WC_Auth {
 			return $user_id;
 		}
 
-        // Store the authenticated key data.
-        self::$current_api_key = $key_data;
+		// Store the authenticated key data.
+		self::$current_api_key = $key_data;
 
-        // Update last used timestamp and invalidate caches.
-        $this->update_last_used( $key_data['id'], isset( $key_data['key_id'] ) ? $key_data['key_id'] : null );
+		// Update last used timestamp and invalidate caches.
+		$this->update_last_used( $key_data['id'], isset( $key_data['key_id'] ) ? $key_data['key_id'] : null );
 
 		// Return the user ID associated with the key, or a fallback admin user.
 		if ( ! empty( $key_data['user_id'] ) ) {
@@ -176,7 +175,7 @@ class UCP_WC_Auth {
 		// Fall back to query parameter.
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- API key authentication, not form submission.
 		if ( ! empty( $_GET[ self::QUERY_PARAM ] ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended.
 			return sanitize_text_field( wp_unslash( $_GET[ self::QUERY_PARAM ] ) );
 		}
 
@@ -257,7 +256,7 @@ class UCP_WC_Auth {
 	 * @return bool
 	 */
 	public static function is_api_key_authenticated() {
-		return self::$current_api_key !== null;
+		return null !== self::$current_api_key;
 	}
 
 	/**
@@ -608,28 +607,28 @@ class UCP_WC_Auth {
 	/**
 	 * Update the last used timestamp for a key.
 	 *
-     * @param int         $key_db_id Database ID of the key.
-     * @param string|null $key_id    Optional public key_id for cache invalidation.
-     */
-    private function update_last_used( $key_db_id, $key_id = null ) {
-        global $wpdb;
+	 * @param int         $key_db_id Database ID of the key.
+	 * @param string|null $key_id    Optional public key_id for cache invalidation.
+	 */
+	private function update_last_used( $key_db_id, $key_id = null ) {
+		global $wpdb;
 
-        $table_name = $wpdb->prefix . self::TABLE_NAME;
+		$table_name = $wpdb->prefix . self::TABLE_NAME;
 
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table, timestamp update doesn't require cache invalidation.
-        $wpdb->update(
-            $table_name,
-            array( 'last_used_at' => current_time( 'mysql' ) ),
-            array( 'id' => $key_db_id ),
-            array( '%s' ),
-            array( '%d' )
-        );
+		$wpdb->update(
+			$table_name,
+			array( 'last_used_at' => current_time( 'mysql' ) ),
+			array( 'id' => $key_db_id ),
+			array( '%s' ),
+			array( '%d' )
+		);
 
-        // Invalidate cached key info so subsequent reads get the updated timestamp.
-        if ( $key_id ) {
-            $this->invalidate_key_cache( $key_id );
-        }
-    }
+		// Invalidate cached key info so subsequent reads get the updated timestamp.
+		if ( $key_id ) {
+			$this->invalidate_key_cache( $key_id );
+		}
+	}
 
 	/**
 	 * Invalidate cache for a specific API key.

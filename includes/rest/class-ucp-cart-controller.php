@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * REST controller for cart endpoints.
  *
@@ -50,7 +49,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'create_cart' ),
-					'permission_callback' => array( $this, 'check_write_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_write' ),
 					'args'                => $this->get_create_cart_args(),
 				),
 			)
@@ -64,7 +63,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_cart' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_read' ),
 					'args'                => array(
 						'cart_id' => array(
 							'required'          => true,
@@ -86,7 +85,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_cart' ),
-					'permission_callback' => array( $this, 'check_write_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_write' ),
 					'args'                => array(
 						'cart_id' => array(
 							'required'          => true,
@@ -108,7 +107,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'add_item' ),
-					'permission_callback' => array( $this, 'check_write_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_write' ),
 					'args'                => $this->get_add_item_args(),
 				),
 			)
@@ -122,7 +121,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::EDITABLE,
 					'callback'            => array( $this, 'update_item' ),
-					'permission_callback' => array( $this, 'check_write_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_write' ),
 					'args'                => $this->get_update_item_args(),
 				),
 			)
@@ -136,7 +135,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'remove_item' ),
-					'permission_callback' => array( $this, 'check_write_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_write' ),
 					'args'                => array(
 						'cart_id'  => array(
 							'required'          => true,
@@ -165,7 +164,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'checkout' ),
-					'permission_callback' => array( $this, 'check_write_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_write' ),
 					'args'                => $this->get_checkout_args(),
 				),
 			)
@@ -429,7 +428,13 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 			);
 		}
 
-		$this->log( 'Adding item to cart', array( 'cart_id' => $cart_id, 'item' => $item ) );
+		$this->log(
+			'Adding item to cart',
+			array(
+				'cart_id' => $cart_id,
+				'item'    => $item,
+			)
+		);
 
 		$result = $this->cart->add_item( $cart_id, $item );
 

@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * REST controller for customer endpoints.
  *
@@ -50,7 +49,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'create_customer' ),
-					'permission_callback' => array( $this, 'check_write_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_write' ),
 					'args'                => $this->get_create_customer_args(),
 				),
 			)
@@ -196,9 +195,9 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 				'sanitize_callback' => 'sanitize_user',
 			),
 			'password'         => array(
-				'required'          => false,
-				'type'              => 'string',
-				'description'       => __( 'Customer password.', 'harmonytics-ucp-connector-for-woocommerce' ),
+				'required'    => false,
+				'type'        => 'string',
+				'description' => __( 'Customer password.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
 			'billing_address'  => array(
 				'required'    => false,
@@ -753,7 +752,13 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 		$set_default = $request->get_param( 'set_default' );
 		$address     = $request->get_param( 'address' );
 
-		$this->log( 'Adding customer address', array( 'customer_id' => $customer_id, 'type' => $type ) );
+		$this->log(
+			'Adding customer address',
+			array(
+				'customer_id' => $customer_id,
+				'type'        => $type,
+			)
+		);
 
 		try {
 			$customer = new WC_Customer( $customer_id );
@@ -815,8 +820,8 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 					$additional_addresses = array();
 				}
 
-				$wc_address['type']  = $type;
-				$wc_address['label'] = $label;
+				$wc_address['type']     = $type;
+				$wc_address['label']    = $label;
 				$additional_addresses[] = $wc_address;
 
 				$customer->update_meta_data( '_ucp_additional_addresses', $additional_addresses );
@@ -824,7 +829,13 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 
 			$customer->save();
 
-			$this->log( 'Address added', array( 'customer_id' => $customer_id, 'type' => $type ) );
+			$this->log(
+				'Address added',
+				array(
+					'customer_id' => $customer_id,
+					'type'        => $type,
+				)
+			);
 
 			// Return updated addresses list.
 			$addresses = $this->mapper->get_customer_addresses( $customer );

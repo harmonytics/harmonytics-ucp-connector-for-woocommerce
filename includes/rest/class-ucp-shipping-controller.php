@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * REST controller for shipping endpoints.
  *
@@ -50,7 +49,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'calculate_rates' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_calculate_rates_args(),
 				),
 			)
@@ -64,7 +63,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'list_zones' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_read' ),
 				),
 			)
 		);
@@ -77,7 +76,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'list_methods' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 				),
 			)
 		);
@@ -223,7 +222,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 				continue;
 			}
 
-			$line_total = $product->get_price() * $quantity;
+			$line_total     = $product->get_price() * $quantity;
 			$contents_cost += $line_total;
 
 			// Add product weight.
@@ -247,7 +246,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 				'line_tax'          => 0,
 			);
 
-			$line_number++;
+			++$line_number;
 		}
 
 		// If all products are virtual, return empty rates.
@@ -359,9 +358,9 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 	public function list_methods( $request ) {
 		$this->log( 'Listing shipping methods' );
 
-		$shipping        = WC()->shipping();
-		$methods         = $shipping->get_shipping_methods();
-		$mapped_methods  = array();
+		$shipping       = WC()->shipping();
+		$methods        = $shipping->get_shipping_methods();
+		$mapped_methods = array();
 
 		foreach ( $methods as $method_id => $method ) {
 			$mapped_methods[] = $this->shipping_mapper->map_shipping_method_info( $method );

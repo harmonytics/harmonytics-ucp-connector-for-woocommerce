@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * REST controller for coupon endpoints.
  *
@@ -50,7 +49,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'validate_coupon' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_validate_args(),
 				),
 			)
@@ -64,7 +63,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'calculate_discount' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_calculate_args(),
 				),
 			)
@@ -78,7 +77,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'list_active_coupons' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_list_active_args(),
 				),
 			)
@@ -235,7 +234,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 
 		if ( is_wp_error( $validation_result ) ) {
 			// Return coupon data with valid=false and error details.
-			$response = $this->coupon_mapper->map_coupon_validation( $coupon, false );
+			$response          = $this->coupon_mapper->map_coupon_validation( $coupon, false );
 			$response['error'] = array(
 				'code'    => $validation_result->get_error_code(),
 				'message' => $validation_result->get_error_message(),
@@ -301,8 +300,8 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		// Calculate subtotal before discount.
 		$subtotal_before = 0;
 		foreach ( $items as $item ) {
-			$price    = isset( $item['price'] ) ? floatval( $item['price'] ) : 0;
-			$quantity = isset( $item['quantity'] ) ? absint( $item['quantity'] ) : 1;
+			$price            = isset( $item['price'] ) ? floatval( $item['price'] ) : 0;
+			$quantity         = isset( $item['quantity'] ) ? absint( $item['quantity'] ) : 1;
 			$subtotal_before += $price * $quantity;
 		}
 
@@ -344,7 +343,13 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		$page     = $request->get_param( 'page' );
 		$per_page = $request->get_param( 'per_page' );
 
-		$this->log( 'Listing active coupons', array( 'page' => $page, 'per_page' => $per_page ) );
+		$this->log(
+			'Listing active coupons',
+			array(
+				'page'     => $page,
+				'per_page' => $per_page,
+			)
+		);
 
 		// Check if public coupons feature is enabled.
 		if ( get_option( 'ucp_wc_public_coupons', 'no' ) !== 'yes' ) {
@@ -514,10 +519,10 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 
 		// Validate product restrictions if items provided.
 		if ( ! empty( $items ) && is_array( $items ) ) {
-			$product_ids           = $coupon->get_product_ids();
-			$excluded_product_ids  = $coupon->get_excluded_product_ids();
-			$product_categories    = $coupon->get_product_categories();
-			$excluded_categories   = $coupon->get_excluded_product_categories();
+			$product_ids          = $coupon->get_product_ids();
+			$excluded_product_ids = $coupon->get_excluded_product_ids();
+			$product_categories   = $coupon->get_product_categories();
+			$excluded_categories  = $coupon->get_excluded_product_categories();
 
 			$has_restrictions = ! empty( $product_ids ) || ! empty( $product_categories );
 			$valid_item_found = false;
@@ -589,17 +594,19 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		$used_by = $coupon->get_used_by();
 
 		if ( ! empty( $used_by ) ) {
-			return count( array_filter(
-				$used_by,
-				function ( $user ) use ( $email ) {
-					// Could be user ID or email.
-					if ( is_numeric( $user ) ) {
-						$user_data = get_userdata( $user );
-						return $user_data && strtolower( $user_data->user_email ) === strtolower( $email );
+			return count(
+				array_filter(
+					$used_by,
+					function ( $user ) use ( $email ) {
+						// Could be user ID or email.
+						if ( is_numeric( $user ) ) {
+							$user_data = get_userdata( $user );
+							return $user_data && strtolower( $user_data->user_email ) === strtolower( $email );
+						}
+						return strtolower( $user ) === strtolower( $email );
 					}
-					return strtolower( $user ) === strtolower( $email );
-				}
-			) );
+				)
+			);
 		}
 
 		return 0;

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<ruleset name="Harmonytics UCP Connector">
+	<description>PHP CodeSniffer rules for Harmonytics UCP Connector for WooCommerce</description>
+
+	<!-- What to scan -->
+	<file>.</file>
+	<exclude-pattern>/vendor/</exclude-pattern>
+	<exclude-pattern>/node_modules/</exclude-pattern>
+	<exclude-pattern>/tests/</exclude-pattern>
+
+	<!-- Only check PHP files -->
+	<arg name="extensions" value="php"/>
+
+	<!-- Show progress and sniff codes -->
+	<arg value="ps"/>
+
+	<!-- Use WordPress coding standards -->
+	<rule ref="WordPress">
+		<!-- Allow class-ucp-* file naming (our consistent convention) -->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+
+		<!-- Allow manage_woocommerce capability (WooCommerce capability) -->
+		<exclude name="WordPress.WP.Capabilities.Unknown"/>
+	</rule>
+
+	<!-- Set minimum supported PHP version -->
+	<config name="minimum_supported_wp_version" value="6.0"/>
+
+	<!-- Set text domain -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="harmonytics-ucp-connector-for-woocommerce"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

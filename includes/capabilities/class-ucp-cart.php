@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Cart capability handler.
  *
@@ -157,10 +156,10 @@ class UCP_WC_Cart {
 			);
 		}
 
-		$items      = json_decode( $cart['items'], true ) ?: array();
-		$item_data  = $this->get_items_with_product_data( $items );
-		$totals     = $this->calculate_totals( $item_data );
-		$metadata   = $cart['metadata'] ? json_decode( $cart['metadata'], true ) : null;
+		$items     = json_decode( $cart['items'], true ) ? json_decode( $cart['items'], true ) : array();
+		$item_data = $this->get_items_with_product_data( $items );
+		$totals    = $this->calculate_totals( $item_data );
+		$metadata  = $cart['metadata'] ? json_decode( $cart['metadata'], true ) : null;
 
 		return array(
 			'cart_id'             => $cart_id,
@@ -193,7 +192,7 @@ class UCP_WC_Cart {
 		}
 
 		$cart  = $cart_result;
-		$items = json_decode( $cart['items'], true ) ?: array();
+		$items = json_decode( $cart['items'], true ) ? json_decode( $cart['items'], true ) : array();
 
 		// Check max items.
 		if ( count( $items ) >= self::MAX_ITEMS ) {
@@ -244,7 +243,7 @@ class UCP_WC_Cart {
 			// Add new item.
 			$items[] = array(
 				'item_key'   => $item_key,
-				'product_id' => $product->get_parent_id() ?: $product->get_id(),
+				'product_id' => $product->get_parent_id() ? $product->get_parent_id() : $product->get_id(),
 				'variant_id' => $product->get_parent_id() ? $product->get_id() : null,
 				'sku'        => $product->get_sku(),
 				'quantity'   => $quantity,
@@ -285,7 +284,7 @@ class UCP_WC_Cart {
 		}
 
 		$cart  = $cart_result;
-		$items = json_decode( $cart['items'], true ) ?: array();
+		$items = json_decode( $cart['items'], true ) ? json_decode( $cart['items'], true ) : array();
 
 		// Find item.
 		$item_index = $this->find_item_index( $items, $item_key );
@@ -305,7 +304,7 @@ class UCP_WC_Cart {
 		}
 
 		// Get product to check stock.
-		$product_id = $items[ $item_index ]['variant_id'] ?: $items[ $item_index ]['product_id'];
+		$product_id = $items[ $item_index ]['variant_id'] ? $items[ $item_index ]['variant_id'] : $items[ $item_index ]['product_id'];
 		$product    = wc_get_product( $product_id );
 
 		if ( ! $product ) {
@@ -361,7 +360,7 @@ class UCP_WC_Cart {
 		}
 
 		$cart  = $cart_result;
-		$items = json_decode( $cart['items'], true ) ?: array();
+		$items = json_decode( $cart['items'], true ) ? json_decode( $cart['items'], true ) : array();
 
 		// Find and remove item.
 		$item_index = $this->find_item_index( $items, $item_key );
@@ -460,9 +459,9 @@ class UCP_WC_Cart {
 	/**
 	 * Convert cart to checkout session.
 	 *
-	 * @param string     $cart_id          Cart ID.
-	 * @param array|null $shipping_address Shipping address.
-	 * @param array|null $billing_address  Billing address.
+	 * @param string      $cart_id          Cart ID.
+	 * @param array|null  $shipping_address Shipping address.
+	 * @param array|null  $billing_address  Billing address.
 	 * @param string|null $coupon_code     Coupon code.
 	 * @param string|null $customer_note   Customer note.
 	 * @return array|WP_Error
@@ -477,7 +476,7 @@ class UCP_WC_Cart {
 		}
 
 		$cart  = $cart_result;
-		$items = json_decode( $cart['items'], true ) ?: array();
+		$items = json_decode( $cart['items'], true ) ? json_decode( $cart['items'], true ) : array();
 
 		// Check if cart has items.
 		if ( empty( $items ) ) {
@@ -721,7 +720,7 @@ class UCP_WC_Cart {
 		$result = array();
 
 		foreach ( $items as $item ) {
-			$product_id = $item['variant_id'] ?: $item['product_id'];
+			$product_id = ! empty( $item['variant_id'] ) ? $item['variant_id'] : $item['product_id'];
 			$product    = wc_get_product( $product_id );
 
 			if ( ! $product ) {

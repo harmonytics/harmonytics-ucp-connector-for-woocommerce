@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Review mapper for UCP schema conversion.
  *
@@ -83,7 +82,7 @@ class UCP_WC_Review_Mapper {
 		$rating_counts = $product->get_rating_counts();
 		$distribution  = $this->get_empty_distribution();
 
-		// Populate distribution from rating counts
+		// Populate distribution from rating counts.
 		foreach ( $rating_counts as $rating => $count ) {
 			if ( isset( $distribution[ (string) $rating ] ) ) {
 				$distribution[ (string) $rating ] = (int) $count;

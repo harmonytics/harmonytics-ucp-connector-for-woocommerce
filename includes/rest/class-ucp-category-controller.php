@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * REST controller for category endpoints.
  *
@@ -50,7 +49,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 	 * Register routes.
 	 */
 	public function register_routes() {
-		// GET /categories - List all categories
+		// GET /categories - List all categories.
 		register_rest_route(
 			$this->namespace,
 			'/' . $this->rest_base,
@@ -58,13 +57,13 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'list_categories' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_list_categories_args(),
 				),
 			)
 		);
 
-		// GET /categories/{category_id} - Get single category
+		// GET /categories/{category_id} - Get single category.
 		register_rest_route(
 			$this->namespace,
 			'/' . $this->rest_base . '/(?P<category_id>[\d]+)',
@@ -72,7 +71,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_category' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => array(
 						'category_id' => array(
 							'required'          => true,
@@ -85,7 +84,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 			)
 		);
 
-		// GET /categories/{category_id}/products - Get products in a category
+		// GET /categories/{category_id}/products - Get products in a category.
 		register_rest_route(
 			$this->namespace,
 			'/' . $this->rest_base . '/(?P<category_id>[\d]+)/products',
@@ -93,7 +92,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_category_products' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_category_products_args(),
 				),
 			)
@@ -166,13 +165,13 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 	 */
 	private function get_category_products_args() {
 		return array(
-			'category_id'     => array(
+			'category_id'      => array(
 				'required'          => true,
 				'type'              => 'integer',
 				'description'       => __( 'Category ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
-			'page'            => array(
+			'page'             => array(
 				'required'          => false,
 				'type'              => 'integer',
 				'default'           => 1,
@@ -180,7 +179,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
-			'per_page'        => array(
+			'per_page'         => array(
 				'required'          => false,
 				'type'              => 'integer',
 				'default'           => 10,
@@ -195,26 +194,26 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 				'default'     => true,
 				'description' => __( 'Include products from child categories.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'orderby'         => array(
+			'orderby'          => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'date', 'id', 'title', 'price', 'popularity', 'rating', 'menu_order' ),
 				'default'     => 'date',
 				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'order'           => array(
+			'order'            => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'asc', 'desc' ),
 				'default'     => 'desc',
 				'description' => __( 'Order sort direction.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'in_stock'        => array(
+			'in_stock'         => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'description' => __( 'Filter by stock status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'on_sale'         => array(
+			'on_sale'          => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'description' => __( 'Filter by on sale status.', 'harmonytics-ucp-connector-for-woocommerce' ),
@@ -231,15 +230,15 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 	public function list_categories( $request ) {
 		$this->log( 'Listing categories', array( 'params' => $request->get_params() ) );
 
-		$page       = $request->get_param( 'page' ) ?: 1;
-		$per_page   = $request->get_param( 'per_page' ) ?: 100;
+		$page       = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
+		$per_page   = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 100;
 		$parent     = $request->get_param( 'parent' );
-		$hide_empty = $request->get_param( 'hide_empty' ) ?: false;
-		$orderby    = $request->get_param( 'orderby' ) ?: 'name';
-		$order      = strtoupper( $request->get_param( 'order' ) ?: 'ASC' );
-		$hierarchy  = $request->get_param( 'hierarchy' ) ?: false;
+		$hide_empty = $request->get_param( 'hide_empty' ) ? $request->get_param( 'hide_empty' ) : false;
+		$orderby    = $request->get_param( 'orderby' ) ? $request->get_param( 'orderby' ) : 'name';
+		$order      = strtoupper( $request->get_param( 'order' ) ? $request->get_param( 'order' ) : 'ASC' );
+		$hierarchy  = $request->get_param( 'hierarchy' ) ? $request->get_param( 'hierarchy' ) : false;
 
-		// Build query args
+		// Build query args.
 		$args = array(
 			'taxonomy'   => 'product_cat',
 			'hide_empty' => $hide_empty,
@@ -247,21 +246,21 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 			'order'      => $order,
 		);
 
-		// Filter by parent if specified
+		// Filter by parent if specified.
 		if ( ! is_null( $parent ) ) {
 			$args['parent'] = $parent;
 		}
 
-		// Get total count first
+		// Get total count first.
 		$count_args           = $args;
 		$count_args['fields'] = 'count';
 		$total                = (int) wp_count_terms( $count_args );
 
-		// Add pagination
+		// Add pagination.
 		$args['number'] = $per_page;
 		$args['offset'] = ( $page - 1 ) * $per_page;
 
-		// Get terms
+		// Get terms.
 		$terms = get_terms( $args );
 
 		if ( is_wp_error( $terms ) ) {
@@ -274,13 +273,13 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 
 		$total_pages = ceil( $total / $per_page );
 
-		// Map categories
+		// Map categories.
 		$mapped_categories = array();
 		foreach ( $terms as $term ) {
 			$mapped_categories[] = $this->category_mapper->map_category_summary( $term );
 		}
 
-		// Build hierarchical tree if requested
+		// Build hierarchical tree if requested.
 		if ( $hierarchy && is_null( $parent ) ) {
 			$mapped_categories = $this->category_mapper->build_hierarchy( $mapped_categories );
 		}
@@ -295,7 +294,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 
 		$response = $this->success_response( $result );
 
-		// Add pagination headers
+		// Add pagination headers.
 		$response->header( 'X-WP-Total', $total );
 		$response->header( 'X-WP-TotalPages', $total_pages );
 
@@ -336,11 +335,11 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 	 */
 	public function get_category_products( $request ) {
 		$category_id      = $request->get_param( 'category_id' );
-		$page             = $request->get_param( 'page' ) ?: 1;
-		$per_page         = $request->get_param( 'per_page' ) ?: 10;
+		$page             = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
+		$per_page         = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 		$include_children = $request->get_param( 'include_children' ) !== false;
-		$orderby          = $request->get_param( 'orderby' ) ?: 'date';
-		$order            = strtoupper( $request->get_param( 'order' ) ?: 'DESC' );
+		$orderby          = $request->get_param( 'orderby' ) ? $request->get_param( 'orderby' ) : 'date';
+		$order            = strtoupper( $request->get_param( 'order' ) ? $request->get_param( 'order' ) : 'DESC' );
 		$in_stock         = $request->get_param( 'in_stock' );
 		$on_sale          = $request->get_param( 'on_sale' );
 
@@ -352,7 +351,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 			)
 		);
 
-		// Verify category exists
+		// Verify category exists.
 		$term = get_term( $category_id, 'product_cat' );
 
 		if ( ! $term || is_wp_error( $term ) ) {
@@ -363,7 +362,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 			);
 		}
 
-		// Build product query args
+		// Build product query args.
 		$args = array(
 			'status'     => 'publish',
 			'limit'      => $per_page,
@@ -373,9 +372,9 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 			'visibility' => 'visible',
 		);
 
-		// Set category filter
+		// Set category filter.
 		if ( $include_children ) {
-			// Include products from child categories
+			// Include products from child categories.
 			$args['category'] = array( $term->slug );
 		} else {
 			// Only direct products (use tax_query for exact match).
@@ -390,22 +389,22 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 			);
 		}
 
-		// Stock filter
-		if ( $in_stock === true ) {
+		// Stock filter.
+		if ( true === $in_stock ) {
 			$args['stock_status'] = 'instock';
-		} elseif ( $in_stock === false ) {
+		} elseif ( false === $in_stock ) {
 			$args['stock_status'] = 'outofstock';
 		}
 
-		// On sale filter
-		if ( $on_sale === true ) {
+		// On sale filter.
+		if ( true === $on_sale ) {
 			$args['include'] = wc_get_product_ids_on_sale();
 		}
 
 		$query    = new WC_Product_Query( $args );
 		$products = $query->get_products();
 
-		// Get total count for pagination
+		// Get total count for pagination.
 		$count_args           = $args;
 		$count_args['return'] = 'ids';
 		$count_args['limit']  = -1;
@@ -416,7 +415,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 		$total       = count( $count_query->get_products() );
 		$total_pages = ceil( $total / $per_page );
 
-		// Map products
+		// Map products.
 		$mapped_products = array();
 		foreach ( $products as $product ) {
 			$mapped_products[] = $this->product_mapper->map_product_summary( $product );
@@ -433,7 +432,7 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 
 		$response = $this->success_response( $result );
 
-		// Add pagination headers
+		// Add pagination headers.
 		$response->header( 'X-WP-Total', $total );
 		$response->header( 'X-WP-TotalPages', $total_pages );
 

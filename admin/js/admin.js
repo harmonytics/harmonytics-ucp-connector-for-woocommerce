@@ -27,32 +27,32 @@
         rotateKey: function(e) {
             e.preventDefault();
 
-            if (!confirm(ucpAdmin.strings.confirm_rotate)) {
+            if (!confirm(ucp_wc_admin.strings.confirm_rotate)) {
                 return;
             }
 
             var $button = $(e.target);
             var originalText = $button.text();
 
-            $button.text(ucpAdmin.strings.rotating).prop('disabled', true);
+            $button.text(ucp_wc_admin.strings.rotating).prop('disabled', true);
 
             $.ajax({
-                url: ucpAdmin.ajax_url,
+                url: ucp_wc_admin.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'ucp_wc_rotate_key',
-                    nonce: ucpAdmin.nonce
+                    nonce: ucp_wc_admin.nonce
                 },
                 success: function(response) {
                     if (response.success) {
                         alert(response.data.message);
                         location.reload();
                     } else {
-                        alert(ucpAdmin.strings.error + ' ' + response.data.message);
+                        alert(ucp_wc_admin.strings.error + ' ' + response.data.message);
                     }
                 },
                 error: function() {
-                    alert(ucpAdmin.strings.error + ' Request failed.');
+                    alert(ucp_wc_admin.strings.error + ' Request failed.');
                 },
                 complete: function() {
                     $button.text(originalText).prop('disabled', false);
@@ -70,25 +70,25 @@
             var $result = $('#ucp-test-result');
             var originalText = $button.text();
 
-            $button.text(ucpAdmin.strings.testing).prop('disabled', true);
+            $button.text(ucp_wc_admin.strings.testing).prop('disabled', true);
             $result.removeClass('success error').text('');
 
             $.ajax({
-                url: ucpAdmin.ajax_url,
+                url: ucp_wc_admin.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'ucp_wc_test_webhook',
-                    nonce: ucpAdmin.nonce
+                    nonce: ucp_wc_admin.nonce
                 },
                 success: function(response) {
                     if (response.success) {
-                        $result.addClass('success').text(ucpAdmin.strings.success + ' ' + response.data.message);
+                        $result.addClass('success').text(ucp_wc_admin.strings.success + ' ' + response.data.message);
                     } else {
-                        $result.addClass('error').text(ucpAdmin.strings.error + ' ' + response.data.message);
+                        $result.addClass('error').text(ucp_wc_admin.strings.error + ' ' + response.data.message);
                     }
                 },
                 error: function() {
-                    $result.addClass('error').text(ucpAdmin.strings.error + ' Request failed.');
+                    $result.addClass('error').text(ucp_wc_admin.strings.error + ' Request failed.');
                 },
                 complete: function() {
                     $button.text(originalText).prop('disabled', false);
@@ -105,25 +105,25 @@
             var $button = $(e.target);
             var originalText = $button.text();
 
-            $button.text(ucpAdmin.strings.retrying).prop('disabled', true);
+            $button.text(ucp_wc_admin.strings.retrying).prop('disabled', true);
 
             $.ajax({
-                url: ucpAdmin.ajax_url,
+                url: ucp_wc_admin.ajax_url,
                 type: 'POST',
                 data: {
                     action: 'ucp_wc_retry_failed',
-                    nonce: ucpAdmin.nonce
+                    nonce: ucp_wc_admin.nonce
                 },
                 success: function(response) {
                     if (response.success) {
                         alert(response.data.message);
                         location.reload();
                     } else {
-                        alert(ucpAdmin.strings.error + ' ' + response.data.message);
+                        alert(ucp_wc_admin.strings.error + ' ' + response.data.message);
                     }
                 },
                 error: function() {
-                    alert(ucpAdmin.strings.error + ' Request failed.');
+                    alert(ucp_wc_admin.strings.error + ' Request failed.');
                 },
                 complete: function() {
                     $button.text(originalText).prop('disabled', false);

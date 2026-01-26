@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Customer mapper for UCP schema conversion.
  *
@@ -223,13 +222,13 @@ class UCP_WC_Customer_Mapper {
 		}
 
 		return array(
-			'total_orders'     => $customer->get_order_count(),
-			'total_spent'      => $customer->get_total_spent(),
-			'currency'         => get_woocommerce_currency(),
-			'average_order'    => $customer->get_order_count() > 0
+			'total_orders'  => $customer->get_order_count(),
+			'total_spent'   => $customer->get_total_spent(),
+			'currency'      => get_woocommerce_currency(),
+			'average_order' => $customer->get_order_count() > 0
 				? round( floatval( $customer->get_total_spent() ) / $customer->get_order_count(), 2 )
 				: 0,
-			'recent_orders'    => $order_summaries,
+			'recent_orders' => $order_summaries,
 		);
 	}
 

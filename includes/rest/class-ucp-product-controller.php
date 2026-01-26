@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * REST controller for product catalog endpoints.
  *
@@ -42,7 +41,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 	 * Register routes.
 	 */
 	public function register_routes() {
-		// GET /products - List products
+		// GET /products - List products.
 		register_rest_route(
 			$this->namespace,
 			'/' . $this->rest_base,
@@ -50,13 +49,13 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'list_products' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_list_products_args(),
 				),
 			)
 		);
 
-		// GET /products/search - Search products
+		// GET /products/search - Search products.
 		register_rest_route(
 			$this->namespace,
 			'/' . $this->rest_base . '/search',
@@ -64,13 +63,13 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'search_products' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_search_products_args(),
 				),
 			)
 		);
 
-		// GET /products/{product_id} - Get single product
+		// GET /products/{product_id} - Get single product.
 		register_rest_route(
 			$this->namespace,
 			'/' . $this->rest_base . '/(?P<product_id>[\d]+)',
@@ -78,7 +77,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_product' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => array(
 						'product_id' => array(
 							'required'          => true,
@@ -99,7 +98,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 	 */
 	private function get_list_products_args() {
 		return array(
-			'page'         => array(
+			'page'      => array(
 				'required'          => false,
 				'type'              => 'integer',
 				'default'           => 1,
@@ -107,7 +106,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				'description'       => __( 'Page number.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
-			'per_page'     => array(
+			'per_page'  => array(
 				'required'          => false,
 				'type'              => 'integer',
 				'default'           => 10,
@@ -116,67 +115,67 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 				'description'       => __( 'Items per page.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'absint',
 			),
-			'category'     => array(
+			'category'  => array(
 				'required'          => false,
 				'type'              => 'string',
 				'description'       => __( 'Filter by category slug or ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
-			'tag'          => array(
+			'tag'       => array(
 				'required'          => false,
 				'type'              => 'string',
 				'description'       => __( 'Filter by tag slug or ID.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'sanitize_text_field',
 			),
-			'status'       => array(
+			'status'    => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'publish', 'draft', 'pending', 'any' ),
 				'default'     => 'publish',
 				'description' => __( 'Filter by product status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'type'         => array(
+			'type'      => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'simple', 'variable', 'grouped', 'external', 'any' ),
 				'default'     => 'any',
 				'description' => __( 'Filter by product type.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'featured'     => array(
+			'featured'  => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'description' => __( 'Filter by featured status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'on_sale'      => array(
+			'on_sale'   => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'description' => __( 'Filter by on sale status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'in_stock'     => array(
+			'in_stock'  => array(
 				'required'    => false,
 				'type'        => 'boolean',
 				'description' => __( 'Filter by stock status.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'min_price'    => array(
+			'min_price' => array(
 				'required'          => false,
 				'type'              => 'number',
 				'description'       => __( 'Minimum price filter.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'floatval',
 			),
-			'max_price'    => array(
+			'max_price' => array(
 				'required'          => false,
 				'type'              => 'number',
 				'description'       => __( 'Maximum price filter.', 'harmonytics-ucp-connector-for-woocommerce' ),
 				'sanitize_callback' => 'floatval',
 			),
-			'orderby'      => array(
+			'orderby'   => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'date', 'id', 'title', 'price', 'popularity', 'rating', 'menu_order' ),
 				'default'     => 'date',
 				'description' => __( 'Sort collection by attribute.', 'harmonytics-ucp-connector-for-woocommerce' ),
 			),
-			'order'        => array(
+			'order'     => array(
 				'required'    => false,
 				'type'        => 'string',
 				'enum'        => array( 'asc', 'desc' ),
@@ -194,7 +193,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 	private function get_search_products_args() {
 		$args = $this->get_list_products_args();
 
-		// Add search-specific parameter
+		// Add search-specific parameter.
 		$args['q'] = array(
 			'required'          => true,
 			'type'              => 'string',
@@ -219,7 +218,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		$query    = new WC_Product_Query( $args );
 		$products = $query->get_products();
 
-		// Get total count for pagination
+		// Get total count for pagination.
 		$count_args           = $args;
 		$count_args['return'] = 'ids';
 		$count_args['limit']  = -1;
@@ -229,10 +228,10 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		$count_query = new WC_Product_Query( $count_args );
 		$total       = count( $count_query->get_products() );
 
-		$per_page    = $request->get_param( 'per_page' ) ?: 10;
+		$per_page    = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 		$total_pages = ceil( $total / $per_page );
 
-		// Map products
+		// Map products.
 		$mapped_products = array();
 		foreach ( $products as $product ) {
 			$mapped_products[] = $this->product_mapper->map_product_summary( $product );
@@ -241,14 +240,14 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		$result = array(
 			'products'    => $mapped_products,
 			'total'       => $total,
-			'page'        => $request->get_param( 'page' ) ?: 1,
+			'page'        => $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1,
 			'per_page'    => $per_page,
 			'total_pages' => $total_pages,
 		);
 
 		$response = $this->success_response( $result );
 
-		// Add pagination headers
+		// Add pagination headers.
 		$response->header( 'X-WP-Total', $total );
 		$response->header( 'X-WP-TotalPages', $total_pages );
 
@@ -264,7 +263,13 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 	public function search_products( $request ) {
 		$search_query = $request->get_param( 'q' );
 
-		$this->log( 'Searching products', array( 'query' => $search_query, 'params' => $request->get_params() ) );
+		$this->log(
+			'Searching products',
+			array(
+				'query'  => $search_query,
+				'params' => $request->get_params(),
+			)
+		);
 
 		if ( empty( $search_query ) ) {
 			return $this->error_response(
@@ -274,22 +279,22 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 			);
 		}
 
-		// Build query args with search
-		$args     = $this->build_query_args( $request );
+		// Build query args with search.
+		$args      = $this->build_query_args( $request );
 		$args['s'] = $search_query;
 
-		// Use WP_Query for search as WC_Product_Query has limited search support
+		// Use WP_Query for search as WC_Product_Query has limited search support.
 		$wp_args = array(
 			'post_type'      => 'product',
 			'post_status'    => $args['status'] ?? 'publish',
 			's'              => $search_query,
 			'posts_per_page' => $args['limit'] ?? 10,
-			'paged'          => $request->get_param( 'page' ) ?: 1,
-			'orderby'        => $this->map_orderby( $request->get_param( 'orderby' ) ?: 'relevance' ),
-			'order'          => strtoupper( $request->get_param( 'order' ) ?: 'DESC' ),
+			'paged'          => $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1,
+			'orderby'        => $this->map_orderby( $request->get_param( 'orderby' ) ? $request->get_param( 'orderby' ) : 'relevance' ),
+			'order'          => strtoupper( $request->get_param( 'order' ) ? $request->get_param( 'order' ) : 'DESC' ),
 		);
 
-		// Add tax query for categories/tags
+		// Add tax query for categories/tags.
 		$tax_query = array();
 
 		$category = $request->get_param( 'category' );
@@ -310,7 +315,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 			);
 		}
 
-		// Add product visibility
+		// Add product visibility.
 		$tax_query[] = array(
 			'taxonomy' => 'product_visibility',
 			'field'    => 'name',
@@ -323,7 +328,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 			$wp_args['tax_query'] = $tax_query;
 		}
 
-		// Add meta query for price filtering
+		// Add meta query for price filtering.
 		$meta_query = array();
 
 		$min_price = $request->get_param( 'min_price' );
@@ -346,9 +351,9 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 			);
 		}
 
-		// Add stock filter
+		// Add stock filter.
 		$in_stock = $request->get_param( 'in_stock' );
-		if ( $in_stock === true ) {
+		if ( true === $in_stock ) {
 			$meta_query[] = array(
 				'key'     => '_stock_status',
 				'value'   => 'instock',
@@ -366,7 +371,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 		$per_page    = $wp_args['posts_per_page'];
 		$total_pages = $query->max_num_pages;
 
-		// Map products
+		// Map products.
 		$mapped_products = array();
 		foreach ( $query->posts as $post ) {
 			$product = wc_get_product( $post->ID );
@@ -379,14 +384,14 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 			'query'       => $search_query,
 			'products'    => $mapped_products,
 			'total'       => $total,
-			'page'        => $request->get_param( 'page' ) ?: 1,
+			'page'        => $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1,
 			'per_page'    => $per_page,
 			'total_pages' => $total_pages,
 		);
 
 		$response = $this->success_response( $result );
 
-		// Add pagination headers
+		// Add pagination headers.
 		$response->header( 'X-WP-Total', $total );
 		$response->header( 'X-WP-TotalPages', $total_pages );
 
@@ -414,7 +419,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 			);
 		}
 
-		// Check if product is published (or accessible)
+		// Check if product is published (or accessible).
 		if ( 'publish' !== $product->get_status() ) {
 			return $this->error_response(
 				'product_not_accessible',
@@ -435,56 +440,56 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 	 * @return array
 	 */
 	private function build_query_args( $request ) {
-		$page     = $request->get_param( 'page' ) ?: 1;
-		$per_page = $request->get_param( 'per_page' ) ?: 10;
+		$page     = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
+		$per_page = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 
 		$args = array(
-			'status'  => $request->get_param( 'status' ) ?: 'publish',
+			'status'  => $request->get_param( 'status' ) ? $request->get_param( 'status' ) : 'publish',
 			'limit'   => $per_page,
 			'page'    => $page,
-			'orderby' => $this->map_orderby( $request->get_param( 'orderby' ) ?: 'date' ),
-			'order'   => strtoupper( $request->get_param( 'order' ) ?: 'DESC' ),
+			'orderby' => $this->map_orderby( $request->get_param( 'orderby' ) ? $request->get_param( 'orderby' ) : 'date' ),
+			'order'   => strtoupper( $request->get_param( 'order' ) ? $request->get_param( 'order' ) : 'DESC' ),
 		);
 
-		// Product type filter
+		// Product type filter.
 		$type = $request->get_param( 'type' );
 		if ( ! empty( $type ) && 'any' !== $type ) {
 			$args['type'] = $type;
 		}
 
-		// Category filter
+		// Category filter.
 		$category = $request->get_param( 'category' );
 		if ( ! empty( $category ) ) {
 			$args['category'] = is_numeric( $category ) ? array( $category ) : array( $category );
 		}
 
-		// Tag filter
+		// Tag filter.
 		$tag = $request->get_param( 'tag' );
 		if ( ! empty( $tag ) ) {
 			$args['tag'] = is_numeric( $tag ) ? array( $tag ) : array( $tag );
 		}
 
-		// Featured filter
+		// Featured filter.
 		$featured = $request->get_param( 'featured' );
-		if ( $featured === true ) {
+		if ( true === $featured ) {
 			$args['featured'] = true;
 		}
 
-		// On sale filter
+		// On sale filter.
 		$on_sale = $request->get_param( 'on_sale' );
-		if ( $on_sale === true ) {
+		if ( true === $on_sale ) {
 			$args['include'] = wc_get_product_ids_on_sale();
 		}
 
-		// Stock filter
+		// Stock filter.
 		$in_stock = $request->get_param( 'in_stock' );
-		if ( $in_stock === true ) {
+		if ( true === $in_stock ) {
 			$args['stock_status'] = 'instock';
-		} elseif ( $in_stock === false ) {
+		} elseif ( false === $in_stock ) {
 			$args['stock_status'] = 'outofstock';
 		}
 
-		// Price range filters
+		// Price range filters.
 		$min_price = $request->get_param( 'min_price' );
 		if ( ! is_null( $min_price ) ) {
 			$args['min_price'] = $min_price;
@@ -495,7 +500,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 			$args['max_price'] = $max_price;
 		}
 
-		// Only show visible products in catalog
+		// Only show visible products in catalog.
 		$args['visibility'] = 'visible';
 
 		return $args;

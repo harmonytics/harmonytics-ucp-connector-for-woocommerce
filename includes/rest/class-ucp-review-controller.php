@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * REST controller for product review endpoints.
  *
@@ -50,7 +49,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'list_reviews' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_list_reviews_args(),
 				),
 			)
@@ -64,7 +63,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_review' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => array(
 						'review_id' => array(
 							'required'          => true,
@@ -85,7 +84,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'create_review' ),
-					'permission_callback' => array( $this, 'check_write_permission' ),
+					'permission_callback' => array( $this, 'check_authenticated_write' ),
 					'args'                => $this->get_create_review_args(),
 				),
 			)
@@ -99,7 +98,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_product_reviews' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => $this->get_product_reviews_args(),
 				),
 			)
@@ -113,7 +112,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 				array(
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_product_review_summary' ),
-					'permission_callback' => array( $this, 'check_read_permission' ),
+					'permission_callback' => array( $this, 'check_public_read_permission' ),
 					'args'                => array(
 						'product_id' => array(
 							'required'          => true,
@@ -275,7 +274,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		$count_query = new WP_Comment_Query();
 		$total       = $count_query->query( $count_args );
 
-		$per_page    = $request->get_param( 'per_page' ) ?: 10;
+		$per_page    = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 		$total_pages = ceil( $total / $per_page );
 
 		// Map reviews.
@@ -290,7 +289,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		$result = array(
 			'reviews'     => $mapped_reviews,
 			'total'       => $total,
-			'page'        => $request->get_param( 'page' ) ?: 1,
+			'page'        => $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1,
 			'per_page'    => $per_page,
 			'total_pages' => $total_pages,
 		);
@@ -359,7 +358,13 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 	public function create_review( $request ) {
 		$product_id = $request->get_param( 'product_id' );
 
-		$this->log( 'Creating review', array( 'product_id' => $product_id, 'params' => $request->get_params() ) );
+		$this->log(
+			'Creating review',
+			array(
+				'product_id' => $product_id,
+				'params'     => $request->get_params(),
+			)
+		);
 
 		// Verify product exists.
 		$product = wc_get_product( $product_id );
@@ -451,8 +456,8 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 		wc_delete_product_transients( $product_id );
 
 		// Get the created review.
-		$comment        = get_comment( $comment_id );
-		$mapped_review  = $this->review_mapper->map_review( $comment );
+		$comment       = get_comment( $comment_id );
+		$mapped_review = $this->review_mapper->map_review( $comment );
 
 		// Add moderation notice if applicable.
 		if ( '0' === $comment->comment_approved || 'hold' === $comment->comment_approved ) {
@@ -471,7 +476,13 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 	public function get_product_reviews( $request ) {
 		$product_id = $request->get_param( 'product_id' );
 
-		$this->log( 'Getting product reviews', array( 'product_id' => $product_id, 'params' => $request->get_params() ) );
+		$this->log(
+			'Getting product reviews',
+			array(
+				'product_id' => $product_id,
+				'params'     => $request->get_params(),
+			)
+		);
 
 		// Verify product exists.
 		$product = wc_get_product( $product_id );
@@ -524,27 +535,25 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 	 * @return array
 	 */
 	private function build_comment_query_args( $request ) {
-		$page     = $request->get_param( 'page' ) ?: 1;
-		$per_page = $request->get_param( 'per_page' ) ?: 10;
+		$page     = $request->get_param( 'page' ) ? $request->get_param( 'page' ) : 1;
+		$per_page = $request->get_param( 'per_page' ) ? $request->get_param( 'per_page' ) : 10;
 
 		$args = array(
-			'type'       => 'review',
-			'post_type'  => 'product',
-			'number'     => $per_page,
-			'offset'     => ( $page - 1 ) * $per_page,
-			'orderby'    => $this->map_orderby( $request->get_param( 'orderby' ) ?: 'date' ),
-			'order'      => strtoupper( $request->get_param( 'order' ) ?: 'DESC' ),
+			'type'      => 'review',
+			'post_type' => 'product',
+			'number'    => $per_page,
+			'offset'    => ( $page - 1 ) * $per_page,
+			'orderby'   => $this->map_orderby( $request->get_param( 'orderby' ) ? $request->get_param( 'orderby' ) : 'date' ),
+			'order'     => strtoupper( $request->get_param( 'order' ) ? $request->get_param( 'order' ) : 'DESC' ),
 		);
 
 		// Status filter.
 		$status = $request->get_param( 'status' );
 		if ( ! empty( $status ) && 'any' !== $status ) {
 			$args['status'] = $this->review_mapper->map_ucp_status_to_wp( $status );
-		} else {
+		} elseif ( ! current_user_can( 'moderate_comments' ) ) {
 			// Default to approved reviews for public access.
-			if ( ! current_user_can( 'moderate_comments' ) ) {
-				$args['status'] = 'approve';
-			}
+			$args['status'] = 'approve';
 		}
 
 		// Product filter.

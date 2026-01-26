@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Handler for /.well-known/ucp discovery endpoint.
  *
@@ -17,569 +16,569 @@ defined( 'ABSPATH' ) || exit;
  */
 class UCP_WC_Well_Known {
 
-    /**
-     * Query variable for the well-known endpoint.
-     *
-     * @var string
-     */
-    const QUERY_VAR = 'ucp_well_known';
+	/**
+	 * Query variable for the well-known endpoint.
+	 *
+	 * @var string
+	 */
+	const QUERY_VAR = 'ucp_well_known';
 
-    /**
-     * Register rewrite rules for /.well-known/ucp
-     */
-    public function register_rewrite_rules() {
-        add_rewrite_rule(
-            '^\.well-known/ucp/?$',
-            'index.php?' . self::QUERY_VAR . '=1',
-            'top'
-        );
-    }
+	/**
+	 * Register rewrite rules for /.well-known/ucp
+	 */
+	public function register_rewrite_rules() {
+		add_rewrite_rule(
+			'^\.well-known/ucp/?$',
+			'index.php?' . self::QUERY_VAR . '=1',
+			'top'
+		);
+	}
 
-    /**
-     * Add query variables.
-     *
-     * @param array $vars Existing query variables.
-     * @return array
-     */
-    public function add_query_vars( $vars ) {
-        $vars[] = self::QUERY_VAR;
-        return $vars;
-    }
+	/**
+	 * Add query variables.
+	 *
+	 * @param array $vars Existing query variables.
+	 * @return array
+	 */
+	public function add_query_vars( $vars ) {
+		$vars[] = self::QUERY_VAR;
+		return $vars;
+	}
 
-    /**
-     * Handle the /.well-known/ucp request.
-     *
-     * @param WP $wp Current WordPress environment instance.
-     */
-    public function handle_request( $wp ) {
-        if ( ! isset( $wp->query_vars[ self::QUERY_VAR ] ) ) {
-            return;
-        }
+	/**
+	 * Handle the /.well-known/ucp request.
+	 *
+	 * @param WP $wp Current WordPress environment instance.
+	 */
+	public function handle_request( $wp ) {
+		if ( ! isset( $wp->query_vars[ self::QUERY_VAR ] ) ) {
+			return;
+		}
 
-        // Check if UCP is enabled
-        if ( get_option( 'ucp_wc_enabled', 'yes' ) !== 'yes' ) {
-            status_header( 503 );
-            header( 'Content-Type: application/json; charset=utf-8' );
-            echo wp_json_encode(
-                array(
-                    'error'   => 'service_unavailable',
-                    'message' => 'UCP is currently disabled for this store.',
-                )
-            );
-            exit;
-        }
+		// Check if UCP is enabled.
+		if ( get_option( 'ucp_wc_enabled', 'yes' ) !== 'yes' ) {
+			status_header( 503 );
+			header( 'Content-Type: application/json; charset=utf-8' );
+			echo wp_json_encode(
+				array(
+					'error'   => 'service_unavailable',
+					'message' => 'UCP is currently disabled for this store.',
+				)
+			);
+			exit;
+		}
 
-        // Set proper headers
-        status_header( 200 );
-        header( 'Content-Type: application/json; charset=utf-8' );
-        header( 'Cache-Control: public, max-age=3600' );
-        header( 'Access-Control-Allow-Origin: *' );
-        header( 'Access-Control-Allow-Methods: GET, OPTIONS' );
-        header( 'Access-Control-Allow-Headers: Content-Type' );
+		// Set proper headers.
+		status_header( 200 );
+		header( 'Content-Type: application/json; charset=utf-8' );
+		header( 'Cache-Control: public, max-age=3600' );
+		header( 'Access-Control-Allow-Origin: *' );
+		header( 'Access-Control-Allow-Methods: GET, OPTIONS' );
+		header( 'Access-Control-Allow-Headers: Content-Type' );
 
-        // Handle preflight requests
-        if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'OPTIONS' === $_SERVER['REQUEST_METHOD'] ) {
-            exit;
-        }
+		// Handle preflight requests.
+		if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'OPTIONS' === $_SERVER['REQUEST_METHOD'] ) {
+			exit;
+		}
 
-        echo wp_json_encode( $this->get_business_profile(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
-        exit;
-    }
+		echo wp_json_encode( $this->get_business_profile(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+		exit;
+	}
 
-    /**
-     * Get the business profile data.
-     *
-     * @return array
-     */
-    public function get_business_profile() {
-        $site_url = home_url();
-        $rest_url = rest_url( 'ucp/v1' );
+	/**
+	 * Get the business profile data.
+	 *
+	 * @return array
+	 */
+	public function get_business_profile() {
+		$site_url = home_url();
+		$rest_url = rest_url( 'ucp/v1' );
 
-        return array(
-            'schema_version'  => '1.0',
-            'business'        => $this->get_business_info(),
-            'capabilities'    => $this->get_capabilities( $rest_url ),
-            'authentication'  => $this->get_authentication_info( $rest_url ),
-            'policies'        => $this->get_policies(),
-            'signing_keys'    => $this->get_signing_keys(),
-            'metadata'        => array(
-                'platform'         => 'WooCommerce',
-                'platform_version' => defined( 'WC_VERSION' ) ? WC_VERSION : 'unknown',
-                'plugin_version'   => UCP_WC_VERSION,
-                'updated_at'       => gmdate( 'c' ),
-            ),
-        );
-    }
+		return array(
+			'schema_version' => '1.0',
+			'business'       => $this->get_business_info(),
+			'capabilities'   => $this->get_capabilities( $rest_url ),
+			'authentication' => $this->get_authentication_info( $rest_url ),
+			'policies'       => $this->get_policies(),
+			'signing_keys'   => $this->get_signing_keys(),
+			'metadata'       => array(
+				'platform'         => 'WooCommerce',
+				'platform_version' => defined( 'WC_VERSION' ) ? WC_VERSION : 'unknown',
+				'plugin_version'   => UCP_WC_VERSION,
+				'updated_at'       => gmdate( 'c' ),
+			),
+		);
+	}
 
-    /**
-     * Get business information.
-     *
-     * @return array
-     */
-    private function get_business_info() {
-        $business = array(
-            'name'        => get_bloginfo( 'name' ),
-            'description' => get_bloginfo( 'description' ),
-            'url'         => home_url(),
-        );
+	/**
+	 * Get business information.
+	 *
+	 * @return array
+	 */
+	private function get_business_info() {
+		$business = array(
+			'name'        => get_bloginfo( 'name' ),
+			'description' => get_bloginfo( 'description' ),
+			'url'         => home_url(),
+		);
 
-        // Add logo if custom logo is set
-        $custom_logo_id = get_theme_mod( 'custom_logo' );
-        if ( $custom_logo_id ) {
-            $logo_url = wp_get_attachment_image_url( $custom_logo_id, 'full' );
-            if ( $logo_url ) {
-                $business['logo'] = $logo_url;
-            }
-        }
+		// Add logo if custom logo is set.
+		$custom_logo_id = get_theme_mod( 'custom_logo' );
+		if ( $custom_logo_id ) {
+			$logo_url = wp_get_attachment_image_url( $custom_logo_id, 'full' );
+			if ( $logo_url ) {
+				$business['logo'] = $logo_url;
+			}
+		}
 
-        // Add contact email if available
-        $admin_email = get_option( 'admin_email' );
-        if ( $admin_email ) {
-            $business['contact_email'] = $admin_email;
-        }
+		// Add contact email if available.
+		$admin_email = get_option( 'admin_email' );
+		if ( $admin_email ) {
+			$business['contact_email'] = $admin_email;
+		}
 
-        // Add WooCommerce store details
-        if ( function_exists( 'wc_get_base_location' ) ) {
-            $location                  = wc_get_base_location();
-            $business['country']       = $location['country'] ?? '';
-            $business['currency']      = get_woocommerce_currency();
-            $business['currency_symbol'] = get_woocommerce_currency_symbol();
-        }
+		// Add WooCommerce store details.
+		if ( function_exists( 'wc_get_base_location' ) ) {
+			$location                    = wc_get_base_location();
+			$business['country']         = $location['country'] ?? '';
+			$business['currency']        = get_woocommerce_currency();
+			$business['currency_symbol'] = get_woocommerce_currency_symbol();
+		}
 
-        return $business;
-    }
+		return $business;
+	}
 
-    /**
-     * Get capabilities and their REST endpoints.
-     *
-     * @param string $rest_url Base REST URL.
-     * @return array
-     */
-    private function get_capabilities( $rest_url ) {
-        $capabilities = array();
+	/**
+	 * Get capabilities and their REST endpoints.
+	 *
+	 * @param string $rest_url Base REST URL.
+	 * @return array
+	 */
+	private function get_capabilities( $rest_url ) {
+		$capabilities = array();
 
-        // Catalog capability
-        $capabilities['catalog'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/products',
-                'methods'  => array(
-                    array(
-                        'action' => 'list_products',
-                        'method' => 'GET',
-                        'path'   => '/',
-                    ),
-                    array(
-                        'action' => 'get_product',
-                        'method' => 'GET',
-                        'path'   => '/{product_id}',
-                    ),
-                    array(
-                        'action' => 'search_products',
-                        'method' => 'GET',
-                        'path'   => '/search',
-                    ),
-                ),
-            ),
-            'features' => array(
-                'search'     => true,
-                'filtering'  => true,
-                'pagination' => true,
-            ),
-        );
+		// Catalog capability.
+		$capabilities['catalog'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/products',
+				'methods'  => array(
+					array(
+						'action' => 'list_products',
+						'method' => 'GET',
+						'path'   => '/',
+					),
+					array(
+						'action' => 'get_product',
+						'method' => 'GET',
+						'path'   => '/{product_id}',
+					),
+					array(
+						'action' => 'search_products',
+						'method' => 'GET',
+						'path'   => '/search',
+					),
+				),
+			),
+			'features' => array(
+				'search'     => true,
+				'filtering'  => true,
+				'pagination' => true,
+			),
+		);
 
-        // Categories capability
-        $capabilities['categories'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/categories',
-                'methods'  => array(
-                    array(
-                        'action' => 'list_categories',
-                        'method' => 'GET',
-                        'path'   => '/',
-                    ),
-                    array(
-                        'action' => 'get_category',
-                        'method' => 'GET',
-                        'path'   => '/{category_id}',
-                    ),
-                    array(
-                        'action' => 'get_category_products',
-                        'method' => 'GET',
-                        'path'   => '/{category_id}/products',
-                    ),
-                ),
-            ),
-            'features' => array(
-                'hierarchy' => true,
-                'images'    => true,
-            ),
-        );
+		// Categories capability.
+		$capabilities['categories'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/categories',
+				'methods'  => array(
+					array(
+						'action' => 'list_categories',
+						'method' => 'GET',
+						'path'   => '/',
+					),
+					array(
+						'action' => 'get_category',
+						'method' => 'GET',
+						'path'   => '/{category_id}',
+					),
+					array(
+						'action' => 'get_category_products',
+						'method' => 'GET',
+						'path'   => '/{category_id}/products',
+					),
+				),
+			),
+			'features' => array(
+				'hierarchy' => true,
+				'images'    => true,
+			),
+		);
 
-        // Checkout capability
-        $capabilities['checkout'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/checkout',
-                'methods'  => array(
-                    array(
-                        'action'   => 'create_session',
-                        'method'   => 'POST',
-                        'path'     => '/sessions',
-                    ),
-                    array(
-                        'action'   => 'get_session',
-                        'method'   => 'GET',
-                        'path'     => '/sessions/{session_id}',
-                    ),
-                    array(
-                        'action'   => 'confirm_session',
-                        'method'   => 'POST',
-                        'path'     => '/sessions/{session_id}/confirm',
-                    ),
-                ),
-            ),
-            'features' => array(
-                'guest_checkout'    => get_option( 'ucp_wc_guest_checkout', 'yes' ) === 'yes',
-                'shipping_options'  => true,
-                'coupon_support'    => true,
-                'tax_calculation'   => true,
-                'web_checkout_fallback' => true,
-            ),
-        );
+		// Checkout capability.
+		$capabilities['checkout'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/checkout',
+				'methods'  => array(
+					array(
+						'action' => 'create_session',
+						'method' => 'POST',
+						'path'   => '/sessions',
+					),
+					array(
+						'action' => 'get_session',
+						'method' => 'GET',
+						'path'   => '/sessions/{session_id}',
+					),
+					array(
+						'action' => 'confirm_session',
+						'method' => 'POST',
+						'path'   => '/sessions/{session_id}/confirm',
+					),
+				),
+			),
+			'features' => array(
+				'guest_checkout'        => get_option( 'ucp_wc_guest_checkout', 'yes' ) === 'yes',
+				'shipping_options'      => true,
+				'coupon_support'        => true,
+				'tax_calculation'       => true,
+				'web_checkout_fallback' => true,
+			),
+		);
 
-        // Order capability
-        $capabilities['order'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/orders',
-                'methods'  => array(
-                    array(
-                        'action'   => 'get_order',
-                        'method'   => 'GET',
-                        'path'     => '/{order_id}',
-                    ),
-                    array(
-                        'action'   => 'list_orders',
-                        'method'   => 'GET',
-                        'path'     => '/',
-                    ),
-                ),
-            ),
-            'webhooks' => array(
-                'events' => array(
-                    'order.created',
-                    'order.status_changed',
-                    'order.paid',
-                    'order.refunded',
-                ),
-            ),
-        );
+		// Order capability.
+		$capabilities['order'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/orders',
+				'methods'  => array(
+					array(
+						'action' => 'get_order',
+						'method' => 'GET',
+						'path'   => '/{order_id}',
+					),
+					array(
+						'action' => 'list_orders',
+						'method' => 'GET',
+						'path'   => '/',
+					),
+				),
+			),
+			'webhooks' => array(
+				'events' => array(
+					'order.created',
+					'order.status_changed',
+					'order.paid',
+					'order.refunded',
+				),
+			),
+		);
 
-        // Cart capability
-        $capabilities['cart'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/cart',
-                'methods'  => array(
-                    array(
-                        'action' => 'create_cart',
-                        'method' => 'POST',
-                        'path'   => '/',
-                    ),
-                    array(
-                        'action' => 'get_cart',
-                        'method' => 'GET',
-                        'path'   => '/{cart_id}',
-                    ),
-                    array(
-                        'action' => 'add_item',
-                        'method' => 'POST',
-                        'path'   => '/{cart_id}/items',
-                    ),
-                    array(
-                        'action' => 'update_item',
-                        'method' => 'PUT',
-                        'path'   => '/{cart_id}/items/{item_key}',
-                    ),
-                    array(
-                        'action' => 'remove_item',
-                        'method' => 'DELETE',
-                        'path'   => '/{cart_id}/items/{item_key}',
-                    ),
-                    array(
-                        'action' => 'clear_cart',
-                        'method' => 'DELETE',
-                        'path'   => '/{cart_id}',
-                    ),
-                    array(
-                        'action' => 'checkout',
-                        'method' => 'POST',
-                        'path'   => '/{cart_id}/checkout',
-                    ),
-                ),
-            ),
-            'features' => array(
-                'persistent' => true,
-                'expiration' => '7 days',
-                'max_items'  => 100,
-            ),
-        );
+		// Cart capability.
+		$capabilities['cart'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/cart',
+				'methods'  => array(
+					array(
+						'action' => 'create_cart',
+						'method' => 'POST',
+						'path'   => '/',
+					),
+					array(
+						'action' => 'get_cart',
+						'method' => 'GET',
+						'path'   => '/{cart_id}',
+					),
+					array(
+						'action' => 'add_item',
+						'method' => 'POST',
+						'path'   => '/{cart_id}/items',
+					),
+					array(
+						'action' => 'update_item',
+						'method' => 'PUT',
+						'path'   => '/{cart_id}/items/{item_key}',
+					),
+					array(
+						'action' => 'remove_item',
+						'method' => 'DELETE',
+						'path'   => '/{cart_id}/items/{item_key}',
+					),
+					array(
+						'action' => 'clear_cart',
+						'method' => 'DELETE',
+						'path'   => '/{cart_id}',
+					),
+					array(
+						'action' => 'checkout',
+						'method' => 'POST',
+						'path'   => '/{cart_id}/checkout',
+					),
+				),
+			),
+			'features' => array(
+				'persistent' => true,
+				'expiration' => '7 days',
+				'max_items'  => 100,
+			),
+		);
 
-        // Shipping capability
-        $capabilities['shipping'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/shipping',
-                'methods'  => array(
-                    array(
-                        'action' => 'calculate_rates',
-                        'method' => 'POST',
-                        'path'   => '/rates',
-                    ),
-                    array(
-                        'action' => 'list_zones',
-                        'method' => 'GET',
-                        'path'   => '/zones',
-                    ),
-                    array(
-                        'action' => 'list_methods',
-                        'method' => 'GET',
-                        'path'   => '/methods',
-                    ),
-                ),
-            ),
-            'features' => array(
-                'rate_calculation'        => true,
-                'zones'                   => true,
-                'free_shipping_threshold' => true,
-            ),
-        );
+		// Shipping capability.
+		$capabilities['shipping'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/shipping',
+				'methods'  => array(
+					array(
+						'action' => 'calculate_rates',
+						'method' => 'POST',
+						'path'   => '/rates',
+					),
+					array(
+						'action' => 'list_zones',
+						'method' => 'GET',
+						'path'   => '/zones',
+					),
+					array(
+						'action' => 'list_methods',
+						'method' => 'GET',
+						'path'   => '/methods',
+					),
+				),
+			),
+			'features' => array(
+				'rate_calculation'        => true,
+				'zones'                   => true,
+				'free_shipping_threshold' => true,
+			),
+		);
 
-        // Coupons capability
-        $capabilities['coupons'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/coupons',
-                'methods'  => array(
-                    array(
-                        'action' => 'validate',
-                        'method' => 'POST',
-                        'path'   => '/validate',
-                    ),
-                    array(
-                        'action' => 'calculate',
-                        'method' => 'POST',
-                        'path'   => '/calculate',
-                    ),
-                    array(
-                        'action' => 'list_active',
-                        'method' => 'GET',
-                        'path'   => '/active',
-                    ),
-                ),
-            ),
-            'features' => array(
-                'validation'     => true,
-                'calculation'    => true,
-                'public_coupons' => get_option( 'ucp_wc_public_coupons', 'no' ) === 'yes',
-            ),
-        );
+		// Coupons capability.
+		$capabilities['coupons'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/coupons',
+				'methods'  => array(
+					array(
+						'action' => 'validate',
+						'method' => 'POST',
+						'path'   => '/validate',
+					),
+					array(
+						'action' => 'calculate',
+						'method' => 'POST',
+						'path'   => '/calculate',
+					),
+					array(
+						'action' => 'list_active',
+						'method' => 'GET',
+						'path'   => '/active',
+					),
+				),
+			),
+			'features' => array(
+				'validation'     => true,
+				'calculation'    => true,
+				'public_coupons' => get_option( 'ucp_wc_public_coupons', 'no' ) === 'yes',
+			),
+		);
 
-        // Customer capability
-        $capabilities['customer'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/customers',
-                'methods'  => array(
-                    array(
-                        'action' => 'create',
-                        'method' => 'POST',
-                        'path'   => '/',
-                    ),
-                    array(
-                        'action' => 'get',
-                        'method' => 'GET',
-                        'path'   => '/{customer_id}',
-                    ),
-                    array(
-                        'action' => 'update',
-                        'method' => 'PUT',
-                        'path'   => '/{customer_id}',
-                    ),
-                    array(
-                        'action' => 'get_addresses',
-                        'method' => 'GET',
-                        'path'   => '/{customer_id}/addresses',
-                    ),
-                    array(
-                        'action' => 'add_address',
-                        'method' => 'POST',
-                        'path'   => '/{customer_id}/addresses',
-                    ),
-                    array(
-                        'action' => 'get_orders',
-                        'method' => 'GET',
-                        'path'   => '/{customer_id}/orders',
-                    ),
-                    array(
-                        'action' => 'lookup',
-                        'method' => 'POST',
-                        'path'   => '/lookup',
-                    ),
-                ),
-            ),
-            'features' => array(
-                'registration'   => true,
-                'addresses'      => true,
-                'order_history'  => true,
-                'authentication' => 'api_key',
-            ),
-        );
+		// Customer capability.
+		$capabilities['customer'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/customers',
+				'methods'  => array(
+					array(
+						'action' => 'create',
+						'method' => 'POST',
+						'path'   => '/',
+					),
+					array(
+						'action' => 'get',
+						'method' => 'GET',
+						'path'   => '/{customer_id}',
+					),
+					array(
+						'action' => 'update',
+						'method' => 'PUT',
+						'path'   => '/{customer_id}',
+					),
+					array(
+						'action' => 'get_addresses',
+						'method' => 'GET',
+						'path'   => '/{customer_id}/addresses',
+					),
+					array(
+						'action' => 'add_address',
+						'method' => 'POST',
+						'path'   => '/{customer_id}/addresses',
+					),
+					array(
+						'action' => 'get_orders',
+						'method' => 'GET',
+						'path'   => '/{customer_id}/orders',
+					),
+					array(
+						'action' => 'lookup',
+						'method' => 'POST',
+						'path'   => '/lookup',
+					),
+				),
+			),
+			'features' => array(
+				'registration'   => true,
+				'addresses'      => true,
+				'order_history'  => true,
+				'authentication' => 'api_key',
+			),
+		);
 
-        // Reviews capability
-        $capabilities['reviews'] = array(
-            'enabled'  => true,
-            'version'  => '1.0',
-            'rest'     => array(
-                'endpoint' => $rest_url . '/reviews',
-                'methods'  => array(
-                    array(
-                        'action' => 'list',
-                        'method' => 'GET',
-                        'path'   => '/',
-                    ),
-                    array(
-                        'action' => 'get',
-                        'method' => 'GET',
-                        'path'   => '/{review_id}',
-                    ),
-                    array(
-                        'action' => 'create',
-                        'method' => 'POST',
-                        'path'   => '/',
-                    ),
-                    array(
-                        'action' => 'product_reviews',
-                        'method' => 'GET',
-                        'path'   => '/product/{product_id}',
-                    ),
-                    array(
-                        'action' => 'product_summary',
-                        'method' => 'GET',
-                        'path'   => '/product/{product_id}/summary',
-                    ),
-                ),
-            ),
-            'features' => array(
-                'ratings'         => true,
-                'verified_buyers' => true,
-                'moderation'      => true,
-            ),
-        );
+		// Reviews capability.
+		$capabilities['reviews'] = array(
+			'enabled'  => true,
+			'version'  => '1.0',
+			'rest'     => array(
+				'endpoint' => $rest_url . '/reviews',
+				'methods'  => array(
+					array(
+						'action' => 'list',
+						'method' => 'GET',
+						'path'   => '/',
+					),
+					array(
+						'action' => 'get',
+						'method' => 'GET',
+						'path'   => '/{review_id}',
+					),
+					array(
+						'action' => 'create',
+						'method' => 'POST',
+						'path'   => '/',
+					),
+					array(
+						'action' => 'product_reviews',
+						'method' => 'GET',
+						'path'   => '/product/{product_id}',
+					),
+					array(
+						'action' => 'product_summary',
+						'method' => 'GET',
+						'path'   => '/product/{product_id}/summary',
+					),
+				),
+			),
+			'features' => array(
+				'ratings'         => true,
+				'verified_buyers' => true,
+				'moderation'      => true,
+			),
+		);
 
-        return $capabilities;
-    }
+		return $capabilities;
+	}
 
-    /**
-     * Get authentication information for AI agents.
-     *
-     * @param string $rest_url Base REST URL.
-     * @return array
-     */
-    private function get_authentication_info( $rest_url ) {
-        return array(
-            'methods'   => array(
-                array(
-                    'type'        => 'api_key',
-                    'header'      => 'X-UCP-API-Key',
-                    'query'       => 'ucp_api_key',
-                    'format'      => '{key_id}:{secret}',
-                    'description' => 'API key authentication for AI agents. Obtain keys from the store admin.',
-                ),
-            ),
-            'endpoints' => array(
-                'create_key' => $rest_url . '/auth/keys',
-                'list_keys'  => $rest_url . '/auth/keys',
-                'revoke_key' => $rest_url . '/auth/keys/{key_id}',
-                'verify'     => $rest_url . '/auth/verify',
-            ),
-            'permissions' => array(
-                'read'  => 'Read-only access to catalog, products, and order status.',
-                'write' => 'Read access plus ability to create carts, checkout sessions, and orders.',
-                'admin' => 'Full access including API key management and customer lookup.',
-            ),
-        );
-    }
+	/**
+	 * Get authentication information for AI agents.
+	 *
+	 * @param string $rest_url Base REST URL.
+	 * @return array
+	 */
+	private function get_authentication_info( $rest_url ) {
+		return array(
+			'methods'     => array(
+				array(
+					'type'        => 'api_key',
+					'header'      => 'X-UCP-API-Key',
+					'query'       => 'ucp_api_key',
+					'format'      => '{key_id}:{secret}',
+					'description' => 'API key authentication for AI agents. Obtain keys from the store admin.',
+				),
+			),
+			'endpoints'   => array(
+				'create_key' => $rest_url . '/auth/keys',
+				'list_keys'  => $rest_url . '/auth/keys',
+				'revoke_key' => $rest_url . '/auth/keys/{key_id}',
+				'verify'     => $rest_url . '/auth/verify',
+			),
+			'permissions' => array(
+				'read'  => 'Read-only access to catalog, products, and order status.',
+				'write' => 'Read access plus ability to create carts, checkout sessions, and orders.',
+				'admin' => 'Full access including API key management and customer lookup.',
+			),
+		);
+	}
 
-    /**
-     * Get policy links.
-     *
-     * @return array
-     */
-    private function get_policies() {
-        $policies = array();
+	/**
+	 * Get policy links.
+	 *
+	 * @return array
+	 */
+	private function get_policies() {
+		$policies = array();
 
-        // Privacy policy
-        $privacy_page_id = get_option( 'wp_page_for_privacy_policy' );
-        if ( $privacy_page_id ) {
-            $policies['privacy'] = get_permalink( $privacy_page_id );
-        }
+		// Privacy policy.
+		$privacy_page_id = get_option( 'wp_page_for_privacy_policy' );
+		if ( $privacy_page_id ) {
+			$policies['privacy'] = get_permalink( $privacy_page_id );
+		}
 
-        // Terms and conditions (WooCommerce)
-        $terms_page_id = wc_terms_and_conditions_page_id();
-        if ( $terms_page_id ) {
-            $policies['terms'] = get_permalink( $terms_page_id );
-        }
+		// Terms and conditions (WooCommerce).
+		$terms_page_id = wc_terms_and_conditions_page_id();
+		if ( $terms_page_id ) {
+			$policies['terms'] = get_permalink( $terms_page_id );
+		}
 
-        // Refund policy page (if using WooCommerce 4.0+)
-        $refund_page_id = get_option( 'woocommerce_refund_returns_page_id' );
-        if ( $refund_page_id ) {
-            $policies['refund'] = get_permalink( $refund_page_id );
-        }
+		// Refund policy page (if using WooCommerce 4.0+).
+		$refund_page_id = get_option( 'woocommerce_refund_returns_page_id' );
+		if ( $refund_page_id ) {
+			$policies['refund'] = get_permalink( $refund_page_id );
+		}
 
-        // Shipping policy
-        $shipping_page_id = get_option( 'woocommerce_shipping_page_id' );
-        if ( $shipping_page_id ) {
-            $policies['shipping'] = get_permalink( $shipping_page_id );
-        }
+		// Shipping policy.
+		$shipping_page_id = get_option( 'woocommerce_shipping_page_id' );
+		if ( $shipping_page_id ) {
+			$policies['shipping'] = get_permalink( $shipping_page_id );
+		}
 
-        return $policies;
-    }
+		return $policies;
+	}
 
-    /**
-     * Get signing keys for webhook verification.
-     *
-     * @return array
-     */
-    private function get_signing_keys() {
-        $signing_key = UCP_WC_Activator::get_signing_key();
+	/**
+	 * Get signing keys for webhook verification.
+	 *
+	 * @return array
+	 */
+	private function get_signing_keys() {
+		$signing_key = UCP_WC_Activator::get_signing_key();
 
-        if ( empty( $signing_key ) ) {
-            return array();
-        }
+		if ( empty( $signing_key ) ) {
+			return array();
+		}
 
-        // Return the public key info for HMAC verification
-        // For HMAC-SHA256, we expose a key ID and algorithm
-        // The actual secret is NOT exposed - it's used for signing
-        $key_id = hash( 'sha256', $signing_key );
+		// Return the public key info for HMAC verification.
+		// For HMAC-SHA256, we expose a key ID and algorithm.
+		// The actual secret is NOT exposed - it's used for signing.
+		$key_id = hash( 'sha256', $signing_key );
 
-        return array(
-            array(
-                'key_id'    => substr( $key_id, 0, 16 ),
-                'algorithm' => 'HMAC-SHA256',
-                'status'    => 'active',
-                'created_at' => get_option( 'ucp_wc_key_created_at', gmdate( 'c' ) ),
-            ),
-        );
-    }
+		return array(
+			array(
+				'key_id'     => substr( $key_id, 0, 16 ),
+				'algorithm'  => 'HMAC-SHA256',
+				'status'     => 'active',
+				'created_at' => get_option( 'ucp_wc_key_created_at', gmdate( 'c' ) ),
+			),
+		);
+	}
 }

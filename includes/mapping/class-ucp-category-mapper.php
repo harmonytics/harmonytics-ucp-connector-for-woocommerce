@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Category mapper for UCP schema conversion.
  *
@@ -37,7 +36,7 @@ class UCP_WC_Category_Mapper {
 			'links'         => $this->map_links( $term ),
 		);
 
-		// Include children if requested
+		// Include children if requested.
 		if ( $include_children ) {
 			$mapped['children'] = $this->get_children( $term->term_id );
 		}
@@ -88,8 +87,8 @@ class UCP_WC_Category_Mapper {
 		return array(
 			'id'        => $thumbnail_id,
 			'url'       => $full_url,
-			'thumbnail' => $thumbnail_url ?: $full_url,
-			'alt'       => $alt_text ?: '',
+			'thumbnail' => $thumbnail_url ? $thumbnail_url : $full_url,
+			'alt'       => $alt_text ? $alt_text : '',
 		);
 	}
 
@@ -157,7 +156,7 @@ class UCP_WC_Category_Mapper {
 			'permalink' => get_term_link( $term ),
 		);
 
-		// Add parent link if category has a parent
+		// Add parent link if category has a parent.
 		if ( $term->parent > 0 ) {
 			$links['parent'] = rest_url( 'ucp/v1/categories/' . $term->parent );
 		}
@@ -176,7 +175,7 @@ class UCP_WC_Category_Mapper {
 		$tree = array();
 
 		foreach ( $categories as $category ) {
-			if ( $category['parent_id'] === ( $parent_id > 0 ? $parent_id : null ) ) {
+			if ( ( $parent_id > 0 ? $parent_id : null ) === $category['parent_id'] ) {
 				$children = $this->build_hierarchy( $categories, $category['id'] );
 
 				if ( ! empty( $children ) ) {

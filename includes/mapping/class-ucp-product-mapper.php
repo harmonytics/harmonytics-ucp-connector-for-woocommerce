@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Product mapper for UCP schema conversion.
  *
@@ -25,37 +24,37 @@ class UCP_WC_Product_Mapper {
 	 */
 	public function map_product( $product ) {
 		$mapped = array(
-			'id'               => $product->get_id(),
-			'sku'              => $product->get_sku(),
-			'name'             => $product->get_name(),
-			'slug'             => $product->get_slug(),
-			'type'             => $product->get_type(),
-			'status'           => $product->get_status(),
-			'description'      => $product->get_description(),
+			'id'                => $product->get_id(),
+			'sku'               => $product->get_sku(),
+			'name'              => $product->get_name(),
+			'slug'              => $product->get_slug(),
+			'type'              => $product->get_type(),
+			'status'            => $product->get_status(),
+			'description'       => $product->get_description(),
 			'short_description' => $product->get_short_description(),
-			'url'              => get_permalink( $product->get_id() ),
-			'pricing'          => $this->map_pricing( $product ),
-			'stock'            => $this->map_stock( $product ),
-			'images'           => $this->map_images( $product ),
-			'categories'       => $this->map_categories( $product ),
-			'tags'             => $this->map_tags( $product ),
-			'attributes'       => $this->map_attributes( $product ),
-			'dimensions'       => $this->map_dimensions( $product ),
-			'meta'             => $this->map_meta( $product ),
-			'dates'            => $this->map_dates( $product ),
-			'links'            => $this->map_links( $product ),
+			'url'               => get_permalink( $product->get_id() ),
+			'pricing'           => $this->map_pricing( $product ),
+			'stock'             => $this->map_stock( $product ),
+			'images'            => $this->map_images( $product ),
+			'categories'        => $this->map_categories( $product ),
+			'tags'              => $this->map_tags( $product ),
+			'attributes'        => $this->map_attributes( $product ),
+			'dimensions'        => $this->map_dimensions( $product ),
+			'meta'              => $this->map_meta( $product ),
+			'dates'             => $this->map_dates( $product ),
+			'links'             => $this->map_links( $product ),
 		);
 
-		// Add variations for variable products
+		// Add variations for variable products.
 		if ( $product->is_type( 'variable' ) ) {
 			$mapped['variations'] = $this->map_variations( $product );
 		}
 
-		// Add downloadable/virtual flags
+		// Add downloadable/virtual flags.
 		$mapped['is_virtual']      = $product->is_virtual();
 		$mapped['is_downloadable'] = $product->is_downloadable();
 
-		// Add featured flag
+		// Add featured flag.
 		$mapped['is_featured'] = $product->is_featured();
 
 		return $mapped;
@@ -69,19 +68,19 @@ class UCP_WC_Product_Mapper {
 	 */
 	public function map_product_summary( $product ) {
 		return array(
-			'id'               => $product->get_id(),
-			'sku'              => $product->get_sku(),
-			'name'             => $product->get_name(),
-			'slug'             => $product->get_slug(),
-			'type'             => $product->get_type(),
+			'id'                => $product->get_id(),
+			'sku'               => $product->get_sku(),
+			'name'              => $product->get_name(),
+			'slug'              => $product->get_slug(),
+			'type'              => $product->get_type(),
 			'short_description' => $product->get_short_description(),
-			'url'              => get_permalink( $product->get_id() ),
-			'pricing'          => $this->map_pricing( $product ),
-			'stock'            => $this->map_stock_summary( $product ),
-			'thumbnail'        => $this->get_product_thumbnail( $product ),
-			'categories'       => $this->map_category_names( $product ),
-			'is_featured'      => $product->is_featured(),
-			'is_virtual'       => $product->is_virtual(),
+			'url'               => get_permalink( $product->get_id() ),
+			'pricing'           => $this->map_pricing( $product ),
+			'stock'             => $this->map_stock_summary( $product ),
+			'thumbnail'         => $this->get_product_thumbnail( $product ),
+			'categories'        => $this->map_category_names( $product ),
+			'is_featured'       => $product->is_featured(),
+			'is_virtual'        => $product->is_virtual(),
 		);
 	}
 
@@ -93,15 +92,15 @@ class UCP_WC_Product_Mapper {
 	 */
 	private function map_pricing( $product ) {
 		$pricing = array(
-			'price'         => floatval( $product->get_price() ),
-			'regular_price' => floatval( $product->get_regular_price() ),
-			'currency'      => get_woocommerce_currency(),
+			'price'           => floatval( $product->get_price() ),
+			'regular_price'   => floatval( $product->get_regular_price() ),
+			'currency'        => get_woocommerce_currency(),
 			'currency_symbol' => get_woocommerce_currency_symbol(),
-			'price_html'    => $product->get_price_html(),
-			'on_sale'       => $product->is_on_sale(),
+			'price_html'      => $product->get_price_html(),
+			'on_sale'         => $product->is_on_sale(),
 		);
 
-		// Add sale price if on sale
+		// Add sale price if on sale.
 		if ( $product->is_on_sale() ) {
 			$pricing['sale_price'] = floatval( $product->get_sale_price() );
 
@@ -116,13 +115,13 @@ class UCP_WC_Product_Mapper {
 			}
 		}
 
-		// Add price range for variable products
+		// Add price range for variable products.
 		if ( $product->is_type( 'variable' ) ) {
 			$pricing['min_price'] = floatval( $product->get_variation_price( 'min' ) );
 			$pricing['max_price'] = floatval( $product->get_variation_price( 'max' ) );
 		}
 
-		// Add tax information
+		// Add tax information.
 		$pricing['tax_status'] = $product->get_tax_status();
 		$pricing['tax_class']  = $product->get_tax_class();
 
@@ -137,18 +136,18 @@ class UCP_WC_Product_Mapper {
 	 */
 	private function map_stock( $product ) {
 		$stock = array(
-			'manage_stock'    => $product->managing_stock(),
-			'stock_status'    => $product->get_stock_status(),
-			'in_stock'        => $product->is_in_stock(),
-			'purchasable'     => $product->is_purchasable(),
-			'backorders'      => $product->get_backorders(),
+			'manage_stock'       => $product->managing_stock(),
+			'stock_status'       => $product->get_stock_status(),
+			'in_stock'           => $product->is_in_stock(),
+			'purchasable'        => $product->is_purchasable(),
+			'backorders'         => $product->get_backorders(),
 			'backorders_allowed' => $product->backorders_allowed(),
-			'sold_individually' => $product->is_sold_individually(),
+			'sold_individually'  => $product->is_sold_individually(),
 		);
 
-		// Add quantity if stock is managed
+		// Add quantity if stock is managed.
 		if ( $product->managing_stock() ) {
-			$stock['quantity'] = $product->get_stock_quantity();
+			$stock['quantity']            = $product->get_stock_quantity();
 			$stock['low_stock_threshold'] = $product->get_low_stock_amount();
 		}
 
@@ -178,13 +177,13 @@ class UCP_WC_Product_Mapper {
 	private function map_images( $product ) {
 		$images = array();
 
-		// Main image
+		// Main image.
 		$image_id = $product->get_image_id();
 		if ( $image_id ) {
 			$images[] = $this->map_image( $image_id, true );
 		}
 
-		// Gallery images
+		// Gallery images.
 		$gallery_ids = $product->get_gallery_image_ids();
 		foreach ( $gallery_ids as $gallery_id ) {
 			$images[] = $this->map_image( $gallery_id, false );
@@ -225,10 +224,10 @@ class UCP_WC_Product_Mapper {
 
 		if ( $image_id ) {
 			$image_url = wp_get_attachment_image_url( $image_id, 'woocommerce_thumbnail' );
-			return $image_url ?: null;
+			return $image_url ? $image_url : null;
 		}
 
-		// Try parent product for variations
+		// Try parent product for variations.
 		if ( $product->is_type( 'variation' ) ) {
 			$parent = wc_get_product( $product->get_parent_id() );
 			if ( $parent ) {
@@ -328,7 +327,7 @@ class UCP_WC_Product_Mapper {
 					'variation' => $attribute->get_variation(),
 				);
 
-				// Get options/values
+				// Get options/values.
 				if ( $attribute->is_taxonomy() ) {
 					$terms = wc_get_product_terms(
 						$product->get_id(),
@@ -365,11 +364,11 @@ class UCP_WC_Product_Mapper {
 	 */
 	private function map_dimensions( $product ) {
 		return array(
-			'weight'      => $product->get_weight(),
-			'length'      => $product->get_length(),
-			'width'       => $product->get_width(),
-			'height'      => $product->get_height(),
-			'weight_unit' => get_option( 'woocommerce_weight_unit' ),
+			'weight'         => $product->get_weight(),
+			'length'         => $product->get_length(),
+			'width'          => $product->get_width(),
+			'height'         => $product->get_height(),
+			'weight_unit'    => get_option( 'woocommerce_weight_unit' ),
 			'dimension_unit' => get_option( 'woocommerce_dimension_unit' ),
 		);
 	}
@@ -386,16 +385,16 @@ class UCP_WC_Product_Mapper {
 			'menu_order'    => $product->get_menu_order(),
 		);
 
-		// Add review data
+		// Add review data.
 		$meta['reviews'] = array(
-			'enabled'       => $product->get_reviews_allowed(),
+			'enabled'        => $product->get_reviews_allowed(),
 			'average_rating' => floatval( $product->get_average_rating() ),
-			'review_count'  => intval( $product->get_review_count() ),
-			'rating_count'  => intval( $product->get_rating_count() ),
+			'review_count'   => intval( $product->get_review_count() ),
+			'rating_count'   => intval( $product->get_rating_count() ),
 		);
 
-		// Add cross-sells and upsells
-		$meta['upsell_ids']    = $product->get_upsell_ids();
+		// Add cross-sells and upsells.
+		$meta['upsell_ids']     = $product->get_upsell_ids();
 		$meta['cross_sell_ids'] = $product->get_cross_sell_ids();
 
 		return $meta;
@@ -422,8 +421,8 @@ class UCP_WC_Product_Mapper {
 	 */
 	private function map_links( $product ) {
 		return array(
-			'self'      => rest_url( 'ucp/v1/products/' . $product->get_id() ),
-			'permalink' => get_permalink( $product->get_id() ),
+			'self'        => rest_url( 'ucp/v1/products/' . $product->get_id() ),
+			'permalink'   => get_permalink( $product->get_id() ),
 			'add_to_cart' => $product->add_to_cart_url(),
 		);
 	}
@@ -445,20 +444,20 @@ class UCP_WC_Product_Mapper {
 			}
 
 			$variations[] = array(
-				'id'          => $variation->get_id(),
-				'sku'         => $variation->get_sku(),
-				'price'       => floatval( $variation->get_price() ),
-				'regular_price' => floatval( $variation->get_regular_price() ),
-				'sale_price'  => $variation->get_sale_price() ? floatval( $variation->get_sale_price() ) : null,
-				'on_sale'     => $variation->is_on_sale(),
-				'in_stock'    => $variation->is_in_stock(),
-				'stock_status' => $variation->get_stock_status(),
+				'id'             => $variation->get_id(),
+				'sku'            => $variation->get_sku(),
+				'price'          => floatval( $variation->get_price() ),
+				'regular_price'  => floatval( $variation->get_regular_price() ),
+				'sale_price'     => $variation->get_sale_price() ? floatval( $variation->get_sale_price() ) : null,
+				'on_sale'        => $variation->is_on_sale(),
+				'in_stock'       => $variation->is_in_stock(),
+				'stock_status'   => $variation->get_stock_status(),
 				'stock_quantity' => $variation->get_stock_quantity(),
-				'purchasable' => $variation->is_purchasable(),
-				'image'       => $this->get_product_thumbnail( $variation ),
-				'attributes'  => $this->map_variation_attributes( $variation ),
-				'dimensions'  => $this->map_dimensions( $variation ),
-				'weight'      => $variation->get_weight(),
+				'purchasable'    => $variation->is_purchasable(),
+				'image'          => $this->get_product_thumbnail( $variation ),
+				'attributes'     => $this->map_variation_attributes( $variation ),
+				'dimensions'     => $this->map_dimensions( $variation ),
+				'weight'         => $variation->get_weight(),
 			);
 		}
 
@@ -475,7 +474,7 @@ class UCP_WC_Product_Mapper {
 		$attributes = array();
 
 		foreach ( $variation->get_attributes() as $attribute_name => $attribute_value ) {
-			// Get clean attribute name
+			// Get clean attribute name.
 			$name = wc_attribute_label( str_replace( 'pa_', '', $attribute_name ) );
 
 			$attributes[] = array(

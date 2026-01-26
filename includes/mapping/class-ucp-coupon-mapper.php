@@ -1,5 +1,4 @@
 <?php
-// SPDX-License-Identifier: GPL-2.0-or-later
 /**
  * Coupon mapper for UCP schema conversion.
  *
@@ -167,8 +166,8 @@ class UCP_WC_Coupon_Mapper {
 
 		// Calculate subtotal.
 		foreach ( $items as $item ) {
-			$price    = isset( $item['price'] ) ? floatval( $item['price'] ) : 0;
-			$quantity = isset( $item['quantity'] ) ? absint( $item['quantity'] ) : 1;
+			$price     = isset( $item['price'] ) ? floatval( $item['price'] ) : 0;
+			$quantity  = isset( $item['quantity'] ) ? absint( $item['quantity'] ) : 1;
 			$subtotal += $price * $quantity;
 		}
 
