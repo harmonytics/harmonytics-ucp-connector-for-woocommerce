@@ -234,7 +234,7 @@ class UCP_WC_Admin {
 			'ucp_wc_admin',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'ucp_admin_nonce' ),
+				'nonce'    => wp_create_nonce( 'ucp_wc_admin_nonce' ),
 				'strings'  => array(
 					'confirm_rotate' => __( 'Are you sure you want to rotate the signing key? This will invalidate any existing webhook integrations.', 'harmonytics-ucp-connector-for-woocommerce' ),
 					'rotating'       => __( 'Rotating...', 'harmonytics-ucp-connector-for-woocommerce' ),
@@ -367,7 +367,7 @@ class UCP_WC_Admin {
 	 * AJAX: Rotate signing key.
 	 */
 	public function ajax_rotate_key() {
-		check_ajax_referer( 'ucp_admin_nonce', 'nonce' );
+		check_ajax_referer( 'ucp_wc_admin_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'harmonytics-ucp-connector-for-woocommerce' ) ) );
@@ -388,7 +388,7 @@ class UCP_WC_Admin {
 	 * AJAX: Test webhook.
 	 */
 	public function ajax_test_webhook() {
-		check_ajax_referer( 'ucp_admin_nonce', 'nonce' );
+		check_ajax_referer( 'ucp_wc_admin_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'harmonytics-ucp-connector-for-woocommerce' ) ) );
@@ -422,7 +422,7 @@ class UCP_WC_Admin {
 	 * AJAX: Retry failed webhooks.
 	 */
 	public function ajax_retry_failed() {
-		check_ajax_referer( 'ucp_admin_nonce', 'nonce' );
+		check_ajax_referer( 'ucp_wc_admin_nonce', 'nonce' );
 
 		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'harmonytics-ucp-connector-for-woocommerce' ) ) );
