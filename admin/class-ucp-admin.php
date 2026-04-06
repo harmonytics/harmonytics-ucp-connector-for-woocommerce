@@ -201,6 +201,17 @@ class UCP_WC_Admin {
 			);
 			return get_option( 'ucp_wc_webhook_url', '' );
 		}
+		$parsed = wp_parse_url( $url );
+		if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+			if ( empty( $parsed['scheme'] ) || 'https' !== $parsed['scheme'] ) {
+				add_settings_error(
+					'ucp_wc_webhook_url',
+					'not_https',
+					__( 'Webhook URL must use HTTPS for secure payload delivery.', 'harmonytics-ucp-connector-for-woocommerce' )
+				);
+				return get_option( 'ucp_wc_webhook_url', '' );
+			}
+		}
 		return $url;
 	}
 
@@ -210,7 +221,7 @@ class UCP_WC_Admin {
 	 * @param string $hook Current admin page.
 	 */
 	public function enqueue_scripts( $hook ) {
-		if ( strpos( $hook, self::PAGE_SLUG ) === false ) {
+		if ( false === strpos( $hook, self::PAGE_SLUG ) ) {
 			return;
 		}
 

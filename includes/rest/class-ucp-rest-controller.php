@@ -261,16 +261,11 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
 	 * @param array  $context Additional context.
 	 */
 	protected function log( $message, $context = array() ) {
-		if ( get_option( 'ucp_wc_debug_logging', 'no' ) === 'yes' && defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
-				$log_message = sprintf(
-					'[UCP] %s | Context: %s',
-					$message,
-					wp_json_encode( $context )
-				);
-                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional debug logging when WP_DEBUG_LOG is enabled.
-				error_log( $log_message );
-			}
+		if ( 'yes' === get_option( 'ucp_wc_debug_logging', 'no' ) ) {
+			wc_get_logger()->debug(
+				$message,
+				array_merge( $context, array( 'source' => 'ucp-connector' ) )
+			);
 		}
 	}
 

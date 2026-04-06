@@ -86,7 +86,7 @@ class UCP_WC_Activator {
 		// Sessions table.
 		$sessions_table = $wpdb->prefix . self::SESSIONS_TABLE;
 		$sessions_sql   = "CREATE TABLE {$sessions_table} (
-            id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
             session_id VARCHAR(64) UNIQUE NOT NULL,
             wc_order_id BIGINT UNSIGNED NULL,
             status VARCHAR(32) DEFAULT 'pending',
@@ -97,6 +97,7 @@ class UCP_WC_Activator {
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             expires_at DATETIME,
+            PRIMARY KEY  (id),
             INDEX idx_status (status),
             INDEX idx_wc_order_id (wc_order_id),
             INDEX idx_expires_at (expires_at)
@@ -105,7 +106,7 @@ class UCP_WC_Activator {
 		// Carts table.
 		$carts_table = $wpdb->prefix . self::CARTS_TABLE;
 		$carts_sql   = "CREATE TABLE {$carts_table} (
-            id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
             cart_id VARCHAR(64) UNIQUE NOT NULL,
             items LONGTEXT,
             metadata LONGTEXT,
@@ -114,6 +115,7 @@ class UCP_WC_Activator {
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             expires_at DATETIME,
+            PRIMARY KEY  (id),
             INDEX idx_status (status),
             INDEX idx_checkout_session_id (checkout_session_id),
             INDEX idx_expires_at (expires_at)
@@ -122,7 +124,7 @@ class UCP_WC_Activator {
 		// API keys table.
 		$api_keys_table = $wpdb->prefix . self::API_KEYS_TABLE;
 		$api_keys_sql   = "CREATE TABLE {$api_keys_table} (
-            id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
             key_id VARCHAR(50) UNIQUE NOT NULL,
             secret_hash VARCHAR(255) NOT NULL,
             description VARCHAR(255),
@@ -131,6 +133,7 @@ class UCP_WC_Activator {
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
             last_used_at DATETIME NULL,
             status VARCHAR(20) DEFAULT 'active',
+            PRIMARY KEY  (id),
             INDEX idx_key_id (key_id),
             INDEX idx_status (status),
             INDEX idx_user_id (user_id)

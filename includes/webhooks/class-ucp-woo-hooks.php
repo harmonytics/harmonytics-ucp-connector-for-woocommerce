@@ -260,17 +260,11 @@ class UCP_WC_Woo_Hooks {
 	 * @param array  $context Context.
 	 */
 	private function log( $message, $context = array() ) {
-		if ( get_option( 'ucp_wc_debug_logging', 'no' ) === 'yes' && defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
-                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Intentional debug logging when WP_DEBUG_LOG is enabled.
-				error_log(
-					sprintf(
-						'[UCP Hooks] %s | %s',
-						$message,
-						wp_json_encode( $context )
-					)
-				);
-			}
+		if ( 'yes' === get_option( 'ucp_wc_debug_logging', 'no' ) ) {
+			wc_get_logger()->debug(
+				'[Hooks] ' . $message,
+				array_merge( $context, array( 'source' => 'ucp-connector' ) )
+			);
 		}
 	}
 }

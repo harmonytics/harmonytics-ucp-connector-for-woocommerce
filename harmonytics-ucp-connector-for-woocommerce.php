@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name: Harmonytics UCP Connector for WooCommerce
- * Plugin URI: https://github.com/harmonytics/harmonytics-ucp-connector-for-woocommerce.
+ * Plugin URI: https://github.com/harmonytics/harmonytics-ucp-connector-for-woocommerce
  * Description: Adds Universal Commerce Protocol (UCP) capabilities to WooCommerce, enabling AI agents to discover, browse, and complete purchases.
  * Version: 1.0.0
  * Requires at least: 6.0
  * Requires PHP: 8.0
  * Author: Harmonytics
- * Author URI: https://harmonytics.com.
+ * Author URI: https://harmonytics.com
  * License: GPL-2.0-or-later
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html.
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: harmonytics-ucp-connector-for-woocommerce
  * Domain Path: /languages
  * Requires Plugins: woocommerce
@@ -110,6 +110,28 @@ function ucp_wc_init() {
 	$loader->run();
 }
 add_action( 'plugins_loaded', 'ucp_wc_init' );
+
+/**
+ * Declare WooCommerce feature compatibility.
+ */
+add_action( 'before_woocommerce_init', function () {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'product_block_editor', __FILE__, true );
+	}
+} );
+
+/**
+ * Load plugin text domain for translations.
+ */
+add_action( 'init', function () {
+	load_plugin_textdomain(
+		'harmonytics-ucp-connector-for-woocommerce',
+		false,
+		dirname( plugin_basename( __FILE__ ) ) . '/languages'
+	);
+} );
 
 /**
  * Plugin activation hook
