@@ -123,17 +123,6 @@ add_action( 'before_woocommerce_init', function () {
 } );
 
 /**
- * Load plugin text domain for translations.
- */
-add_action( 'init', function () {
-	load_plugin_textdomain(
-		'harmonytics-ucp-connector-for-woocommerce',
-		false,
-		dirname( plugin_basename( __FILE__ ) ) . '/languages'
-	);
-} );
-
-/**
  * Plugin activation hook
  */
 function ucp_wc_activate() {

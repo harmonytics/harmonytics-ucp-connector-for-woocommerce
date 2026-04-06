@@ -172,10 +172,10 @@ class UCP_WC_Auth {
 			return sanitize_text_field( wp_unslash( $_SERVER[ $header_key ] ) );
 		}
 
-		// Fall back to query parameter.
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- API key authentication, not form submission.
+		// Fall back to query parameter (API key authentication, not form submission).
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- API key extraction from query param, no form context.
 		if ( ! empty( $_GET[ self::QUERY_PARAM ] ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended.
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Same as above, reading API key from query param.
 			return sanitize_text_field( wp_unslash( $_GET[ self::QUERY_PARAM ] ) );
 		}
 
