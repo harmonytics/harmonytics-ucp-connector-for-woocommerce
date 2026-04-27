@@ -153,7 +153,7 @@ class HUCP_Customer_Mapper {
 		}
 
 		// Get additional addresses from customer meta (if stored).
-		$additional_addresses = $customer->get_meta( '_ucp_additional_addresses' );
+		$additional_addresses = $customer->get_meta( '_hucp_additional_addresses' );
 		if ( is_array( $additional_addresses ) ) {
 			foreach ( $additional_addresses as $index => $addr ) {
 				$addresses[] = array(

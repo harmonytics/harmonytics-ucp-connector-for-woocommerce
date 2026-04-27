@@ -370,7 +370,7 @@ class HUCP_Coupon_Controller extends HUCP_REST_Controller {
 			'meta_query'     => array(
 				'relation' => 'AND',
 				array(
-					'key'     => '_ucp_public_coupon',
+					'key'     => '_hucp_public_coupon',
 					'value'   => 'yes',
 					'compare' => '=',
 				),

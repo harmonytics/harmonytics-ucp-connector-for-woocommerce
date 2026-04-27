@@ -50,7 +50,7 @@ class Test_UCP_Order extends WC_Unit_Test_Case {
 
         // Create a test order with UCP session ID
         $this->test_order = WC_Helper_Order::create_order();
-        $this->test_order->update_meta_data( '_ucp_session_id', 'ucp_' . bin2hex( random_bytes( 16 ) ) );
+        $this->test_order->update_meta_data( '_hucp_session_id', 'ucp_' . bin2hex( random_bytes( 16 ) ) );
         $this->test_order->save();
     }
 
@@ -147,7 +147,7 @@ class Test_UCP_Order extends WC_Unit_Test_Case {
         global $wpdb;
 
         // Insert session record
-        $session_id = $this->test_order->get_meta( '_ucp_session_id' );
+        $session_id = $this->test_order->get_meta( '_hucp_session_id' );
         $table_name = HUCP_Activator::get_sessions_table();
 
         $wpdb->insert(

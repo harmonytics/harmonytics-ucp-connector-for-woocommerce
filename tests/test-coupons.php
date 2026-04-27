@@ -557,7 +557,7 @@ class Test_UCP_Coupons extends WC_Unit_Test_Case {
 			$wpdb->postmeta,
 			array(
 				'post_id'    => $coupon1->get_id(),
-				'meta_key'   => '_ucp_public_coupon',
+				'meta_key'   => '_hucp_public_coupon',
 				'meta_value' => 'yes',
 			),
 			array( '%d', '%s', '%s' )
@@ -574,7 +574,7 @@ class Test_UCP_Coupons extends WC_Unit_Test_Case {
 			$wpdb->postmeta,
 			array(
 				'post_id'    => $coupon2->get_id(),
-				'meta_key'   => '_ucp_public_coupon',
+				'meta_key'   => '_hucp_public_coupon',
 				'meta_value' => 'yes',
 			),
 			array( '%d', '%s', '%s' )

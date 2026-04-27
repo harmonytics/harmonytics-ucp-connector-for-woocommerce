@@ -222,8 +222,8 @@ class HUCP_Order_Mapper {
 	 */
 	private function map_meta( $order ) {
 		return array(
-			'ucp_session_id' => $order->get_meta( '_ucp_session_id' ),
-			'ucp_created_at' => $order->get_meta( '_ucp_created_at' ),
+			'ucp_session_id' => $order->get_meta( '_hucp_session_id' ),
+			'ucp_created_at' => $order->get_meta( '_hucp_created_at' ),
 			'customer_note'  => $order->get_customer_note(),
 			'coupons'        => $this->map_coupons( $order ),
 		);

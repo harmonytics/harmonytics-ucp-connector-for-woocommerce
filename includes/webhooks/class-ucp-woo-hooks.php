@@ -54,7 +54,7 @@ class HUCP_Woo_Hooks {
 		}
 
 		// Only trigger for UCP-created orders.
-		if ( ! $order->get_meta( '_ucp_session_id' ) ) {
+		if ( ! $order->get_meta( '_hucp_session_id' ) ) {
 			return;
 		}
 
@@ -64,7 +64,7 @@ class HUCP_Woo_Hooks {
 			'event_type' => 'order.created',
 			'timestamp'  => current_time( 'c' ),
 			'order_id'   => $order_id,
-			'session_id' => $order->get_meta( '_ucp_session_id' ),
+			'session_id' => $order->get_meta( '_hucp_session_id' ),
 			'data'       => $this->order_mapper->map_order_summary( $order ),
 		);
 
@@ -81,7 +81,7 @@ class HUCP_Woo_Hooks {
 	 */
 	public function on_order_status_changed( $order_id, $old_status, $new_status, $order ) {
 		// Only trigger for UCP-created orders.
-		if ( ! $order->get_meta( '_ucp_session_id' ) ) {
+		if ( ! $order->get_meta( '_hucp_session_id' ) ) {
 			return;
 		}
 
@@ -101,7 +101,7 @@ class HUCP_Woo_Hooks {
 			'event_type' => 'order.status_changed',
 			'timestamp'  => current_time( 'c' ),
 			'order_id'   => $order_id,
-			'session_id' => $order->get_meta( '_ucp_session_id' ),
+			'session_id' => $order->get_meta( '_hucp_session_id' ),
 			'data'       => array(
 				'from_status'     => $old_status,
 				'to_status'       => $new_status,
@@ -127,7 +127,7 @@ class HUCP_Woo_Hooks {
 		}
 
 		// Only trigger for UCP-created orders.
-		if ( ! $order->get_meta( '_ucp_session_id' ) ) {
+		if ( ! $order->get_meta( '_hucp_session_id' ) ) {
 			return;
 		}
 
@@ -137,7 +137,7 @@ class HUCP_Woo_Hooks {
 			'event_type' => 'order.paid',
 			'timestamp'  => current_time( 'c' ),
 			'order_id'   => $order_id,
-			'session_id' => $order->get_meta( '_ucp_session_id' ),
+			'session_id' => $order->get_meta( '_hucp_session_id' ),
 			'data'       => array(
 				'payment_method' => $order->get_payment_method(),
 				'transaction_id' => $order->get_transaction_id(),
@@ -164,7 +164,7 @@ class HUCP_Woo_Hooks {
 		}
 
 		// Only trigger for UCP-created orders.
-		if ( ! $order->get_meta( '_ucp_session_id' ) ) {
+		if ( ! $order->get_meta( '_hucp_session_id' ) ) {
 			return;
 		}
 
@@ -190,7 +190,7 @@ class HUCP_Woo_Hooks {
 			'event_type' => 'order.refunded',
 			'timestamp'  => current_time( 'c' ),
 			'order_id'   => $order_id,
-			'session_id' => $order->get_meta( '_ucp_session_id' ),
+			'session_id' => $order->get_meta( '_hucp_session_id' ),
 			'data'       => array(
 				'refund_id'      => $refund_id,
 				'refund_amount'  => $refund_amount,
@@ -214,7 +214,7 @@ class HUCP_Woo_Hooks {
 	private function update_session_status( $order, $new_status ) {
 		global $wpdb;
 
-		$session_id = $order->get_meta( '_ucp_session_id' );
+		$session_id = $order->get_meta( '_hucp_session_id' );
 		if ( ! $session_id ) {
 			return;
 		}

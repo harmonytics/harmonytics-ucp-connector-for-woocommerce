@@ -226,14 +226,14 @@ class HUCP_Admin {
 		}
 
 		wp_enqueue_style(
-			'ucp-admin',
+			'hucp-admin',
 			HUCP_PLUGIN_URL . 'admin/css/admin.css',
 			array(),
 			HUCP_VERSION
 		);
 
 		wp_enqueue_script(
-			'ucp-admin',
+			'hucp-admin',
 			HUCP_PLUGIN_URL . 'admin/js/admin.js',
 			array( 'jquery' ),
 			HUCP_VERSION,
@@ -241,7 +241,7 @@ class HUCP_Admin {
 		);
 
 		wp_localize_script(
-			'ucp-admin',
+			'hucp-admin',
 			'hucp_admin',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),

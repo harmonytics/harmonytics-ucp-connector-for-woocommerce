@@ -125,8 +125,8 @@ class HUCP_Checkout {
 		$order->calculate_totals();
 
 		// Store UCP session metadata.
-		$order->update_meta_data( '_ucp_session_id', $session_id );
-		$order->update_meta_data( '_ucp_created_at', current_time( 'mysql', true ) );
+		$order->update_meta_data( '_hucp_session_id', $session_id );
+		$order->update_meta_data( '_hucp_created_at', current_time( 'mysql', true ) );
 		$order->save();
 
 		// Save session to database.

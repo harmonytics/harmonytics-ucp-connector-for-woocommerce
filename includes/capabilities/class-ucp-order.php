@@ -83,7 +83,7 @@ class HUCP_Order {
 
 		// Only get orders created via UCP.
         // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Required to filter UCP-created orders, meta_key is indexed.
-		$query_args['meta_key']     = '_ucp_session_id';
+		$query_args['meta_key']     = '_hucp_session_id';
 		$query_args['meta_compare'] = 'EXISTS';
 
 		$orders = wc_get_orders( $query_args );

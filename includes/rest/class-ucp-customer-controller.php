@@ -815,7 +815,7 @@ class HUCP_Customer_Controller extends HUCP_REST_Controller {
 				}
 			} else {
 				// Store as additional address in customer meta.
-				$additional_addresses = $customer->get_meta( '_ucp_additional_addresses' );
+				$additional_addresses = $customer->get_meta( '_hucp_additional_addresses' );
 				if ( ! is_array( $additional_addresses ) ) {
 					$additional_addresses = array();
 				}
@@ -824,7 +824,7 @@ class HUCP_Customer_Controller extends HUCP_REST_Controller {
 				$wc_address['label']    = $label;
 				$additional_addresses[] = $wc_address;
 
-				$customer->update_meta_data( '_ucp_additional_addresses', $additional_addresses );
+				$customer->update_meta_data( '_hucp_additional_addresses', $additional_addresses );
 			}
 
 			$customer->save();
