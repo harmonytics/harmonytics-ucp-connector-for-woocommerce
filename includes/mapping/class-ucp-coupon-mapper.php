@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Coupon_Mapper
+ * Class HUCP_Coupon_Mapper
  *
  * Maps WooCommerce coupons to UCP coupon schema.
  */
-class UCP_WC_Coupon_Mapper {
+class HUCP_Coupon_Mapper {
 
 	/**
 	 * Map a WooCommerce coupon to UCP validation response format.

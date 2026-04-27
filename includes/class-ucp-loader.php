@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Loader
+ * Class HUCP_Loader
  *
  * Registers all actions and filters for the plugin.
  */
-class UCP_WC_Loader {
+class HUCP_Loader {
 
 	/**
 	 * Array of actions registered with WordPress.
@@ -33,91 +33,91 @@ class UCP_WC_Loader {
 	/**
 	 * Well-known handler instance.
 	 *
-	 * @var UCP_WC_Well_Known
+	 * @var HUCP_Well_Known
 	 */
 	protected $well_known;
 
 	/**
 	 * Checkout controller instance.
 	 *
-	 * @var UCP_WC_Checkout_Controller
+	 * @var HUCP_Checkout_Controller
 	 */
 	protected $checkout_controller;
 
 	/**
 	 * Order controller instance.
 	 *
-	 * @var UCP_WC_Order_Controller
+	 * @var HUCP_Order_Controller
 	 */
 	protected $order_controller;
 
 	/**
 	 * Product controller instance.
 	 *
-	 * @var UCP_WC_Product_Controller
+	 * @var HUCP_Product_Controller
 	 */
 	protected $product_controller;
 
 	/**
 	 * Category controller instance.
 	 *
-	 * @var UCP_WC_Category_Controller
+	 * @var HUCP_Category_Controller
 	 */
 	protected $category_controller;
 
 	/**
 	 * Cart controller instance.
 	 *
-	 * @var UCP_WC_Cart_Controller
+	 * @var HUCP_Cart_Controller
 	 */
 	protected $cart_controller;
 
 	/**
 	 * Shipping controller instance.
 	 *
-	 * @var UCP_WC_Shipping_Controller
+	 * @var HUCP_Shipping_Controller
 	 */
 	protected $shipping_controller;
 
 	/**
 	 * Coupon controller instance.
 	 *
-	 * @var UCP_WC_Coupon_Controller
+	 * @var HUCP_Coupon_Controller
 	 */
 	protected $coupon_controller;
 
 	/**
 	 * Customer controller instance.
 	 *
-	 * @var UCP_WC_Customer_Controller
+	 * @var HUCP_Customer_Controller
 	 */
 	protected $customer_controller;
 
 	/**
 	 * Review controller instance.
 	 *
-	 * @var UCP_WC_Review_Controller
+	 * @var HUCP_Review_Controller
 	 */
 	protected $review_controller;
 
 	/**
 	 * WooCommerce hooks handler instance.
 	 *
-	 * @var UCP_WC_Woo_Hooks
+	 * @var HUCP_Woo_Hooks
 	 */
 	protected $woo_hooks;
 
 	/**
 	 * Auth handler instance.
 	 *
-	 * @var UCP_WC_Auth
+	 * @var HUCP_Auth
 	 */
 	protected $auth;
 
 	/**
 	 * Auth controller instance.
 	 *
-	 * @var UCP_WC_Auth_Controller
+	 * @var HUCP_Auth_Controller
 	 */
 	protected $auth_controller;
 
@@ -125,19 +125,19 @@ class UCP_WC_Loader {
 	 * Initialize the loader.
 	 */
 	public function __construct() {
-		$this->well_known          = new UCP_WC_Well_Known();
-		$this->auth                = new UCP_WC_Auth();
-		$this->auth_controller     = new UCP_WC_Auth_Controller();
-		$this->checkout_controller = new UCP_WC_Checkout_Controller();
-		$this->order_controller    = new UCP_WC_Order_Controller();
-		$this->product_controller  = new UCP_WC_Product_Controller();
-		$this->category_controller = new UCP_WC_Category_Controller();
-		$this->cart_controller     = new UCP_WC_Cart_Controller();
-		$this->shipping_controller = new UCP_WC_Shipping_Controller();
-		$this->coupon_controller   = new UCP_WC_Coupon_Controller();
-		$this->customer_controller = new UCP_WC_Customer_Controller();
-		$this->review_controller   = new UCP_WC_Review_Controller();
-		$this->woo_hooks           = new UCP_WC_Woo_Hooks();
+		$this->well_known          = new HUCP_Well_Known();
+		$this->auth                = new HUCP_Auth();
+		$this->auth_controller     = new HUCP_Auth_Controller();
+		$this->checkout_controller = new HUCP_Checkout_Controller();
+		$this->order_controller    = new HUCP_Order_Controller();
+		$this->product_controller  = new HUCP_Product_Controller();
+		$this->category_controller = new HUCP_Category_Controller();
+		$this->cart_controller     = new HUCP_Cart_Controller();
+		$this->shipping_controller = new HUCP_Shipping_Controller();
+		$this->coupon_controller   = new HUCP_Coupon_Controller();
+		$this->customer_controller = new HUCP_Customer_Controller();
+		$this->review_controller   = new HUCP_Review_Controller();
+		$this->woo_hooks           = new HUCP_Woo_Hooks();
 	}
 
 	/**

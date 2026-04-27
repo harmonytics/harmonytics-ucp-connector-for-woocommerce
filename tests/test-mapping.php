@@ -18,21 +18,21 @@ class Test_UCP_Mapping extends WC_Unit_Test_Case {
     /**
      * Address mapper instance.
      *
-     * @var UCP_WC_Address_Mapper
+     * @var HUCP_Address_Mapper
      */
     protected $address_mapper;
 
     /**
      * Line item mapper instance.
      *
-     * @var UCP_WC_Line_Item_Mapper
+     * @var HUCP_Line_Item_Mapper
      */
     protected $line_item_mapper;
 
     /**
      * Order mapper instance.
      *
-     * @var UCP_WC_Order_Mapper
+     * @var HUCP_Order_Mapper
      */
     protected $order_mapper;
 
@@ -42,14 +42,14 @@ class Test_UCP_Mapping extends WC_Unit_Test_Case {
     public function set_up() {
         parent::set_up();
 
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-order-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-order-mapper.php';
 
-        $this->address_mapper   = new UCP_WC_Address_Mapper();
-        $this->line_item_mapper = new UCP_WC_Line_Item_Mapper();
-        $this->order_mapper     = new UCP_WC_Order_Mapper();
+        $this->address_mapper   = new HUCP_Address_Mapper();
+        $this->line_item_mapper = new HUCP_Line_Item_Mapper();
+        $this->order_mapper     = new HUCP_Order_Mapper();
     }
 
     /**

@@ -18,7 +18,7 @@ class Test_UCP_Well_Known extends WP_UnitTestCase {
     /**
      * Well-known handler instance.
      *
-     * @var UCP_WC_Well_Known
+     * @var HUCP_Well_Known
      */
     protected $well_known;
 
@@ -28,14 +28,14 @@ class Test_UCP_Well_Known extends WP_UnitTestCase {
     public function set_up() {
         parent::set_up();
 
-        require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-well-known.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-well-known.php';
 
-        $this->well_known = new UCP_WC_Well_Known();
+        $this->well_known = new HUCP_Well_Known();
 
         // Enable UCP
-        update_option( 'ucp_wc_enabled', 'yes' );
-        update_option( 'ucp_wc_guest_checkout', 'yes' );
+        update_option( 'hucp_enabled', 'yes' );
+        update_option( 'hucp_guest_checkout', 'yes' );
     }
 
     /**
@@ -100,7 +100,7 @@ class Test_UCP_Well_Known extends WP_UnitTestCase {
         $profile = $this->well_known->get_business_profile();
 
         $this->assertEquals( 'WooCommerce', $profile['metadata']['platform'] );
-        $this->assertEquals( UCP_WC_VERSION, $profile['metadata']['plugin_version'] );
+        $this->assertEquals( HUCP_VERSION, $profile['metadata']['plugin_version'] );
         $this->assertArrayHasKey( 'updated_at', $profile['metadata'] );
     }
 
@@ -126,7 +126,7 @@ class Test_UCP_Well_Known extends WP_UnitTestCase {
      * Test UCP disabled returns no profile.
      */
     public function test_disabled_ucp() {
-        update_option( 'ucp_wc_enabled', 'no' );
+        update_option( 'hucp_enabled', 'no' );
 
         // The profile should still be generated, but the request handler
         // would return a 503 error. We test the profile generation here.

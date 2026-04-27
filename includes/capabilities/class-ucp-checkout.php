@@ -10,30 +10,30 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Checkout
+ * Class HUCP_Checkout
  *
  * Handles checkout session creation, management, and confirmation.
  */
-class UCP_WC_Checkout {
+class HUCP_Checkout {
 
 	/**
 	 * Line item mapper.
 	 *
-	 * @var UCP_WC_Line_Item_Mapper
+	 * @var HUCP_Line_Item_Mapper
 	 */
 	protected $line_item_mapper;
 
 	/**
 	 * Address mapper.
 	 *
-	 * @var UCP_WC_Address_Mapper
+	 * @var HUCP_Address_Mapper
 	 */
 	protected $address_mapper;
 
 	/**
 	 * Shipping mapper.
 	 *
-	 * @var UCP_WC_Shipping_Mapper
+	 * @var HUCP_Shipping_Mapper
 	 */
 	protected $shipping_mapper;
 
@@ -41,9 +41,9 @@ class UCP_WC_Checkout {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->line_item_mapper = new UCP_WC_Line_Item_Mapper();
-		$this->address_mapper   = new UCP_WC_Address_Mapper();
-		$this->shipping_mapper  = new UCP_WC_Shipping_Mapper();
+		$this->line_item_mapper = new HUCP_Line_Item_Mapper();
+		$this->address_mapper   = new HUCP_Address_Mapper();
+		$this->shipping_mapper  = new HUCP_Shipping_Mapper();
 	}
 
 	/**
@@ -142,7 +142,7 @@ class UCP_WC_Checkout {
 			'expires_at'    => gmdate( 'Y-m-d H:i:s', strtotime( '+24 hours' ) ),
 		);
 
-		$table_name = UCP_WC_Activator::get_sessions_table();
+		$table_name = HUCP_Activator::get_sessions_table();
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for UCP sessions, no WP API available.
 		$wpdb->insert( $table_name, $session_data );
 
@@ -173,7 +173,7 @@ class UCP_WC_Checkout {
 	public function get_session( $session_id ) {
 		global $wpdb;
 
-		$table_name = UCP_WC_Activator::get_sessions_table();
+		$table_name = HUCP_Activator::get_sessions_table();
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table for UCP sessions, table name from trusted internal source.
 		$session = $wpdb->get_row(
 			$wpdb->prepare(
@@ -242,7 +242,7 @@ class UCP_WC_Checkout {
 	public function update_session( $session_id, $updates ) {
 		global $wpdb;
 
-		$table_name = UCP_WC_Activator::get_sessions_table();
+		$table_name = HUCP_Activator::get_sessions_table();
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table for UCP sessions, table name from trusted internal source.
 		$session = $wpdb->get_row(
 			$wpdb->prepare(
@@ -336,7 +336,7 @@ class UCP_WC_Checkout {
 	public function confirm_session( $session_id, $shipping_method = null, $payment_method = null ) {
 		global $wpdb;
 
-		$table_name = UCP_WC_Activator::get_sessions_table();
+		$table_name = HUCP_Activator::get_sessions_table();
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table for UCP sessions, table name from trusted internal source.
 		$session = $wpdb->get_row(
 			$wpdb->prepare(
@@ -697,7 +697,7 @@ class UCP_WC_Checkout {
 
 		// Most payment methods require web checkout for security.
 		// Only skip for specific pre-authorized methods.
-		$agentic_methods = apply_filters( 'ucp_wc_agentic_payment_methods', array() );
+		$agentic_methods = apply_filters( 'hucp_agentic_payment_methods', array() );
 
 		if ( $payment_method && in_array( $payment_method, $agentic_methods, true ) ) {
 			return false;

@@ -10,23 +10,23 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Woo_Hooks
+ * Class HUCP_Woo_Hooks
  *
  * Handles WooCommerce hooks and triggers UCP events.
  */
-class UCP_WC_Woo_Hooks {
+class HUCP_Woo_Hooks {
 
 	/**
 	 * Webhook sender instance.
 	 *
-	 * @var UCP_WC_Webhook_Sender
+	 * @var HUCP_Webhook_Sender
 	 */
 	protected $webhook_sender;
 
 	/**
 	 * Order mapper instance.
 	 *
-	 * @var UCP_WC_Order_Mapper
+	 * @var HUCP_Order_Mapper
 	 */
 	protected $order_mapper;
 
@@ -34,8 +34,8 @@ class UCP_WC_Woo_Hooks {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->webhook_sender = new UCP_WC_Webhook_Sender();
-		$this->order_mapper   = new UCP_WC_Order_Mapper();
+		$this->webhook_sender = new HUCP_Webhook_Sender();
+		$this->order_mapper   = new HUCP_Order_Mapper();
 	}
 
 	/**
@@ -219,7 +219,7 @@ class UCP_WC_Woo_Hooks {
 			return;
 		}
 
-		$table_name = UCP_WC_Activator::get_sessions_table();
+		$table_name = HUCP_Activator::get_sessions_table();
 
 		// Map WC status to session status.
 		$session_status = 'pending';
@@ -260,7 +260,7 @@ class UCP_WC_Woo_Hooks {
 	 * @param array  $context Context.
 	 */
 	private function log( $message, $context = array() ) {
-		if ( 'yes' === get_option( 'ucp_wc_debug_logging', 'no' ) ) {
+		if ( 'yes' === get_option( 'hucp_debug_logging', 'no' ) ) {
 			wc_get_logger()->debug(
 				'[Hooks] ' . $message,
 				array_merge( $context, array( 'source' => 'ucp-connector' ) )

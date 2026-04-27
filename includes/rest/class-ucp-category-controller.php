@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Category_Controller
+ * Class HUCP_Category_Controller
  *
  * Handles category REST API endpoints for UCP.
  */
-class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
+class HUCP_Category_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,14 +26,14 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Category mapper instance.
 	 *
-	 * @var UCP_WC_Category_Mapper
+	 * @var HUCP_Category_Mapper
 	 */
 	protected $category_mapper;
 
 	/**
 	 * Product mapper instance.
 	 *
-	 * @var UCP_WC_Product_Mapper
+	 * @var HUCP_Product_Mapper
 	 */
 	protected $product_mapper;
 
@@ -41,8 +41,8 @@ class UCP_WC_Category_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->category_mapper = new UCP_WC_Category_Mapper();
-		$this->product_mapper  = new UCP_WC_Product_Mapper();
+		$this->category_mapper = new HUCP_Category_Mapper();
+		$this->product_mapper  = new HUCP_Product_Mapper();
 	}
 
 	/**

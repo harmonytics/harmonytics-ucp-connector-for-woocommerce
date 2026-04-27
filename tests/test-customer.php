@@ -18,14 +18,14 @@ class Test_UCP_Customer extends WC_Unit_Test_Case {
 	/**
 	 * Customer controller instance.
 	 *
-	 * @var UCP_WC_Customer_Controller
+	 * @var HUCP_Customer_Controller
 	 */
 	protected $controller;
 
 	/**
 	 * Customer mapper instance.
 	 *
-	 * @var UCP_WC_Customer_Mapper
+	 * @var HUCP_Customer_Mapper
 	 */
 	protected $mapper;
 
@@ -57,20 +57,20 @@ class Test_UCP_Customer extends WC_Unit_Test_Case {
 		parent::set_up();
 
 		// Load required classes.
-		require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-order-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-customer-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-customer-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-order-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-customer-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-customer-controller.php';
 
 		// Create tables.
-		UCP_WC_Activator::activate();
+		HUCP_Activator::activate();
 
-		$this->controller = new UCP_WC_Customer_Controller();
-		$this->mapper     = new UCP_WC_Customer_Mapper();
+		$this->controller = new HUCP_Customer_Controller();
+		$this->mapper     = new HUCP_Customer_Mapper();
 
 		// Create an admin user.
 		$this->admin_user_id = $this->factory->user->create(
@@ -115,7 +115,7 @@ class Test_UCP_Customer extends WC_Unit_Test_Case {
 		$this->test_customer->save();
 
 		// Enable UCP.
-		update_option( 'ucp_wc_enabled', 'yes' );
+		update_option( 'hucp_enabled', 'yes' );
 	}
 
 	/**

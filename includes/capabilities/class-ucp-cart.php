@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Cart
+ * Class HUCP_Cart
  *
  * Handles cart creation, management, and conversion to checkout sessions.
  */
-class UCP_WC_Cart {
+class HUCP_Cart {
 
 	/**
 	 * Database table name for UCP carts.
@@ -40,14 +40,14 @@ class UCP_WC_Cart {
 	/**
 	 * Line item mapper.
 	 *
-	 * @var UCP_WC_Line_Item_Mapper
+	 * @var HUCP_Line_Item_Mapper
 	 */
 	protected $line_item_mapper;
 
 	/**
 	 * Product mapper.
 	 *
-	 * @var UCP_WC_Product_Mapper
+	 * @var HUCP_Product_Mapper
 	 */
 	protected $product_mapper;
 
@@ -55,8 +55,8 @@ class UCP_WC_Cart {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->line_item_mapper = new UCP_WC_Line_Item_Mapper();
-		$this->product_mapper   = new UCP_WC_Product_Mapper();
+		$this->line_item_mapper = new HUCP_Line_Item_Mapper();
+		$this->product_mapper   = new HUCP_Product_Mapper();
 	}
 
 	/**
@@ -506,7 +506,7 @@ class UCP_WC_Cart {
 		}
 
 		// Create checkout session using the checkout capability.
-		$checkout = new UCP_WC_Checkout();
+		$checkout = new HUCP_Checkout();
 		$result   = $checkout->create_session(
 			$checkout_items,
 			$shipping_address,

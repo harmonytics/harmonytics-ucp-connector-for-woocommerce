@@ -18,14 +18,14 @@ class Test_UCP_Shipping extends WC_Unit_Test_Case {
 	/**
 	 * Shipping controller instance.
 	 *
-	 * @var UCP_WC_Shipping_Controller
+	 * @var HUCP_Shipping_Controller
 	 */
 	protected $shipping_controller;
 
 	/**
 	 * Shipping mapper instance.
 	 *
-	 * @var UCP_WC_Shipping_Mapper
+	 * @var HUCP_Shipping_Mapper
 	 */
 	protected $shipping_mapper;
 
@@ -71,16 +71,16 @@ class Test_UCP_Shipping extends WC_Unit_Test_Case {
 		parent::set_up();
 
 		// Load required classes.
-		require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-shipping-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-shipping-controller.php';
 
 		// Create tables.
-		UCP_WC_Activator::activate();
+		HUCP_Activator::activate();
 
 		// Enable UCP.
-		update_option( 'ucp_wc_enabled', 'yes' );
+		update_option( 'hucp_enabled', 'yes' );
 
 		// Create test product with weight.
 		$this->product = WC_Helper_Product::create_simple_product();
@@ -143,8 +143,8 @@ class Test_UCP_Shipping extends WC_Unit_Test_Case {
 		delete_transient( 'wc_shipping_zones' );
 
 		// Create controller and mapper AFTER shipping setup to ensure clean state.
-		$this->shipping_mapper     = new UCP_WC_Shipping_Mapper();
-		$this->shipping_controller = new UCP_WC_Shipping_Controller();
+		$this->shipping_mapper     = new HUCP_Shipping_Mapper();
+		$this->shipping_controller = new HUCP_Shipping_Controller();
 	}
 
 	/**

@@ -18,7 +18,7 @@ class Test_UCP_Order extends WC_Unit_Test_Case {
     /**
      * Order capability instance.
      *
-     * @var UCP_WC_Order
+     * @var HUCP_Order
      */
     protected $order_capability;
 
@@ -36,17 +36,17 @@ class Test_UCP_Order extends WC_Unit_Test_Case {
         parent::set_up();
 
         // Load required classes
-        require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-order-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/capabilities/class-ucp-order.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-order-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/capabilities/class-ucp-order.php';
 
         // Create tables
-        UCP_WC_Activator::activate();
+        HUCP_Activator::activate();
 
-        $this->order_capability = new UCP_WC_Order();
+        $this->order_capability = new HUCP_Order();
 
         // Create a test order with UCP session ID
         $this->test_order = WC_Helper_Order::create_order();
@@ -148,7 +148,7 @@ class Test_UCP_Order extends WC_Unit_Test_Case {
 
         // Insert session record
         $session_id = $this->test_order->get_meta( '_ucp_session_id' );
-        $table_name = UCP_WC_Activator::get_sessions_table();
+        $table_name = HUCP_Activator::get_sessions_table();
 
         $wpdb->insert(
             $table_name,
@@ -169,7 +169,7 @@ class Test_UCP_Order extends WC_Unit_Test_Case {
      * Test status mapping.
      */
     public function test_status_mapping() {
-        $mapper = new UCP_WC_Order_Mapper();
+        $mapper = new HUCP_Order_Mapper();
 
         $this->assertEquals( 'awaiting_payment', $mapper->map_status( 'pending' ) );
         $this->assertEquals( 'awaiting_payment', $mapper->map_status( 'on-hold' ) );

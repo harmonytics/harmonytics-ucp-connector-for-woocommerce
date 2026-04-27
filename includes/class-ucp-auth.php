@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Auth
+ * Class HUCP_Auth
  *
  * Handles API key-based authentication for AI agents.
  */
-class UCP_WC_Auth {
+class HUCP_Auth {
 
 	/**
 	 * Database table name for API keys.

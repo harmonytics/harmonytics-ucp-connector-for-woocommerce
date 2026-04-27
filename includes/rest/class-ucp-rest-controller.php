@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_REST_Controller
+ * Class HUCP_REST_Controller
  *
  * Base controller class for UCP REST API endpoints.
  */
-abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
+abstract class HUCP_REST_Controller extends WP_REST_Controller {
 
 	/**
 	 * Namespace for REST routes.
@@ -29,7 +29,7 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
 	 * @return bool
 	 */
 	protected function is_ucp_enabled() {
-		return get_option( 'ucp_wc_enabled', 'yes' ) === 'yes';
+		return get_option( 'hucp_enabled', 'yes' ) === 'yes';
 	}
 
 	/**
@@ -177,7 +177,7 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
 	 */
 	protected function is_authenticated() {
 		// Check if authenticated via API key.
-		if ( class_exists( 'UCP_WC_Auth' ) && UCP_WC_Auth::is_api_key_authenticated() ) {
+		if ( class_exists( 'HUCP_Auth' ) && HUCP_Auth::is_api_key_authenticated() ) {
 			return true;
 		}
 
@@ -192,8 +192,8 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
 	 * @return bool
 	 */
 	protected function has_permission( $permission ) {
-		if ( class_exists( 'UCP_WC_Auth' ) ) {
-			return UCP_WC_Auth::check_permission( $permission );
+		if ( class_exists( 'HUCP_Auth' ) ) {
+			return HUCP_Auth::check_permission( $permission );
 		}
 
 		// Fallback: check WordPress capabilities.
@@ -206,8 +206,8 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
 	 * @return array|null
 	 */
 	protected function get_current_api_key() {
-		if ( class_exists( 'UCP_WC_Auth' ) ) {
-			return UCP_WC_Auth::get_current_api_key();
+		if ( class_exists( 'HUCP_Auth' ) ) {
+			return HUCP_Auth::get_current_api_key();
 		}
 		return null;
 	}
@@ -261,7 +261,7 @@ abstract class UCP_WC_REST_Controller extends WP_REST_Controller {
 	 * @param array  $context Additional context.
 	 */
 	protected function log( $message, $context = array() ) {
-		if ( 'yes' === get_option( 'ucp_wc_debug_logging', 'no' ) ) {
+		if ( 'yes' === get_option( 'hucp_debug_logging', 'no' ) ) {
 			wc_get_logger()->debug(
 				$message,
 				array_merge( $context, array( 'source' => 'ucp-connector' ) )

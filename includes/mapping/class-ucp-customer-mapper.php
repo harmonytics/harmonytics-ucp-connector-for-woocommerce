@@ -10,16 +10,16 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Customer_Mapper
+ * Class HUCP_Customer_Mapper
  *
  * Maps WooCommerce customers to UCP customer schema.
  */
-class UCP_WC_Customer_Mapper {
+class HUCP_Customer_Mapper {
 
 	/**
 	 * Address mapper.
 	 *
-	 * @var UCP_WC_Address_Mapper
+	 * @var HUCP_Address_Mapper
 	 */
 	protected $address_mapper;
 
@@ -27,7 +27,7 @@ class UCP_WC_Customer_Mapper {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->address_mapper = new UCP_WC_Address_Mapper();
+		$this->address_mapper = new HUCP_Address_Mapper();
 	}
 
 	/**
@@ -205,7 +205,7 @@ class UCP_WC_Customer_Mapper {
 	 * @return array
 	 */
 	public function get_order_history_summary( $customer, $limit = 5 ) {
-		$order_mapper = new UCP_WC_Order_Mapper();
+		$order_mapper = new HUCP_Order_Mapper();
 
 		$orders = wc_get_orders(
 			array(
@@ -247,7 +247,7 @@ class UCP_WC_Customer_Mapper {
 		);
 
 		$args         = wp_parse_args( $args, $defaults );
-		$order_mapper = new UCP_WC_Order_Mapper();
+		$order_mapper = new HUCP_Order_Mapper();
 
 		$query_args = array(
 			'customer_id' => $customer_id,

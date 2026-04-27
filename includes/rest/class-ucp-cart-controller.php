@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Cart_Controller
+ * Class HUCP_Cart_Controller
  *
  * Handles cart-related REST API endpoints.
  */
-class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
+class HUCP_Cart_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Cart capability handler.
 	 *
-	 * @var UCP_WC_Cart
+	 * @var HUCP_Cart
 	 */
 	protected $cart;
 
@@ -34,7 +34,7 @@ class UCP_WC_Cart_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->cart = new UCP_WC_Cart();
+		$this->cart = new HUCP_Cart();
 	}
 
 	/**

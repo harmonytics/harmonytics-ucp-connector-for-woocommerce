@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Customer_Controller
+ * Class HUCP_Customer_Controller
  *
  * Handles customer-related REST API endpoints.
  */
-class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
+class HUCP_Customer_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Customer mapper.
 	 *
-	 * @var UCP_WC_Customer_Mapper
+	 * @var HUCP_Customer_Mapper
 	 */
 	protected $mapper;
 
@@ -34,7 +34,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->mapper = new UCP_WC_Customer_Mapper();
+		$this->mapper = new HUCP_Customer_Mapper();
 	}
 
 	/**
@@ -772,7 +772,7 @@ class UCP_WC_Customer_Controller extends UCP_WC_REST_Controller {
 			}
 
 			// Validate address.
-			$address_mapper = new UCP_WC_Address_Mapper();
+			$address_mapper = new HUCP_Address_Mapper();
 			$errors         = $address_mapper->validate( $address );
 			if ( ! empty( $errors ) ) {
 				return $this->error_response(

@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Webhook_Sender
+ * Class HUCP_Webhook_Sender
  *
  * Sends webhook notifications to configured endpoints.
  */
-class UCP_WC_Webhook_Sender {
+class HUCP_Webhook_Sender {
 
 	/**
 	 * Maximum retry attempts.
@@ -44,7 +44,7 @@ class UCP_WC_Webhook_Sender {
 	 * @return bool|WP_Error
 	 */
 	public function send( $event ) {
-		$webhook_url = get_option( 'ucp_wc_webhook_url' );
+		$webhook_url = get_option( 'hucp_webhook_url' );
 
 		if ( empty( $webhook_url ) ) {
 			$this->log( 'No webhook URL configured, skipping', array( 'event_type' => $event['event_type'] ) );
@@ -91,7 +91,7 @@ class UCP_WC_Webhook_Sender {
 			'source'      => array(
 				'platform' => 'WooCommerce',
 				'plugin'   => 'harmonytics-ucp-connector-for-woocommerce',
-				'version'  => UCP_WC_VERSION,
+				'version'  => HUCP_VERSION,
 				'site_url' => home_url(),
 			),
 			'data'        => $event['data'] ?? array(),
@@ -109,7 +109,7 @@ class UCP_WC_Webhook_Sender {
 	 * @return string
 	 */
 	private function generate_signature( $payload ) {
-		$signing_key = UCP_WC_Activator::get_signing_key();
+		$signing_key = HUCP_Activator::get_signing_key();
 
 		if ( empty( $signing_key ) ) {
 			return '';
@@ -205,7 +205,7 @@ class UCP_WC_Webhook_Sender {
 			'httpversion' => '1.1',
 			'headers'     => array(
 				'Content-Type'      => 'application/json',
-				'User-Agent'        => 'WooCommerce-UCP/' . UCP_WC_VERSION,
+				'User-Agent'        => 'WooCommerce-UCP/' . HUCP_VERSION,
 				'X-UCP-Signature'   => $signature,
 				'X-UCP-Event-Type'  => $payload['event_type'],
 				'X-UCP-Delivery-ID' => $payload['id'],
@@ -254,7 +254,7 @@ class UCP_WC_Webhook_Sender {
 	 * @param WP_Error $error     Error object.
 	 */
 	private function store_failed_webhook( $url, $payload, $signature, $error ) {
-		$failed_webhooks = get_option( 'ucp_wc_failed_webhooks', array() );
+		$failed_webhooks = get_option( 'hucp_failed_webhooks', array() );
 
 		// Limit stored failed webhooks to 100.
 		if ( count( $failed_webhooks ) >= 100 ) {
@@ -269,7 +269,7 @@ class UCP_WC_Webhook_Sender {
 			'failed_at' => current_time( 'mysql', true ),
 		);
 
-		update_option( 'ucp_wc_failed_webhooks', $failed_webhooks );
+		update_option( 'hucp_failed_webhooks', $failed_webhooks );
 	}
 
 	/**
@@ -280,7 +280,7 @@ class UCP_WC_Webhook_Sender {
 	 * @return array Results of retry attempts.
 	 */
 	public function retry_failed_webhooks() {
-		$failed_webhooks = get_option( 'ucp_wc_failed_webhooks', array() );
+		$failed_webhooks = get_option( 'hucp_failed_webhooks', array() );
 
 		if ( empty( $failed_webhooks ) ) {
 			return array();
@@ -316,7 +316,7 @@ class UCP_WC_Webhook_Sender {
 			}
 		}
 
-		update_option( 'ucp_wc_failed_webhooks', $remaining );
+		update_option( 'hucp_failed_webhooks', $remaining );
 
 		return $results;
 	}
@@ -329,7 +329,7 @@ class UCP_WC_Webhook_Sender {
 	 * @return bool
 	 */
 	public static function verify_signature( $payload, $signature ) {
-		$signing_key = UCP_WC_Activator::get_signing_key();
+		$signing_key = HUCP_Activator::get_signing_key();
 
 		if ( empty( $signing_key ) || empty( $signature ) ) {
 			return false;
@@ -365,7 +365,7 @@ class UCP_WC_Webhook_Sender {
 	 * @param array  $context Context.
 	 */
 	private function log( $message, $context = array() ) {
-		if ( 'yes' === get_option( 'ucp_wc_debug_logging', 'no' ) ) {
+		if ( 'yes' === get_option( 'hucp_debug_logging', 'no' ) ) {
 			wc_get_logger()->debug(
 				'[Webhook] ' . $message,
 				array_merge( $context, array( 'source' => 'ucp-connector' ) )

@@ -18,14 +18,14 @@ class Test_UCP_Coupons extends WC_Unit_Test_Case {
 	/**
 	 * Coupon controller instance.
 	 *
-	 * @var UCP_WC_Coupon_Controller
+	 * @var HUCP_Coupon_Controller
 	 */
 	protected $controller;
 
 	/**
 	 * Coupon mapper instance.
 	 *
-	 * @var UCP_WC_Coupon_Mapper
+	 * @var HUCP_Coupon_Mapper
 	 */
 	protected $mapper;
 
@@ -57,16 +57,16 @@ class Test_UCP_Coupons extends WC_Unit_Test_Case {
 		parent::set_up();
 
 		// Load required classes.
-		require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-coupon-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-coupon-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-coupon-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-coupon-controller.php';
 
 		// Create tables.
-		UCP_WC_Activator::activate();
+		HUCP_Activator::activate();
 
-		$this->controller = new UCP_WC_Coupon_Controller();
-		$this->mapper     = new UCP_WC_Coupon_Mapper();
+		$this->controller = new HUCP_Coupon_Controller();
+		$this->mapper     = new HUCP_Coupon_Mapper();
 
 		// Create test products.
 		$this->product = WC_Helper_Product::create_simple_product();
@@ -82,7 +82,7 @@ class Test_UCP_Coupons extends WC_Unit_Test_Case {
 		$this->product2->save();
 
 		// Enable UCP.
-		update_option( 'ucp_wc_enabled', 'yes' );
+		update_option( 'hucp_enabled', 'yes' );
 	}
 
 	/**
@@ -106,7 +106,7 @@ class Test_UCP_Coupons extends WC_Unit_Test_Case {
 		}
 
 		// Reset option.
-		delete_option( 'ucp_wc_public_coupons' );
+		delete_option( 'hucp_public_coupons' );
 
 		parent::tear_down();
 	}
@@ -541,7 +541,7 @@ class Test_UCP_Coupons extends WC_Unit_Test_Case {
 	 */
 	public function test_list_active_coupons() {
 		// Enable public coupons.
-		update_option( 'ucp_wc_public_coupons', 'yes' );
+		update_option( 'hucp_public_coupons', 'yes' );
 
 		// Create public coupons using direct meta insertion.
 		$coupon1 = $this->create_coupon(
@@ -627,7 +627,7 @@ class Test_UCP_Coupons extends WC_Unit_Test_Case {
 	 */
 	public function test_list_active_coupons_disabled() {
 		// Ensure public coupons is disabled.
-		update_option( 'ucp_wc_public_coupons', 'no' );
+		update_option( 'hucp_public_coupons', 'no' );
 
 		$request = new WP_REST_Request( 'GET', '/ucp/v1/coupons/active' );
 		$request->set_param( 'page', 1 );

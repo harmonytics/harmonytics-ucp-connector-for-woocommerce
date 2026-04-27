@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Address_Mapper
+ * Class HUCP_Address_Mapper
  *
  * Maps WooCommerce addresses to UCP address schema.
  */
-class UCP_WC_Address_Mapper {
+class HUCP_Address_Mapper {
 
 	/**
 	 * Map order shipping address.

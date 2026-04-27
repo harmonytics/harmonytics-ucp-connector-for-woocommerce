@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Order_Controller
+ * Class HUCP_Order_Controller
  *
  * Handles order-related REST API endpoints.
  */
-class UCP_WC_Order_Controller extends UCP_WC_REST_Controller {
+class HUCP_Order_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Order_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Order capability handler.
 	 *
-	 * @var UCP_WC_Order
+	 * @var HUCP_Order
 	 */
 	protected $order;
 
@@ -34,7 +34,7 @@ class UCP_WC_Order_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->order = new UCP_WC_Order();
+		$this->order = new HUCP_Order();
 	}
 
 	/**

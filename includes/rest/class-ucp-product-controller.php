@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Product_Controller
+ * Class HUCP_Product_Controller
  *
  * Handles product catalog REST API endpoints for UCP.
  */
-class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
+class HUCP_Product_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Product mapper instance.
 	 *
-	 * @var UCP_WC_Product_Mapper
+	 * @var HUCP_Product_Mapper
 	 */
 	protected $product_mapper;
 
@@ -34,7 +34,7 @@ class UCP_WC_Product_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->product_mapper = new UCP_WC_Product_Mapper();
+		$this->product_mapper = new HUCP_Product_Mapper();
 	}
 
 	/**

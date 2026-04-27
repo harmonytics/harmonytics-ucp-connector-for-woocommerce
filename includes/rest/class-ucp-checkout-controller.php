@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Checkout_Controller
+ * Class HUCP_Checkout_Controller
  *
  * Handles checkout-related REST API endpoints.
  */
-class UCP_WC_Checkout_Controller extends UCP_WC_REST_Controller {
+class HUCP_Checkout_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Checkout_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Checkout capability handler.
 	 *
-	 * @var UCP_WC_Checkout
+	 * @var HUCP_Checkout
 	 */
 	protected $checkout;
 
@@ -34,7 +34,7 @@ class UCP_WC_Checkout_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->checkout = new UCP_WC_Checkout();
+		$this->checkout = new HUCP_Checkout();
 	}
 
 	/**
