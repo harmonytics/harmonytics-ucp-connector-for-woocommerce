@@ -1,9 +1,9 @@
 <?php
 // SPDX-License-Identifier: GPL-2.0-or-later
 /**
- * PHPUnit bootstrap file for WooCommerce UCP tests.
+ * PHPUnit bootstrap file for Harmonytics UCP Connector tests.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */

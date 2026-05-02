@@ -2,7 +2,7 @@
 /**
  * The loader class responsible for orchestrating plugin hooks and filters.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */

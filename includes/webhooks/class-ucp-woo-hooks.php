@@ -2,7 +2,7 @@
 /**
  * WooCommerce hooks integration for UCP events.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -263,7 +263,7 @@ class HUCP_Woo_Hooks {
 		if ( 'yes' === get_option( 'hucp_debug_logging', 'no' ) ) {
 			wc_get_logger()->debug(
 				'[Hooks] ' . $message,
-				array_merge( $context, array( 'source' => 'ucp-connector' ) )
+				array_merge( $context, array( 'source' => 'harmonytics-ucp' ) )
 			);
 		}
 	}

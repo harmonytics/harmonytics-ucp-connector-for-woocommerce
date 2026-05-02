@@ -1,8 +1,8 @@
 <?php
 /**
- * Admin functionality for WooCommerce UCP.
+ * Admin functionality for Harmonytics UCP Connector.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -417,7 +417,7 @@ class HUCP_Admin {
 				'event_type' => 'test',
 				'timestamp'  => current_time( 'c' ),
 				'data'       => array(
-					'message' => 'This is a test webhook from WooCommerce UCP.',
+					'message' => 'This is a test webhook from Harmonytics UCP Connector.',
 				),
 			)
 		);

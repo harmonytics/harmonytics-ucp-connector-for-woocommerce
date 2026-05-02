@@ -2,7 +2,7 @@
 /**
  * REST controller for product catalog endpoints.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */

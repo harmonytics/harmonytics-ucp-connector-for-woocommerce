@@ -2,7 +2,7 @@
 /**
  * Plugin activation and deactivation handler.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -21,21 +21,21 @@ class HUCP_Activator {
 	 *
 	 * @var string
 	 */
-	const SESSIONS_TABLE = 'ucp_sessions';
+	const SESSIONS_TABLE = 'hucp_sessions';
 
 	/**
 	 * Database table name for UCP carts.
 	 *
 	 * @var string
 	 */
-	const CARTS_TABLE = 'ucp_carts';
+	const CARTS_TABLE = 'hucp_carts';
 
 	/**
 	 * Database table name for UCP API keys.
 	 *
 	 * @var string
 	 */
-	const API_KEYS_TABLE = 'ucp_api_keys';
+	const API_KEYS_TABLE = 'hucp_api_keys';
 
 	/**
 	 * Option name for signing key.

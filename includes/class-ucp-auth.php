@@ -2,7 +2,7 @@
 /**
  * Authentication handler for UCP API keys.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -21,7 +21,7 @@ class HUCP_Auth {
 	 *
 	 * @var string
 	 */
-	const TABLE_NAME = 'ucp_api_keys';
+	const TABLE_NAME = 'hucp_api_keys';
 
 	/**
 	 * Header name for API key authentication.
@@ -204,21 +204,21 @@ class HUCP_Auth {
 		}
 
 		// Check cache first.
-		$cache_key = 'ucp_api_key_' . md5( $key_id );
-		$key_data  = wp_cache_get( $cache_key, 'ucp_api_keys' );
+		$cache_key = 'hucp_api_key_' . md5( $key_id );
+		$key_data  = wp_cache_get( $cache_key, 'hucp_api_keys' );
 
 		if ( false === $key_data ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for UCP API keys.
 			$key_data = $wpdb->get_row(
 				$wpdb->prepare(
-					'SELECT * FROM ' . $wpdb->prefix . "ucp_api_keys WHERE key_id = %s AND status = 'active'",
+					'SELECT * FROM ' . $wpdb->prefix . "hucp_api_keys WHERE key_id = %s AND status = 'active'",
 					$key_id
 				),
 				ARRAY_A
 			);
 
 			// Cache for 5 minutes even if not found to prevent repeated lookups.
-			wp_cache_set( $cache_key, $key_data ? $key_data : 'not_found', 'ucp_api_keys', 300 );
+			wp_cache_set( $cache_key, $key_data ? $key_data : 'not_found', 'hucp_api_keys', 300 );
 		} elseif ( 'not_found' === $key_data ) {
 			$key_data = null;
 		}
@@ -394,7 +394,7 @@ class HUCP_Auth {
 			$keys = $wpdb->get_results(
 				$wpdb->prepare(
 					'SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
-					FROM ' . $wpdb->prefix . 'ucp_api_keys
+					FROM ' . $wpdb->prefix . 'hucp_api_keys
 					WHERE status = %s
 					ORDER BY created_at DESC
 					LIMIT %d OFFSET %d',
@@ -408,7 +408,7 @@ class HUCP_Auth {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP API keys.
 			$total = $wpdb->get_var(
 				$wpdb->prepare(
-					'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'ucp_api_keys WHERE status = %s',
+					'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'hucp_api_keys WHERE status = %s',
 					$status
 				)
 			);
@@ -417,7 +417,7 @@ class HUCP_Auth {
 			$keys = $wpdb->get_results(
 				$wpdb->prepare(
 					'SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
-					FROM ' . $wpdb->prefix . 'ucp_api_keys
+					FROM ' . $wpdb->prefix . 'hucp_api_keys
 					ORDER BY created_at DESC
 					LIMIT %d OFFSET %d',
 					absint( $args['per_page'] ),
@@ -427,7 +427,7 @@ class HUCP_Auth {
 			);
 
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for UCP API keys.
-			$total = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'ucp_api_keys' );
+			$total = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'hucp_api_keys' );
 		}
 
 		$formatted_keys = array();
@@ -463,15 +463,15 @@ class HUCP_Auth {
 		global $wpdb;
 
 		// Check cache first.
-		$cache_key = 'ucp_api_key_info_' . md5( $key_id );
-		$key       = wp_cache_get( $cache_key, 'ucp_api_keys' );
+		$cache_key = 'hucp_api_key_info_' . md5( $key_id );
+		$key       = wp_cache_get( $cache_key, 'hucp_api_keys' );
 
 		if ( false === $key ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for UCP API keys.
 			$key = $wpdb->get_row(
 				$wpdb->prepare(
 					'SELECT id, key_id, description, permissions, user_id, created_at, last_used_at, status
-					FROM ' . $wpdb->prefix . 'ucp_api_keys
+					FROM ' . $wpdb->prefix . 'hucp_api_keys
 					WHERE key_id = %s',
 					$key_id
 				),
@@ -479,7 +479,7 @@ class HUCP_Auth {
 			);
 
 			// Cache for 5 minutes.
-			wp_cache_set( $cache_key, $key ? $key : 'not_found', 'ucp_api_keys', 300 );
+			wp_cache_set( $cache_key, $key ? $key : 'not_found', 'hucp_api_keys', 300 );
 		} elseif ( 'not_found' === $key ) {
 			$key = null;
 		}
@@ -636,8 +636,8 @@ class HUCP_Auth {
 	 * @param string $key_id The key_id to invalidate cache for.
 	 */
 	private function invalidate_key_cache( $key_id ) {
-		wp_cache_delete( 'ucp_api_key_' . md5( $key_id ), 'ucp_api_keys' );
-		wp_cache_delete( 'ucp_api_key_info_' . md5( $key_id ), 'ucp_api_keys' );
+		wp_cache_delete( 'hucp_api_key_' . md5( $key_id ), 'hucp_api_keys' );
+		wp_cache_delete( 'hucp_api_key_info_' . md5( $key_id ), 'hucp_api_keys' );
 	}
 
 	/**

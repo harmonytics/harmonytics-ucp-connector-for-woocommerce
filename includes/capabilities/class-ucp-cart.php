@@ -2,7 +2,7 @@
 /**
  * Cart capability handler.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -21,7 +21,7 @@ class HUCP_Cart {
 	 *
 	 * @var string
 	 */
-	const CARTS_TABLE = 'ucp_carts';
+	const CARTS_TABLE = 'hucp_carts';
 
 	/**
 	 * Default cart expiration in seconds (7 days).

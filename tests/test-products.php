@@ -3,7 +3,7 @@
 /**
  * Tests for the Products/Catalog capability.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */

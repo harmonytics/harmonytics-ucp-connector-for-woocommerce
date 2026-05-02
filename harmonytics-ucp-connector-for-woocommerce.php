@@ -16,7 +16,7 @@
  * WC requires at least: 8.0
  * WC tested up to: 10.4.3
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  *
@@ -53,7 +53,7 @@ function hucp_is_woocommerce_active() {
 function hucp_woocommerce_missing_notice() {
 	?>
 	<div class="notice notice-error">
-		<p><?php esc_html_e( 'WooCommerce UCP requires WooCommerce to be installed and active.', 'harmonytics-ucp-connector-for-woocommerce' ); ?></p>
+		<p><?php esc_html_e( 'Harmonytics UCP Connector requires WooCommerce to be installed and active.', 'harmonytics-ucp-connector-for-woocommerce' ); ?></p>
 	</div>
 	<?php
 }
