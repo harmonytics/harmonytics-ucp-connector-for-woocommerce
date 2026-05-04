@@ -3,7 +3,7 @@
 /**
  * Tests for the Categories capability.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -18,14 +18,14 @@ class Test_UCP_Categories extends WC_Unit_Test_Case {
 	/**
 	 * Category controller instance.
 	 *
-	 * @var UCP_WC_Category_Controller
+	 * @var HUCP_Category_Controller
 	 */
 	protected $controller;
 
 	/**
 	 * Category mapper instance.
 	 *
-	 * @var UCP_WC_Category_Mapper
+	 * @var HUCP_Category_Mapper
 	 */
 	protected $category_mapper;
 
@@ -50,16 +50,16 @@ class Test_UCP_Categories extends WC_Unit_Test_Case {
 		parent::set_up();
 
 		// Load required classes
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-category-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-product-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-category-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-category-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-product-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-category-controller.php';
 
-		$this->controller      = new UCP_WC_Category_Controller();
-		$this->category_mapper = new UCP_WC_Category_Mapper();
+		$this->controller      = new HUCP_Category_Controller();
+		$this->category_mapper = new HUCP_Category_Mapper();
 
 		// Enable UCP
-		update_option( 'ucp_wc_enabled', 'yes' );
+		update_option( 'hucp_enabled', 'yes' );
 	}
 
 	/**

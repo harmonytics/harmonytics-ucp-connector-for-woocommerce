@@ -2,7 +2,7 @@
 /**
  * Line item mapper for UCP schema conversion.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Line_Item_Mapper
+ * Class HUCP_Line_Item_Mapper
  *
  * Maps WooCommerce order items to UCP line item schema.
  */
-class UCP_WC_Line_Item_Mapper {
+class HUCP_Line_Item_Mapper {
 
 	/**
 	 * Map order items to UCP format.

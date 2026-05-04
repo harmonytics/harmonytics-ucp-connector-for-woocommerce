@@ -2,7 +2,7 @@
 /**
  * Review mapper for UCP schema conversion.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Review_Mapper
+ * Class HUCP_Review_Mapper
  *
  * Maps WooCommerce product reviews (WP_Comment) to UCP review schema.
  */
-class UCP_WC_Review_Mapper {
+class HUCP_Review_Mapper {
 
 	/**
 	 * Map a WooCommerce product review to UCP format.

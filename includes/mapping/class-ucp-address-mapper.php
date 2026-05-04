@@ -2,7 +2,7 @@
 /**
  * Address mapper for UCP schema conversion.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Address_Mapper
+ * Class HUCP_Address_Mapper
  *
  * Maps WooCommerce addresses to UCP address schema.
  */
-class UCP_WC_Address_Mapper {
+class HUCP_Address_Mapper {
 
 	/**
 	 * Map order shipping address.

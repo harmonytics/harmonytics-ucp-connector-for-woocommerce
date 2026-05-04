@@ -2,7 +2,7 @@
 /**
  * Order mapper for UCP schema conversion.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -10,30 +10,30 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Order_Mapper
+ * Class HUCP_Order_Mapper
  *
  * Maps WooCommerce orders to UCP order schema.
  */
-class UCP_WC_Order_Mapper {
+class HUCP_Order_Mapper {
 
 	/**
 	 * Line item mapper.
 	 *
-	 * @var UCP_WC_Line_Item_Mapper
+	 * @var HUCP_Line_Item_Mapper
 	 */
 	protected $line_item_mapper;
 
 	/**
 	 * Address mapper.
 	 *
-	 * @var UCP_WC_Address_Mapper
+	 * @var HUCP_Address_Mapper
 	 */
 	protected $address_mapper;
 
 	/**
 	 * Shipping mapper.
 	 *
-	 * @var UCP_WC_Shipping_Mapper
+	 * @var HUCP_Shipping_Mapper
 	 */
 	protected $shipping_mapper;
 
@@ -41,9 +41,9 @@ class UCP_WC_Order_Mapper {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->line_item_mapper = new UCP_WC_Line_Item_Mapper();
-		$this->address_mapper   = new UCP_WC_Address_Mapper();
-		$this->shipping_mapper  = new UCP_WC_Shipping_Mapper();
+		$this->line_item_mapper = new HUCP_Line_Item_Mapper();
+		$this->address_mapper   = new HUCP_Address_Mapper();
+		$this->shipping_mapper  = new HUCP_Shipping_Mapper();
 	}
 
 	/**
@@ -222,8 +222,8 @@ class UCP_WC_Order_Mapper {
 	 */
 	private function map_meta( $order ) {
 		return array(
-			'ucp_session_id' => $order->get_meta( '_ucp_session_id' ),
-			'ucp_created_at' => $order->get_meta( '_ucp_created_at' ),
+			'ucp_session_id' => $order->get_meta( '_hucp_session_id' ),
+			'ucp_created_at' => $order->get_meta( '_hucp_created_at' ),
 			'customer_note'  => $order->get_customer_note(),
 			'coupons'        => $this->map_coupons( $order ),
 		);

@@ -2,7 +2,7 @@
 /**
  * WooCommerce hooks integration for UCP events.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -10,23 +10,23 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Woo_Hooks
+ * Class HUCP_Woo_Hooks
  *
  * Handles WooCommerce hooks and triggers UCP events.
  */
-class UCP_WC_Woo_Hooks {
+class HUCP_Woo_Hooks {
 
 	/**
 	 * Webhook sender instance.
 	 *
-	 * @var UCP_WC_Webhook_Sender
+	 * @var HUCP_Webhook_Sender
 	 */
 	protected $webhook_sender;
 
 	/**
 	 * Order mapper instance.
 	 *
-	 * @var UCP_WC_Order_Mapper
+	 * @var HUCP_Order_Mapper
 	 */
 	protected $order_mapper;
 
@@ -34,8 +34,8 @@ class UCP_WC_Woo_Hooks {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->webhook_sender = new UCP_WC_Webhook_Sender();
-		$this->order_mapper   = new UCP_WC_Order_Mapper();
+		$this->webhook_sender = new HUCP_Webhook_Sender();
+		$this->order_mapper   = new HUCP_Order_Mapper();
 	}
 
 	/**
@@ -54,7 +54,7 @@ class UCP_WC_Woo_Hooks {
 		}
 
 		// Only trigger for UCP-created orders.
-		if ( ! $order->get_meta( '_ucp_session_id' ) ) {
+		if ( ! $order->get_meta( '_hucp_session_id' ) ) {
 			return;
 		}
 
@@ -64,7 +64,7 @@ class UCP_WC_Woo_Hooks {
 			'event_type' => 'order.created',
 			'timestamp'  => current_time( 'c' ),
 			'order_id'   => $order_id,
-			'session_id' => $order->get_meta( '_ucp_session_id' ),
+			'session_id' => $order->get_meta( '_hucp_session_id' ),
 			'data'       => $this->order_mapper->map_order_summary( $order ),
 		);
 
@@ -81,7 +81,7 @@ class UCP_WC_Woo_Hooks {
 	 */
 	public function on_order_status_changed( $order_id, $old_status, $new_status, $order ) {
 		// Only trigger for UCP-created orders.
-		if ( ! $order->get_meta( '_ucp_session_id' ) ) {
+		if ( ! $order->get_meta( '_hucp_session_id' ) ) {
 			return;
 		}
 
@@ -101,7 +101,7 @@ class UCP_WC_Woo_Hooks {
 			'event_type' => 'order.status_changed',
 			'timestamp'  => current_time( 'c' ),
 			'order_id'   => $order_id,
-			'session_id' => $order->get_meta( '_ucp_session_id' ),
+			'session_id' => $order->get_meta( '_hucp_session_id' ),
 			'data'       => array(
 				'from_status'     => $old_status,
 				'to_status'       => $new_status,
@@ -127,7 +127,7 @@ class UCP_WC_Woo_Hooks {
 		}
 
 		// Only trigger for UCP-created orders.
-		if ( ! $order->get_meta( '_ucp_session_id' ) ) {
+		if ( ! $order->get_meta( '_hucp_session_id' ) ) {
 			return;
 		}
 
@@ -137,7 +137,7 @@ class UCP_WC_Woo_Hooks {
 			'event_type' => 'order.paid',
 			'timestamp'  => current_time( 'c' ),
 			'order_id'   => $order_id,
-			'session_id' => $order->get_meta( '_ucp_session_id' ),
+			'session_id' => $order->get_meta( '_hucp_session_id' ),
 			'data'       => array(
 				'payment_method' => $order->get_payment_method(),
 				'transaction_id' => $order->get_transaction_id(),
@@ -164,7 +164,7 @@ class UCP_WC_Woo_Hooks {
 		}
 
 		// Only trigger for UCP-created orders.
-		if ( ! $order->get_meta( '_ucp_session_id' ) ) {
+		if ( ! $order->get_meta( '_hucp_session_id' ) ) {
 			return;
 		}
 
@@ -190,7 +190,7 @@ class UCP_WC_Woo_Hooks {
 			'event_type' => 'order.refunded',
 			'timestamp'  => current_time( 'c' ),
 			'order_id'   => $order_id,
-			'session_id' => $order->get_meta( '_ucp_session_id' ),
+			'session_id' => $order->get_meta( '_hucp_session_id' ),
 			'data'       => array(
 				'refund_id'      => $refund_id,
 				'refund_amount'  => $refund_amount,
@@ -214,12 +214,12 @@ class UCP_WC_Woo_Hooks {
 	private function update_session_status( $order, $new_status ) {
 		global $wpdb;
 
-		$session_id = $order->get_meta( '_ucp_session_id' );
+		$session_id = $order->get_meta( '_hucp_session_id' );
 		if ( ! $session_id ) {
 			return;
 		}
 
-		$table_name = UCP_WC_Activator::get_sessions_table();
+		$table_name = HUCP_Activator::get_sessions_table();
 
 		// Map WC status to session status.
 		$session_status = 'pending';
@@ -260,10 +260,10 @@ class UCP_WC_Woo_Hooks {
 	 * @param array  $context Context.
 	 */
 	private function log( $message, $context = array() ) {
-		if ( 'yes' === get_option( 'ucp_wc_debug_logging', 'no' ) ) {
+		if ( 'yes' === get_option( 'hucp_debug_logging', 'no' ) ) {
 			wc_get_logger()->debug(
 				'[Hooks] ' . $message,
-				array_merge( $context, array( 'source' => 'ucp-connector' ) )
+				array_merge( $context, array( 'source' => 'harmonytics-ucp' ) )
 			);
 		}
 	}

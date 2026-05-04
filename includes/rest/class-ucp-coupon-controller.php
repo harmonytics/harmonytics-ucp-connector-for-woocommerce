@@ -2,7 +2,7 @@
 /**
  * REST controller for coupon endpoints.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Coupon_Controller
+ * Class HUCP_Coupon_Controller
  *
  * Handles coupon-related REST API endpoints for UCP.
  */
-class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
+class HUCP_Coupon_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Coupon mapper instance.
 	 *
-	 * @var UCP_WC_Coupon_Mapper
+	 * @var HUCP_Coupon_Mapper
 	 */
 	protected $coupon_mapper;
 
@@ -34,7 +34,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->coupon_mapper = new UCP_WC_Coupon_Mapper();
+		$this->coupon_mapper = new HUCP_Coupon_Mapper();
 	}
 
 	/**
@@ -352,7 +352,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 		);
 
 		// Check if public coupons feature is enabled.
-		if ( get_option( 'ucp_wc_public_coupons', 'no' ) !== 'yes' ) {
+		if ( get_option( 'hucp_public_coupons', 'no' ) !== 'yes' ) {
 			return $this->error_response(
 				'public_coupons_disabled',
 				__( 'Public coupon listing is not enabled for this store.', 'harmonytics-ucp-connector-for-woocommerce' ),
@@ -370,7 +370,7 @@ class UCP_WC_Coupon_Controller extends UCP_WC_REST_Controller {
 			'meta_query'     => array(
 				'relation' => 'AND',
 				array(
-					'key'     => '_ucp_public_coupon',
+					'key'     => '_hucp_public_coupon',
 					'value'   => 'yes',
 					'compare' => '=',
 				),

@@ -2,7 +2,7 @@
 /**
  * REST controller for authentication endpoints.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Auth_Controller
+ * Class HUCP_Auth_Controller
  *
  * Handles API key management REST endpoints.
  */
-class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
+class HUCP_Auth_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Auth handler instance.
 	 *
-	 * @var UCP_WC_Auth
+	 * @var HUCP_Auth
 	 */
 	protected $auth;
 
@@ -34,7 +34,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->auth = new UCP_WC_Auth();
+		$this->auth = new HUCP_Auth();
 	}
 
 	/**
@@ -207,7 +207,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 		}
 
 		// Check for admin-level API key.
-		if ( UCP_WC_Auth::check_permission( 'admin' ) ) {
+		if ( HUCP_Auth::check_permission( 'admin' ) ) {
 			return true;
 		}
 
@@ -375,7 +375,7 @@ class UCP_WC_Auth_Controller extends UCP_WC_REST_Controller {
 
 		// If no key provided in body, check if authenticated via header.
 		if ( empty( $api_key ) ) {
-			$current_key = UCP_WC_Auth::get_current_api_key();
+			$current_key = HUCP_Auth::get_current_api_key();
 
 			if ( ! $current_key ) {
 				return $this->error_response(

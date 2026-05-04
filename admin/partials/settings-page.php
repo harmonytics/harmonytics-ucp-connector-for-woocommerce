@@ -2,16 +2,16 @@
 /**
  * Admin settings page template.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$ucp_wc_discovery_url = UCP_WC_Admin::get_discovery_url();
-$ucp_wc_key_info      = UCP_WC_Admin::get_key_info();
-$ucp_wc_failed_count  = UCP_WC_Admin::get_failed_webhooks_count();
+$hucp_discovery_url = HUCP_Admin::get_discovery_url();
+$hucp_key_info      = HUCP_Admin::get_key_info();
+$hucp_failed_count  = HUCP_Admin::get_failed_webhooks_count();
 ?>
 
 <div class="wrap ucp-settings">
@@ -25,13 +25,13 @@ $ucp_wc_failed_count  = UCP_WC_Admin::get_failed_webhooks_count();
 			<tbody>
 				<tr>
 					<th><?php esc_html_e( 'Plugin Version', 'harmonytics-ucp-connector-for-woocommerce' ); ?></th>
-					<td><?php echo esc_html( UCP_WC_VERSION ); ?></td>
+					<td><?php echo esc_html( HUCP_VERSION ); ?></td>
 				</tr>
 				<tr>
 					<th><?php esc_html_e( 'Discovery URL', 'harmonytics-ucp-connector-for-woocommerce' ); ?></th>
 					<td>
-						<code><?php echo esc_html( $ucp_wc_discovery_url ); ?></code>
-						<a href="<?php echo esc_url( $ucp_wc_discovery_url ); ?>" target="_blank" class="button button-small">
+						<code><?php echo esc_html( $hucp_discovery_url ); ?></code>
+						<a href="<?php echo esc_url( $hucp_discovery_url ); ?>" target="_blank" class="button button-small">
 							<?php esc_html_e( 'View', 'harmonytics-ucp-connector-for-woocommerce' ); ?>
 						</a>
 					</td>
@@ -39,13 +39,13 @@ $ucp_wc_failed_count  = UCP_WC_Admin::get_failed_webhooks_count();
 				<tr>
 					<th><?php esc_html_e( 'Signing Key', 'harmonytics-ucp-connector-for-woocommerce' ); ?></th>
 					<td>
-						<?php if ( $ucp_wc_key_info['exists'] ) : ?>
+						<?php if ( $hucp_key_info['exists'] ) : ?>
 							<span class="dashicons dashicons-yes-alt" style="color: green;"></span>
 							<?php esc_html_e( 'Active', 'harmonytics-ucp-connector-for-woocommerce' ); ?>
 							<br>
 							<small>
 								<?php esc_html_e( 'Key ID:', 'harmonytics-ucp-connector-for-woocommerce' ); ?>
-								<code><?php echo esc_html( $ucp_wc_key_info['key_id'] ); ?></code>
+								<code><?php echo esc_html( $hucp_key_info['key_id'] ); ?></code>
 							</small>
 							<br>
 							<button type="button" class="button button-small" id="ucp-rotate-key">
@@ -60,13 +60,13 @@ $ucp_wc_failed_count  = UCP_WC_Admin::get_failed_webhooks_count();
 				<tr>
 					<th><?php esc_html_e( 'Failed Webhooks', 'harmonytics-ucp-connector-for-woocommerce' ); ?></th>
 					<td>
-						<?php if ( $ucp_wc_failed_count > 0 ) : ?>
+						<?php if ( $hucp_failed_count > 0 ) : ?>
 							<span class="dashicons dashicons-warning" style="color: orange;"></span>
 							<?php
 							printf(
 								/* translators: %d: number of failed webhooks */
-								esc_html( _n( '%d failed webhook', '%d failed webhooks', $ucp_wc_failed_count, 'harmonytics-ucp-connector-for-woocommerce' ) ),
-								intval( $ucp_wc_failed_count )
+								esc_html( _n( '%d failed webhook', '%d failed webhooks', $hucp_failed_count, 'harmonytics-ucp-connector-for-woocommerce' ) ),
+								intval( $hucp_failed_count )
 							);
 							?>
 							<button type="button" class="button button-small" id="ucp-retry-failed">
@@ -85,8 +85,8 @@ $ucp_wc_failed_count  = UCP_WC_Admin::get_failed_webhooks_count();
 	<!-- Settings Form -->
 	<form method="post" action="options.php">
 		<?php
-		settings_fields( UCP_WC_Admin::OPTION_GROUP );
-		do_settings_sections( UCP_WC_Admin::PAGE_SLUG );
+		settings_fields( HUCP_Admin::OPTION_GROUP );
+		do_settings_sections( HUCP_Admin::PAGE_SLUG );
 		submit_button();
 		?>
 	</form>

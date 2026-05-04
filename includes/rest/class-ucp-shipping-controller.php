@@ -2,7 +2,7 @@
 /**
  * REST controller for shipping endpoints.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Shipping_Controller
+ * Class HUCP_Shipping_Controller
  *
  * Handles shipping-related REST API endpoints for UCP.
  */
-class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
+class HUCP_Shipping_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Shipping mapper instance.
 	 *
-	 * @var UCP_WC_Shipping_Mapper
+	 * @var HUCP_Shipping_Mapper
 	 */
 	protected $shipping_mapper;
 
@@ -34,7 +34,7 @@ class UCP_WC_Shipping_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->shipping_mapper = new UCP_WC_Shipping_Mapper();
+		$this->shipping_mapper = new HUCP_Shipping_Mapper();
 	}
 
 	/**

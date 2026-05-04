@@ -3,7 +3,7 @@
 /**
  * Tests for the Products/Catalog capability.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -18,14 +18,14 @@ class Test_UCP_Products extends WC_Unit_Test_Case {
 	/**
 	 * Product controller instance.
 	 *
-	 * @var UCP_WC_Product_Controller
+	 * @var HUCP_Product_Controller
 	 */
 	protected $controller;
 
 	/**
 	 * Product mapper instance.
 	 *
-	 * @var UCP_WC_Product_Mapper
+	 * @var HUCP_Product_Mapper
 	 */
 	protected $product_mapper;
 
@@ -53,15 +53,15 @@ class Test_UCP_Products extends WC_Unit_Test_Case {
 		$_SERVER['REQUEST_URI'] = '/';
 
 		// Load required classes
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-product-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-product-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-product-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-product-controller.php';
 
-		$this->controller     = new UCP_WC_Product_Controller();
-		$this->product_mapper = new UCP_WC_Product_Mapper();
+		$this->controller     = new HUCP_Product_Controller();
+		$this->product_mapper = new HUCP_Product_Mapper();
 
 		// Enable UCP
-		update_option( 'ucp_wc_enabled', 'yes' );
+		update_option( 'hucp_enabled', 'yes' );
 	}
 
 	/**

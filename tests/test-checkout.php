@@ -3,7 +3,7 @@
 /**
  * Tests for the Checkout capability.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -18,7 +18,7 @@ class Test_UCP_Checkout extends WC_Unit_Test_Case {
     /**
      * Checkout capability instance.
      *
-     * @var UCP_WC_Checkout
+     * @var HUCP_Checkout
      */
     protected $checkout;
 
@@ -36,16 +36,16 @@ class Test_UCP_Checkout extends WC_Unit_Test_Case {
         parent::set_up();
 
         // Load required classes
-        require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
-        require_once UCP_WC_PLUGIN_DIR . 'includes/capabilities/class-ucp-checkout.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
+        require_once HUCP_PLUGIN_DIR . 'includes/capabilities/class-ucp-checkout.php';
 
         // Create tables
-        UCP_WC_Activator::activate();
+        HUCP_Activator::activate();
 
-        $this->checkout = new UCP_WC_Checkout();
+        $this->checkout = new HUCP_Checkout();
 
         // Create a test product
         $this->product = WC_Helper_Product::create_simple_product();
@@ -53,7 +53,7 @@ class Test_UCP_Checkout extends WC_Unit_Test_Case {
         $this->product->save();
 
         // Enable UCP
-        update_option( 'ucp_wc_enabled', 'yes' );
+        update_option( 'hucp_enabled', 'yes' );
     }
 
     /**

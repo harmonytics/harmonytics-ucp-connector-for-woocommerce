@@ -2,7 +2,7 @@
 /**
  * Coupon mapper for UCP schema conversion.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Coupon_Mapper
+ * Class HUCP_Coupon_Mapper
  *
  * Maps WooCommerce coupons to UCP coupon schema.
  */
-class UCP_WC_Coupon_Mapper {
+class HUCP_Coupon_Mapper {
 
 	/**
 	 * Map a WooCommerce coupon to UCP validation response format.

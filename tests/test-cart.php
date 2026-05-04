@@ -3,7 +3,7 @@
 /**
  * Tests for the Cart capability.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -18,7 +18,7 @@ class Test_UCP_Cart extends WC_Unit_Test_Case {
 	/**
 	 * Cart capability instance.
 	 *
-	 * @var UCP_WC_Cart
+	 * @var HUCP_Cart
 	 */
 	protected $cart;
 
@@ -50,18 +50,18 @@ class Test_UCP_Cart extends WC_Unit_Test_Case {
 		parent::set_up();
 
 		// Load required classes.
-		require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-product-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/capabilities/class-ucp-cart.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/capabilities/class-ucp-checkout.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-line-item-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-address-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-shipping-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-product-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/capabilities/class-ucp-cart.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/capabilities/class-ucp-checkout.php';
 
 		// Create tables.
-		UCP_WC_Activator::activate();
+		HUCP_Activator::activate();
 
-		$this->cart = new UCP_WC_Cart();
+		$this->cart = new HUCP_Cart();
 
 		// Create test products.
 		$this->product = WC_Helper_Product::create_simple_product();
@@ -83,7 +83,7 @@ class Test_UCP_Cart extends WC_Unit_Test_Case {
 		$this->product2->save();
 
 		// Enable UCP.
-		update_option( 'ucp_wc_enabled', 'yes' );
+		update_option( 'hucp_enabled', 'yes' );
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Test_UCP_Cart extends WC_Unit_Test_Case {
 		global $wpdb;
 
 		// Clean up created carts.
-		$table_name = UCP_WC_Cart::get_carts_table();
+		$table_name = HUCP_Cart::get_carts_table();
 		foreach ( $this->created_cart_ids as $cart_id ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->delete( $table_name, array( 'cart_id' => $cart_id ) );
@@ -447,7 +447,7 @@ class Test_UCP_Cart extends WC_Unit_Test_Case {
 		$this->track_cart( $cart_result['cart_id'] );
 
 		// Manually set expiration to past.
-		$table_name = UCP_WC_Cart::get_carts_table();
+		$table_name = HUCP_Cart::get_carts_table();
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->update(
 			$table_name,
@@ -721,7 +721,7 @@ class Test_UCP_Cart extends WC_Unit_Test_Case {
 		$cart_result = $this->cart->create_cart();
 		$this->assertIsArray( $cart_result );
 
-		$table_name = UCP_WC_Cart::get_carts_table();
+		$table_name = HUCP_Cart::get_carts_table();
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->update(
 			$table_name,
@@ -730,7 +730,7 @@ class Test_UCP_Cart extends WC_Unit_Test_Case {
 		);
 
 		// Run cleanup.
-		$deleted = UCP_WC_Cart::cleanup_expired_carts();
+		$deleted = HUCP_Cart::cleanup_expired_carts();
 
 		$this->assertGreaterThanOrEqual( 1, $deleted );
 

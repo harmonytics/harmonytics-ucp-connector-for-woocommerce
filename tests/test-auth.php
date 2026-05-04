@@ -3,7 +3,7 @@
 /**
  * Tests for the Auth capability.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -18,7 +18,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 	/**
 	 * Auth handler instance.
 	 *
-	 * @var UCP_WC_Auth
+	 * @var HUCP_Auth
 	 */
 	protected $auth;
 
@@ -43,20 +43,20 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		parent::set_up();
 
 		// Load required classes.
-		require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-auth.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-auth.php';
 
 		// Create tables.
-		UCP_WC_Activator::activate();
+		HUCP_Activator::activate();
 
 		// Create auth instance.
-		$this->auth = new UCP_WC_Auth();
+		$this->auth = new HUCP_Auth();
 
 		// Create admin user.
 		$this->admin_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
 
 		// Enable UCP.
-		update_option( 'ucp_wc_enabled', 'yes' );
+		update_option( 'hucp_enabled', 'yes' );
 
 		// Reset static properties for clean state.
 		$this->reset_auth_state();
@@ -69,7 +69,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		global $wpdb;
 
 		// Clean up test API keys.
-		$table_name = $wpdb->prefix . UCP_WC_Auth::TABLE_NAME;
+		$table_name = $wpdb->prefix . HUCP_Auth::TABLE_NAME;
 		$wpdb->query( "TRUNCATE TABLE {$table_name}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 		// Reset current user.
@@ -85,7 +85,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 	 * Reset auth static state using reflection.
 	 */
 	private function reset_auth_state() {
-		$reflection = new ReflectionClass( 'UCP_WC_Auth' );
+		$reflection = new ReflectionClass( 'HUCP_Auth' );
 
 		$current_api_key = $reflection->getProperty( 'current_api_key' );
 		$current_api_key->setAccessible( true );
@@ -424,9 +424,9 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		wp_set_current_user( 0 );
 
 		// Check permissions.
-		$this->assertTrue( UCP_WC_Auth::check_permission( 'read' ) );
-		$this->assertFalse( UCP_WC_Auth::check_permission( 'write' ) );
-		$this->assertFalse( UCP_WC_Auth::check_permission( 'admin' ) );
+		$this->assertTrue( HUCP_Auth::check_permission( 'read' ) );
+		$this->assertFalse( HUCP_Auth::check_permission( 'write' ) );
+		$this->assertFalse( HUCP_Auth::check_permission( 'admin' ) );
 	}
 
 	/**
@@ -452,9 +452,9 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		wp_set_current_user( 0 );
 
 		// Write permission should include read.
-		$this->assertTrue( UCP_WC_Auth::check_permission( 'read' ) );
-		$this->assertTrue( UCP_WC_Auth::check_permission( 'write' ) );
-		$this->assertFalse( UCP_WC_Auth::check_permission( 'admin' ) );
+		$this->assertTrue( HUCP_Auth::check_permission( 'read' ) );
+		$this->assertTrue( HUCP_Auth::check_permission( 'write' ) );
+		$this->assertFalse( HUCP_Auth::check_permission( 'admin' ) );
 	}
 
 	/**
@@ -480,9 +480,9 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		wp_set_current_user( 0 );
 
 		// Admin permission should include all.
-		$this->assertTrue( UCP_WC_Auth::check_permission( 'read' ) );
-		$this->assertTrue( UCP_WC_Auth::check_permission( 'write' ) );
-		$this->assertTrue( UCP_WC_Auth::check_permission( 'admin' ) );
+		$this->assertTrue( HUCP_Auth::check_permission( 'read' ) );
+		$this->assertTrue( HUCP_Auth::check_permission( 'write' ) );
+		$this->assertTrue( HUCP_Auth::check_permission( 'admin' ) );
 	}
 
 	/**
@@ -503,7 +503,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		$api_key = $generated['key_id'] . ':' . $generated['secret'];
 
 		// Simulate header authentication.
-		$header_key = 'HTTP_' . str_replace( '-', '_', strtoupper( UCP_WC_Auth::HEADER_NAME ) );
+		$header_key = 'HTTP_' . str_replace( '-', '_', strtoupper( HUCP_Auth::HEADER_NAME ) );
 		$_SERVER[ $header_key ] = $api_key;
 
 		// Simulate REST request environment.
@@ -513,14 +513,14 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		$this->reset_auth_state();
 
 		// Create a fresh auth instance and trigger authentication.
-		$auth   = new UCP_WC_Auth();
+		$auth   = new HUCP_Auth();
 		$result = $auth->authenticate( false );
 
 		// Verify authentication succeeded.
 		$this->assertEquals( $this->admin_id, $result );
 
 		// Verify current API key is set.
-		$current_key = UCP_WC_Auth::get_current_api_key();
+		$current_key = HUCP_Auth::get_current_api_key();
 		$this->assertNotNull( $current_key );
 		$this->assertEquals( $generated['key_id'], $current_key['key_id'] );
 
@@ -547,7 +547,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		$api_key = $generated['key_id'] . ':' . $generated['secret'];
 
 		// Simulate query parameter authentication.
-		$_GET[ UCP_WC_Auth::QUERY_PARAM ] = $api_key;
+		$_GET[ HUCP_Auth::QUERY_PARAM ] = $api_key;
 
 		// Simulate REST request environment.
 		$_SERVER['REQUEST_URI'] = '/wp-json/ucp/v1/test';
@@ -556,19 +556,19 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		$this->reset_auth_state();
 
 		// Create a fresh auth instance and trigger authentication.
-		$auth   = new UCP_WC_Auth();
+		$auth   = new HUCP_Auth();
 		$result = $auth->authenticate( false );
 
 		// Verify authentication succeeded.
 		$this->assertEquals( $this->admin_id, $result );
 
 		// Verify current API key is set.
-		$current_key = UCP_WC_Auth::get_current_api_key();
+		$current_key = HUCP_Auth::get_current_api_key();
 		$this->assertNotNull( $current_key );
 		$this->assertEquals( $generated['key_id'], $current_key['key_id'] );
 
 		// Clean up.
-		unset( $_GET[ UCP_WC_Auth::QUERY_PARAM ] );
+		unset( $_GET[ HUCP_Auth::QUERY_PARAM ] );
 		unset( $_SERVER['REQUEST_URI'] );
 	}
 
@@ -596,7 +596,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		$api_key = $generated['key_id'] . ':' . $generated['secret'];
 
 		// Simulate header authentication.
-		$header_key = 'HTTP_' . str_replace( '-', '_', strtoupper( UCP_WC_Auth::HEADER_NAME ) );
+		$header_key = 'HTTP_' . str_replace( '-', '_', strtoupper( HUCP_Auth::HEADER_NAME ) );
 		$_SERVER[ $header_key ] = $api_key;
 
 		// Simulate REST request environment.
@@ -606,7 +606,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		$this->reset_auth_state();
 
 		// Authenticate.
-		$auth = new UCP_WC_Auth();
+		$auth = new HUCP_Auth();
 		$auth->authenticate( false );
 
 		// Clean up.
@@ -637,10 +637,10 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		// Permission checks are done at the REST API controller level.
 		// However, we can test the REST controller's permission check.
 
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-auth-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-auth-controller.php';
 
-		$controller = new UCP_WC_Auth_Controller();
+		$controller = new HUCP_Auth_Controller();
 		$request    = new WP_REST_Request( 'POST', '/ucp/v1/auth/keys' );
 
 		// Reset auth state to ensure no API key auth.
@@ -677,7 +677,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 	 * @param array $key_data Key data to set.
 	 */
 	private function set_current_api_key( $key_data ) {
-		$reflection       = new ReflectionClass( 'UCP_WC_Auth' );
+		$reflection       = new ReflectionClass( 'HUCP_Auth' );
 		$current_api_key  = $reflection->getProperty( 'current_api_key' );
 		$current_api_key->setAccessible( true );
 		$current_api_key->setValue( null, $key_data );
@@ -688,7 +688,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 	 */
 	public function test_is_api_key_authenticated() {
 		// Initially should be false.
-		$this->assertFalse( UCP_WC_Auth::is_api_key_authenticated() );
+		$this->assertFalse( HUCP_Auth::is_api_key_authenticated() );
 
 		wp_set_current_user( $this->admin_id );
 
@@ -707,7 +707,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		$this->set_current_api_key( $key_data );
 
 		// Now should be true.
-		$this->assertTrue( UCP_WC_Auth::is_api_key_authenticated() );
+		$this->assertTrue( HUCP_Auth::is_api_key_authenticated() );
 	}
 
 	/**
@@ -715,7 +715,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 	 */
 	public function test_get_current_api_key() {
 		// Initially should be null.
-		$this->assertNull( UCP_WC_Auth::get_current_api_key() );
+		$this->assertNull( HUCP_Auth::get_current_api_key() );
 
 		wp_set_current_user( $this->admin_id );
 
@@ -734,7 +734,7 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 		$this->set_current_api_key( $key_data );
 
 		// Verify we can retrieve it.
-		$current = UCP_WC_Auth::get_current_api_key();
+		$current = HUCP_Auth::get_current_api_key();
 		$this->assertIsArray( $current );
 		$this->assertEquals( $generated['key_id'], $current['key_id'] );
 	}
@@ -890,8 +890,8 @@ class Test_UCP_Auth extends WC_Unit_Test_Case {
 	public function test_get_table_name() {
 		global $wpdb;
 
-		$expected = $wpdb->prefix . UCP_WC_Auth::TABLE_NAME;
-		$actual   = UCP_WC_Auth::get_table_name();
+		$expected = $wpdb->prefix . HUCP_Auth::TABLE_NAME;
+		$actual   = HUCP_Auth::get_table_name();
 
 		$this->assertEquals( $expected, $actual );
 	}

@@ -1,9 +1,9 @@
 <?php
 // SPDX-License-Identifier: GPL-2.0-or-later
 /**
- * PHPUnit bootstrap file for WooCommerce UCP tests.
+ * PHPUnit bootstrap file for Harmonytics UCP Connector tests.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -15,7 +15,7 @@ if ( file_exists( $autoloader ) ) {
 }
 
 // Define test constants
-define( 'UCP_WC_TESTING', true );
+define( 'HUCP_TESTING', true );
 // Disable WP-Cron during tests to avoid core warnings accessing REQUEST_URI in CLI.
 if ( ! defined( 'DISABLE_WP_CRON' ) ) {
     define( 'DISABLE_WP_CRON', true );
@@ -41,7 +41,7 @@ if ( ! $_tests_dir ) {
 
 // WooCommerce path
 $_wc_dir = getenv( 'WP_CORE_DIR' ) ? getenv( 'WP_CORE_DIR' ) . '/wp-content/plugins/woocommerce' : dirname( dirname( __DIR__ ) ) . '/woocommerce';
-define( 'UCP_WC_TEST_WC_DIR', $_wc_dir );
+define( 'HUCP_TEST_WC_DIR', $_wc_dir );
 
 // Forward custom PHPUnit Polyfills configuration to PHPUnit bootstrap file
 $_phpunit_polyfills_path = getenv( 'WP_TESTS_PHPUNIT_POLYFILLS_PATH' );
@@ -64,7 +64,7 @@ require_once "{$_tests_dir}/includes/functions.php";
  */
 function _manually_load_plugin() {
     // Load WooCommerce first
-    require UCP_WC_TEST_WC_DIR . '/woocommerce.php';
+    require HUCP_TEST_WC_DIR . '/woocommerce.php';
 
     // Load our plugin
     require dirname( __DIR__ ) . '/harmonytics-ucp-connector-for-woocommerce.php';

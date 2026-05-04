@@ -3,7 +3,7 @@
 /**
  * Tests for the Reviews capability.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -18,14 +18,14 @@ class Test_UCP_Reviews extends WC_Unit_Test_Case {
 	/**
 	 * Review controller instance.
 	 *
-	 * @var UCP_WC_Review_Controller
+	 * @var HUCP_Review_Controller
 	 */
 	protected $controller;
 
 	/**
 	 * Review mapper instance.
 	 *
-	 * @var UCP_WC_Review_Mapper
+	 * @var HUCP_Review_Mapper
 	 */
 	protected $mapper;
 
@@ -57,16 +57,16 @@ class Test_UCP_Reviews extends WC_Unit_Test_Case {
 		parent::set_up();
 
 		// Load required classes.
-		require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-activator.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/mapping/class-ucp-review-mapper.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
-		require_once UCP_WC_PLUGIN_DIR . 'includes/rest/class-ucp-review-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-activator.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/mapping/class-ucp-review-mapper.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-rest-controller.php';
+		require_once HUCP_PLUGIN_DIR . 'includes/rest/class-ucp-review-controller.php';
 
 		// Create tables.
-		UCP_WC_Activator::activate();
+		HUCP_Activator::activate();
 
-		$this->controller = new UCP_WC_Review_Controller();
-		$this->mapper     = new UCP_WC_Review_Mapper();
+		$this->controller = new HUCP_Review_Controller();
+		$this->mapper     = new HUCP_Review_Mapper();
 
 		// Create test products.
 		$this->product = WC_Helper_Product::create_simple_product();
@@ -84,7 +84,7 @@ class Test_UCP_Reviews extends WC_Unit_Test_Case {
 		$this->product2->save();
 
 		// Enable UCP.
-		update_option( 'ucp_wc_enabled', 'yes' );
+		update_option( 'hucp_enabled', 'yes' );
 
 		// Allow duplicate reviews for testing.
 		update_option( 'woocommerce_review_rating_verification_required', 'no' );

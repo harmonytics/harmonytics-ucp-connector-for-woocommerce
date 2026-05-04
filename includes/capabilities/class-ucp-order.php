@@ -2,7 +2,7 @@
 /**
  * Order capability handler.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -10,16 +10,16 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Order
+ * Class HUCP_Order
  *
  * Handles order retrieval and status mapping.
  */
-class UCP_WC_Order {
+class HUCP_Order {
 
 	/**
 	 * Order mapper.
 	 *
-	 * @var UCP_WC_Order_Mapper
+	 * @var HUCP_Order_Mapper
 	 */
 	protected $order_mapper;
 
@@ -27,7 +27,7 @@ class UCP_WC_Order {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->order_mapper = new UCP_WC_Order_Mapper();
+		$this->order_mapper = new HUCP_Order_Mapper();
 	}
 
 	/**
@@ -83,7 +83,7 @@ class UCP_WC_Order {
 
 		// Only get orders created via UCP.
         // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Required to filter UCP-created orders, meta_key is indexed.
-		$query_args['meta_key']     = '_ucp_session_id';
+		$query_args['meta_key']     = '_hucp_session_id';
 		$query_args['meta_compare'] = 'EXISTS';
 
 		$orders = wc_get_orders( $query_args );
@@ -138,7 +138,7 @@ class UCP_WC_Order {
 	public function get_order_by_session( $session_id ) {
 		global $wpdb;
 
-		$table_name = UCP_WC_Activator::get_sessions_table();
+		$table_name = HUCP_Activator::get_sessions_table();
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Custom table for UCP sessions, table name from trusted internal source.
 		$session = $wpdb->get_row(
 			$wpdb->prepare(

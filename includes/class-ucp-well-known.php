@@ -2,7 +2,7 @@
 /**
  * Handler for /.well-known/ucp discovery endpoint.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Well_Known
+ * Class HUCP_Well_Known
  *
  * Handles the /.well-known/ucp endpoint for UCP discovery.
  */
-class UCP_WC_Well_Known {
+class HUCP_Well_Known {
 
 	/**
 	 * Query variable for the well-known endpoint.
@@ -56,7 +56,7 @@ class UCP_WC_Well_Known {
 		}
 
 		// Check if UCP is enabled.
-		if ( get_option( 'ucp_wc_enabled', 'yes' ) !== 'yes' ) {
+		if ( get_option( 'hucp_enabled', 'yes' ) !== 'yes' ) {
 			status_header( 503 );
 			header( 'Content-Type: application/json; charset=utf-8' );
 			echo wp_json_encode(
@@ -104,7 +104,7 @@ class UCP_WC_Well_Known {
 			'metadata'       => array(
 				'platform'         => 'WooCommerce',
 				'platform_version' => defined( 'WC_VERSION' ) ? WC_VERSION : 'unknown',
-				'plugin_version'   => UCP_WC_VERSION,
+				'plugin_version'   => HUCP_VERSION,
 				'updated_at'       => gmdate( 'c' ),
 			),
 		);
@@ -243,7 +243,7 @@ class UCP_WC_Well_Known {
 				),
 			),
 			'features' => array(
-				'guest_checkout'        => get_option( 'ucp_wc_guest_checkout', 'yes' ) === 'yes',
+				'guest_checkout'        => get_option( 'hucp_guest_checkout', 'yes' ) === 'yes',
 				'shipping_options'      => true,
 				'coupon_support'        => true,
 				'tax_calculation'       => true,
@@ -389,7 +389,7 @@ class UCP_WC_Well_Known {
 			'features' => array(
 				'validation'     => true,
 				'calculation'    => true,
-				'public_coupons' => get_option( 'ucp_wc_public_coupons', 'no' ) === 'yes',
+				'public_coupons' => get_option( 'hucp_public_coupons', 'no' ) === 'yes',
 			),
 		);
 
@@ -561,7 +561,7 @@ class UCP_WC_Well_Known {
 	 * @return array
 	 */
 	private function get_signing_keys() {
-		$signing_key = UCP_WC_Activator::get_signing_key();
+		$signing_key = HUCP_Activator::get_signing_key();
 
 		if ( empty( $signing_key ) ) {
 			return array();
@@ -577,7 +577,7 @@ class UCP_WC_Well_Known {
 				'key_id'     => substr( $key_id, 0, 16 ),
 				'algorithm'  => 'HMAC-SHA256',
 				'status'     => 'active',
-				'created_at' => get_option( 'ucp_wc_key_created_at', gmdate( 'c' ) ),
+				'created_at' => get_option( 'hucp_key_created_at', gmdate( 'c' ) ),
 			),
 		);
 	}

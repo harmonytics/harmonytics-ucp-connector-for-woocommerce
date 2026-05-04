@@ -2,7 +2,7 @@
 /**
  * Product mapper for UCP schema conversion.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Product_Mapper
+ * Class HUCP_Product_Mapper
  *
  * Maps WooCommerce products to UCP product schema.
  */
-class UCP_WC_Product_Mapper {
+class HUCP_Product_Mapper {
 
 	/**
 	 * Map a WooCommerce product to UCP format.

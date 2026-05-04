@@ -2,7 +2,7 @@
 /**
  * REST controller for product review endpoints.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OU
  * @license GPL-2.0-or-later
  */
@@ -10,11 +10,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Review_Controller
+ * Class HUCP_Review_Controller
  *
  * Handles product review REST API endpoints for UCP.
  */
-class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
+class HUCP_Review_Controller extends HUCP_REST_Controller {
 
 	/**
 	 * Route base.
@@ -26,7 +26,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 	/**
 	 * Review mapper instance.
 	 *
-	 * @var UCP_WC_Review_Mapper
+	 * @var HUCP_Review_Mapper
 	 */
 	protected $review_mapper;
 
@@ -34,7 +34,7 @@ class UCP_WC_Review_Controller extends UCP_WC_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->review_mapper = new UCP_WC_Review_Mapper();
+		$this->review_mapper = new HUCP_Review_Mapper();
 	}
 
 	/**

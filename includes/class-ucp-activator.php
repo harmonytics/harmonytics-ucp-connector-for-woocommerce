@@ -2,7 +2,7 @@
 /**
  * Plugin activation and deactivation handler.
  *
- * @package WooCommerce_UCP
+ * @package Harmonytics_UCP
  * @copyright 2026 Harmonytics OÜ
  * @license GPL-2.0-or-later
  */
@@ -10,46 +10,46 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UCP_WC_Activator
+ * Class HUCP_Activator
  *
  * Handles plugin activation and deactivation tasks.
  */
-class UCP_WC_Activator {
+class HUCP_Activator {
 
 	/**
 	 * Database table name for UCP sessions.
 	 *
 	 * @var string
 	 */
-	const SESSIONS_TABLE = 'ucp_sessions';
+	const SESSIONS_TABLE = 'hucp_sessions';
 
 	/**
 	 * Database table name for UCP carts.
 	 *
 	 * @var string
 	 */
-	const CARTS_TABLE = 'ucp_carts';
+	const CARTS_TABLE = 'hucp_carts';
 
 	/**
 	 * Database table name for UCP API keys.
 	 *
 	 * @var string
 	 */
-	const API_KEYS_TABLE = 'ucp_api_keys';
+	const API_KEYS_TABLE = 'hucp_api_keys';
 
 	/**
 	 * Option name for signing key.
 	 *
 	 * @var string
 	 */
-	const SIGNING_KEY_OPTION = 'ucp_wc_signing_key';
+	const SIGNING_KEY_OPTION = 'hucp_signing_key';
 
 	/**
 	 * Option name for database version.
 	 *
 	 * @var string
 	 */
-	const DB_VERSION_OPTION = 'ucp_wc_db_version';
+	const DB_VERSION_OPTION = 'hucp_db_version';
 
 	/**
 	 * Current database version.
@@ -164,10 +164,10 @@ class UCP_WC_Activator {
 	 */
 	private static function set_default_options() {
 		$defaults = array(
-			'ucp_wc_enabled'        => 'yes',
-			'ucp_wc_webhook_url'    => '',
-			'ucp_wc_debug_logging'  => 'no',
-			'ucp_wc_guest_checkout' => 'yes',
+			'hucp_enabled'        => 'yes',
+			'hucp_webhook_url'    => '',
+			'hucp_debug_logging'  => 'no',
+			'hucp_guest_checkout' => 'yes',
 		);
 
 		foreach ( $defaults as $option => $value ) {
@@ -182,8 +182,8 @@ class UCP_WC_Activator {
 	 */
 	private static function flush_rewrite_rules() {
 		// Register the rewrite rules first.
-		require_once UCP_WC_PLUGIN_DIR . 'includes/class-ucp-well-known.php';
-		$well_known = new UCP_WC_Well_Known();
+		require_once HUCP_PLUGIN_DIR . 'includes/class-ucp-well-known.php';
+		$well_known = new HUCP_Well_Known();
 		$well_known->register_rewrite_rules();
 
 		flush_rewrite_rules();
