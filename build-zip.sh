@@ -36,6 +36,7 @@ zip -r "$ZIP_NAME" "$PLUGIN_SLUG" \
     -x "${PLUGIN_SLUG}/node_modules/*" \
     -x "${PLUGIN_SLUG}/phpunit.xml" \
     -x "${PLUGIN_SLUG}/phpunit.xml.dist" \
+    -x "${PLUGIN_SLUG}/phpcs.xml.dist" \
     -x "${PLUGIN_SLUG}/composer.json" \
     -x "${PLUGIN_SLUG}/composer.lock" \
     -x "${PLUGIN_SLUG}/docker-compose*.yml" \
@@ -45,6 +46,7 @@ zip -r "$ZIP_NAME" "$PLUGIN_SLUG" \
     -x "${PLUGIN_SLUG}/.idea/*" \
     -x "${PLUGIN_SLUG}/.vscode/*" \
     -x "${PLUGIN_SLUG}/.claude/*" \
+    -x "${PLUGIN_SLUG}/tasks/*" \
     -x "${PLUGIN_SLUG}/*.code-workspace" \
     -x "${PLUGIN_SLUG}/.DS_Store" \
     -x "${PLUGIN_SLUG}/Thumbs.db" \
