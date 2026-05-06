@@ -291,27 +291,38 @@ This plugin stores the following data locally in your WordPress database:
 * Webhook signing keys (for secure webhook delivery)
 * Failed webhook records (for retry purposes, automatically purged after 24 hours)
 
-= External Services =
+= External services =
 
-This plugin does NOT send any data to external servers by default.
+This plugin does NOT connect to any external services at runtime by default. No data is sent to the plugin developers, third parties, or external APIs out of the box.
 
-**Optional Webhook Feature:**
-If you configure a webhook URL in the plugin settings, the following data will be sent to that URL when order events occur:
-* Order ID and status
-* Order event type (created, paid, status changed, refunded)
-* Your store URL and plugin version
+**Universal Commerce Protocol (UCP) specification**
 
-Webhooks are:
-* Disabled by default (no URL configured)
-* Only sent to URLs you explicitly configure
-* Signed with HMAC-SHA256 for security
-* Never sent to the plugin developers
+The plugin implements the Universal Commerce Protocol (UCP), an open protocol specification published at https://ucp.dev (a project by Google). The plugin only references this URL as documentation for the protocol it implements; it does NOT make any HTTP requests to ucp.dev, Google, or any related service. No data is exchanged with any UCP-related external endpoint.
 
-You are responsible for ensuring your webhook endpoint complies with applicable privacy laws.
+**Optional webhook feature (disabled by default)**
 
-= Third-Party Services =
+If — and only if — the site administrator explicitly configures a webhook URL in the plugin settings, the plugin will send order event data to that URL when order events occur on the store. The webhook destination is the site administrator's own endpoint of their choosing; it is not a third-party service operated by the plugin developers.
 
-This plugin implements the [Universal Commerce Protocol (UCP)](https://ucp.dev) specification. The UCP discovery endpoint (`/.well-known/ucp`) exposes only public business information that you configure in WooCommerce settings (store name, URL, currency). No customer data is exposed through the discovery endpoint.
+What is sent to the configured webhook URL:
+* Order ID and current status
+* Event type (created, paid, status_changed, refunded)
+* Site URL (the store's home URL)
+* Plugin version
+
+When it is sent: only when the relevant WooCommerce order hook fires (e.g., `woocommerce_new_order`).
+
+Properties of the webhook system:
+* Disabled by default (no URL is configured out of the box)
+* The destination URL is fully under the site administrator's control
+* All payloads are signed with HMAC-SHA256 so the receiver can verify authenticity
+* HTTPS is required; non-HTTPS URLs are rejected at sanitization time
+* No data is ever sent to the plugin developers
+
+Because the webhook destination is configured by the site administrator and is not a fixed third-party service, no third-party Terms of Service or Privacy Policy applies. The site administrator is responsible for ensuring their chosen webhook endpoint complies with applicable privacy laws.
+
+**AI agent traffic to your store**
+
+The plugin exposes REST API endpoints under `ucp/v1` and a discovery endpoint at `/.well-known/ucp`. These endpoints are served by your own WordPress installation; the plugin does not relay traffic to or from any third party. Inbound requests come from AI agents that the site administrator authorizes via API keys; the plugin does not initiate outbound calls to any AI agent or service.
 
 == Screenshots ==
 
